@@ -36,10 +36,10 @@ private:
     
     juce::Image logoImage;
     
-    juce::Image mOffImage;
-    juce::Image mOnImage;
-    juce::Image mKnobImage;
-    juce::Image mMarkerImage;
+    juce::Image cOffImage;
+    juce::Image cOnImage;
+    juce::Image cKnobImage;
+    juce::Image cMarkerImage;
     
     juce::Image dOffImage;
     juce::Image dOnImage;
@@ -50,10 +50,11 @@ private:
     
     juce::ImageComponent logoImageComponent;
 
-    juce::ImageComponent mOffImageComponent;
-    juce::ImageComponent mOnImageComponent;
-    juce::ImageComponent mKnobImageComponent;
-    juce::ImageComponent mMarkerImageComponent;
+    juce::ImageComponent cOffImageComponent;
+    juce::ImageComponent cOnImageComponent;
+    juce::ImageComponent cKnobImageComponent;
+    juce::ImageComponent cMarkerImageComponent;
+    
     juce::ImageComponent dOffImageComponent;
     juce::ImageComponent dOnImageComponent;
     juce::ImageComponent dKnobImageComponent;
@@ -63,23 +64,23 @@ private:
     
     juce::Rectangle<int> logoArea {25, 365, 30, 30};
     
-    juce::Rectangle<int> mImageArea {185, 190, 140, 140};
-    juce::Rectangle<int> mKnobArea {75, 215, 115, 115};
-    juce::Rectangle<int> mMarkerArea {95, 300, 10, 10};
+    juce::Rectangle<int> cImageArea {185, 190, 140, 140};
+    juce::Rectangle<int> cKnobArea {75, 215, 115, 115};
+    juce::Rectangle<int> cMarkerArea {95, 300, 10, 10};
     
     juce::Rectangle<int> dImageArea {75, 80, 140, 140};
     juce::Rectangle<int> dKnobArea {210, 75, 115, 115};
     juce::Rectangle<int> dMarkerArea {230, 160, 10, 10};
     
-    juce::AffineTransform mKnobTransform;
+    juce::AffineTransform cKnobTransform;
     juce::AffineTransform dKnobTransform;
     
-    juce::Slider mSlider;
+    juce::Slider cSlider;
     juce::Slider dSlider;
     
     
 public:
-    std::unique_ptr <juce::AudioProcessorValueTreeState::SliderAttachment> mSliderAttachment;
+    std::unique_ptr <juce::AudioProcessorValueTreeState::SliderAttachment> cSliderAttachment;
     std::unique_ptr <juce::AudioProcessorValueTreeState::SliderAttachment> dSliderAttachment;
 
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (DistortionAudioProcessorEditor)

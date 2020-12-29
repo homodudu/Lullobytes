@@ -47,11 +47,11 @@ void DistortionAudioProcessorEditor::resized()
     dMarkerImageComponent.setBounds(dMarkerArea);
     dSlider.setBounds(dKnobArea);
     
-    mOffImageComponent.setBounds(mImageArea);
-    mOnImageComponent.setBounds(mImageArea);
-    mKnobImageComponent.setBounds(mKnobArea);
-    mMarkerImageComponent.setBounds(mMarkerArea);
-    mSlider.setBounds(mKnobArea);
+    cOffImageComponent.setBounds(cImageArea);
+    cOnImageComponent.setBounds(cImageArea);
+    cKnobImageComponent.setBounds(cKnobArea);
+    cMarkerImageComponent.setBounds(cMarkerArea);
+    cSlider.setBounds(cKnobArea);
 }
 
 void DistortionAudioProcessorEditor:: gui()
@@ -70,17 +70,17 @@ void DistortionAudioProcessorEditor:: gui()
     dOffImageComponent.setImage(dOffImage);
     addAndMakeVisible (&dOffImageComponent);
     
-    mOffImage = juce::ImageCache::getFromMemory (BinaryData::m_off_png, BinaryData::m_off_pngSize);
-    mOffImageComponent.setImage(mOffImage);
-    addAndMakeVisible (&mOffImageComponent);
+    cOffImage = juce::ImageCache::getFromMemory (BinaryData::c_off_png, BinaryData::c_off_pngSize);
+    cOffImageComponent.setImage(cOffImage);
+    addAndMakeVisible (&cOffImageComponent);
 
     dKnobImage = juce::ImageCache::getFromMemory (BinaryData::knob_png, BinaryData::knob_pngSize);
     dKnobImageComponent.setImage(dKnobImage);
     addAndMakeVisible (&dKnobImageComponent);
     
-    mKnobImage = juce::ImageCache::getFromMemory (BinaryData::knob_png, BinaryData::knob_pngSize);
-    mKnobImageComponent.setImage(mKnobImage);
-    addAndMakeVisible (&mKnobImageComponent);
+    cKnobImage = juce::ImageCache::getFromMemory (BinaryData::knob_png, BinaryData::knob_pngSize);
+    cKnobImageComponent.setImage(cKnobImage);
+    addAndMakeVisible (&cKnobImageComponent);
     
     dSlider.setSliderStyle (juce::Slider::Rotary);
     dSlider.setRange (0, 1);
@@ -107,50 +107,50 @@ void DistortionAudioProcessorEditor:: gui()
 
     addAndMakeVisible (dSlider);
     
-    mSlider.setSliderStyle (juce::Slider::Rotary);
-    mSlider.setRange (0, 1.0);
-    mSlider.setTextBoxStyle (juce::Slider::NoTextBox, false, 0, 0);
-    mSlider.setColour(juce::Slider::ColourIds::backgroundColourId, juce::Colours::burlywood);
-    mSlider.setColour(juce::Slider::ColourIds::rotarySliderOutlineColourId, juce::Colours::burlywood);
-    mSlider.setColour(juce::Slider::ColourIds::rotarySliderFillColourId, juce::Colours::burlywood);
-    mSlider.setColour(juce::Slider::ColourIds::trackColourId, juce::Colours::burlywood);
-    mSlider.setColour(juce::Slider::ColourIds::thumbColourId, juce::Colours::burlywood);
+    cSlider.setSliderStyle (juce::Slider::Rotary);
+    cSlider.setRange (0, 1.0);
+    cSlider.setTextBoxStyle (juce::Slider::NoTextBox, false, 0, 0);
+    cSlider.setColour(juce::Slider::ColourIds::backgroundColourId, juce::Colours::burlywood);
+    cSlider.setColour(juce::Slider::ColourIds::rotarySliderOutlineColourId, juce::Colours::burlywood);
+    cSlider.setColour(juce::Slider::ColourIds::rotarySliderFillColourId, juce::Colours::burlywood);
+    cSlider.setColour(juce::Slider::ColourIds::trackColourId, juce::Colours::burlywood);
+    cSlider.setColour(juce::Slider::ColourIds::thumbColourId, juce::Colours::burlywood);
   
-    mSliderAttachment = std::make_unique<juce::AudioProcessorValueTreeState::SliderAttachment>(audioProcessor.treeState, "mix", mSlider);
-    mKnobImageComponent.setTransform(mKnobTransform.rotation(4.72f* *audioProcessor.treeState.getRawParameterValue("mix"),mKnobArea.getCentreX(), mKnobArea.getCentreY()));
+    cSliderAttachment = std::make_unique<juce::AudioProcessorValueTreeState::SliderAttachment>(audioProcessor.treeState, "clean", cSlider);
+    cKnobImageComponent.setTransform(cKnobTransform.rotation(4.72f* *audioProcessor.treeState.getRawParameterValue("clean"),cKnobArea.getCentreX(), cKnobArea.getCentreY()));
     
-    mSlider.onValueChange = [this]
+    cSlider.onValueChange = [this]
     {
-        mKnobImageComponent.setTransform(mKnobTransform.rotation(4.72f* *audioProcessor.treeState.getRawParameterValue("mix"),mKnobArea.getCentreX(), mKnobArea.getCentreY()));
-        if(mSlider.getValue()>0.01f)
-            mOnImageComponent.setAlpha(0.5f * mSlider.getValue() + 0.5f);
-        else mOnImageComponent.setAlpha(0.0f);
+        cKnobImageComponent.setTransform(cKnobTransform.rotation(4.72f* *audioProcessor.treeState.getRawParameterValue("clean"),cKnobArea.getCentreX(), cKnobArea.getCentreY()));
+        if(cSlider.getValue()>0.01f)
+            cOnImageComponent.setAlpha(0.5f * cSlider.getValue() + 0.5f);
+        else cOnImageComponent.setAlpha(0.0f);
     };
     
-    *audioProcessor.treeState.getRawParameterValue("mix") = mSlider.getValue();
+    *audioProcessor.treeState.getRawParameterValue("clean") = cSlider.getValue();
     
-    addAndMakeVisible (mSlider);
+    addAndMakeVisible (cSlider);
     
     dOnImage = juce::ImageCache::getFromMemory (BinaryData::d_on_png, BinaryData::d_on_pngSize);
     dOnImageComponent.setImage(dOnImage);
     dOnImageComponent.setAlpha(0);
     addAndMakeVisible (&dOnImageComponent);
     
-    mOnImage = juce::ImageCache::getFromMemory (BinaryData::m_on_png, BinaryData::m_on_pngSize);
-    mOnImageComponent.setImage(mOnImage);
-    mOnImageComponent.setAlpha(0);
-    addAndMakeVisible (&mOnImageComponent);
+    cOnImage = juce::ImageCache::getFromMemory (BinaryData::c_on_png, BinaryData::c_on_pngSize);
+    cOnImageComponent.setImage(cOnImage);
+    cOnImageComponent.setAlpha(0);
+    addAndMakeVisible (&cOnImageComponent);
     
     dMarkerImage = juce::ImageCache::getFromMemory (BinaryData::marker_png, BinaryData::marker_pngSize);
     dMarkerImageComponent.setImage(dMarkerImage);
     addAndMakeVisible (&dMarkerImageComponent);
     
-    mMarkerImage = juce::ImageCache::getFromMemory (BinaryData::marker_png, BinaryData::marker_pngSize);
-    mMarkerImageComponent.setImage(mMarkerImage);
-    addAndMakeVisible (&mMarkerImageComponent);
+    cMarkerImage = juce::ImageCache::getFromMemory (BinaryData::marker_png, BinaryData::marker_pngSize);
+    cMarkerImageComponent.setImage(cMarkerImage);
+    addAndMakeVisible (&cMarkerImageComponent);
 
     audioProcessor.treeState.addParameterListener("drive", &audioProcessor);
-    audioProcessor.treeState.addParameterListener("mix", &audioProcessor);
+    audioProcessor.treeState.addParameterListener("clean", &audioProcessor);
     
 
 }

@@ -152,13 +152,6 @@
 			path = "/Applications/JUCE/modules/juce_gui_basics";
 			sourceTree = "<absolute>";
 		};
-		02E47066A1BA83D534E10B14 = {
-			isa = PBXFileReference;
-			lastKnownFileType = image.png;
-			name = "m_off.png";
-			path = "../../Assets/m_off.png";
-			sourceTree = "SOURCE_ROOT";
-		};
 		0573CE010CB9DF5426B9AC63 = {
 			isa = PBXFileReference;
 			lastKnownFileType = image.png;
@@ -537,11 +530,25 @@
 			path = System/Library/Frameworks/Carbon.framework;
 			sourceTree = SDKROOT;
 		};
+		D12E350385FB5FB08C31912D = {
+			isa = PBXFileReference;
+			lastKnownFileType = image.png;
+			name = "c_on.png";
+			path = "../../Assets/c_on.png";
+			sourceTree = "SOURCE_ROOT";
+		};
 		D34D372F9B2D2E30B3C275FE = {
 			isa = PBXFileReference;
 			lastKnownFileType = sourcecode.cpp.objcpp;
 			name = "include_juce_core.mm";
 			path = "../../JuceLibraryCode/include_juce_core.mm";
+			sourceTree = "SOURCE_ROOT";
+		};
+		DCEF8907B9D3264547EDAE4E = {
+			isa = PBXFileReference;
+			lastKnownFileType = image.png;
+			name = "c_off.png";
+			path = "../../Assets/c_off.png";
 			sourceTree = "SOURCE_ROOT";
 		};
 		E0A2838AB538A18E80F345CC = {
@@ -565,13 +572,6 @@
 			path = "/Applications/JUCE/modules/juce_gui_extra";
 			sourceTree = "<absolute>";
 		};
-		F4A1C7DE98820E13CA7AC093 = {
-			isa = PBXFileReference;
-			lastKnownFileType = image.png;
-			name = "m_on.png";
-			path = "../../Assets/m_on.png";
-			sourceTree = "SOURCE_ROOT";
-		};
 		F60E61AAE989924194BC084D = {
 			isa = PBXFileReference;
 			lastKnownFileType = file;
@@ -582,12 +582,12 @@
 		EEC80F8D43E0FC5C3E4ACDB3 = {
 			isa = PBXGroup;
 			children = (
+				DCEF8907B9D3264547EDAE4E,
+				D12E350385FB5FB08C31912D,
+				5BD4F8ADDEF10CB4CBA9FBC3,
 				78CBE46CC8D468CD369C41C9,
 				7C059FE8E1FE6C380519D822,
-				5BD4F8ADDEF10CB4CBA9FBC3,
-				F4A1C7DE98820E13CA7AC093,
 				0573CE010CB9DF5426B9AC63,
-				02E47066A1BA83D534E10B14,
 				7503E9A0042A58EDE5CDB319,
 				A218357643BE681474EBE16E,
 			);

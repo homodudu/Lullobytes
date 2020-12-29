@@ -5,12 +5,12 @@
               companyName="Lullobytes" displaySplashScreen="1" version="1.0.1">
   <MAINGROUP id="xcJgGJ" name="Distortion">
     <GROUP id="{E2042A58-6DC0-7AB7-0564-28F97AF4C33C}" name="Assets">
+      <FILE id="QdpHUS" name="c_off.png" compile="0" resource="1" file="Assets/c_off.png"/>
+      <FILE id="Gr1sdR" name="c_on.png" compile="0" resource="1" file="Assets/c_on.png"/>
+      <FILE id="Ddxm2G" name="d_on.png" compile="0" resource="1" file="Assets/d_on.png"/>
       <FILE id="n5GE5G" name="logo.png" compile="0" resource="1" file="Assets/logo.png"/>
       <FILE id="aG2QOz" name="knob.png" compile="0" resource="1" file="Assets/knob.png"/>
-      <FILE id="zrhma4" name="d_on.png" compile="0" resource="1" file="Assets/d_on.png"/>
-      <FILE id="V4nhva" name="m_on.png" compile="0" resource="1" file="Assets/m_on.png"/>
       <FILE id="MnzooO" name="d_off.png" compile="0" resource="1" file="Assets/d_off.png"/>
-      <FILE id="zzrew7" name="m_off.png" compile="0" resource="1" file="Assets/m_off.png"/>
       <FILE id="eh7MgN" name="marker.png" compile="0" resource="1" file="Assets/marker.png"/>
       <FILE id="rWgRTL" name="frame.png" compile="0" resource="1" file="Assets/frame.png"/>
     </GROUP>

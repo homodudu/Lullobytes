@@ -35,8 +35,8 @@ DistortionAudioProcessor::DistortionAudioProcessor()
     {
         treeState.addParameterListener("drive", this);
         treeState.getParameter ("drive")->setValue (0.0f);
-        treeState.addParameterListener("mix", this);
-        treeState.getParameter ("mix")->setValue (0.0f);
+        treeState.addParameterListener("clean", this);
+        treeState.getParameter ("clean")->setValue (0.0f);
     }
     
 
@@ -112,12 +112,12 @@ void DistortionAudioProcessor::changeProgramName (int index, const juce::String&
 juce::AudioProcessorValueTreeState::ParameterLayout DistortionAudioProcessor::createParameterLayout(){
     juce::AudioProcessorValueTreeState::ParameterLayout layout;
     layout.add(std::make_unique<juce::AudioParameterFloat>("drive", "Drive", 0.0f, 1.0f, 0.0f));
-    layout.add(std::make_unique<juce::AudioParameterFloat>("mix", "Mix", 0.0f, 1.0f, 0.0f));
+    layout.add(std::make_unique<juce::AudioParameterFloat>("clean", "Clean", 0.0f, 1.0f, 0.0f));
     return layout;
 }
 void DistortionAudioProcessor::parameterChanged  (const juce::String &parameterID, float newValue){
     if (parameterID.compare("drive")==0) drive = newValue;
-    if (parameterID.compare("mix")==0) mix = newValue;
+    if (parameterID.compare("clean")==0) clean = newValue;
 }
 
 //==============================================================================
@@ -187,7 +187,7 @@ void DistortionAudioProcessor::processBlock (juce::AudioBuffer<float>& buffer, j
         {
             float wetSignal = (2.0f / juce::float_Pi) * atanf(*channelData * drive * 10.0f);
             
-            *channelData = (mix * *channelData) + (wetSignal*0.707f);
+            *channelData = (clean * *channelData) + (wetSignal*0.707f);
             channelData++;
         }
         
@@ -222,7 +222,7 @@ void DistortionAudioProcessor::getStateInformation (juce::MemoryBlock& destData)
     // as intermediaries to make it easy to save and load complex data.
     
     std::unique_ptr<juce::XmlElement> xml (new juce::XmlElement ("Distortion"));
-    xml->setAttribute ("mix", (double) mix);
+    xml->setAttribute ("clean", (double) clean);
     xml->setAttribute ("drive", (double) drive);
     copyXmlToBinary (*xml, destData);
 
@@ -241,7 +241,7 @@ void DistortionAudioProcessor::setStateInformation (const void* data, int sizeIn
         if (xmlState->hasTagName ("Distortion"))
         {
            
-            mix = (float) xmlState->getDoubleAttribute ("mix");
+            clean = (float) xmlState->getDoubleAttribute ("clean");
             drive = (float) xmlState->getDoubleAttribute ("drive");
         
         }

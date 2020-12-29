@@ -8,29 +8,29 @@
 
 namespace BinaryData
 {
+    extern const char*   c_off_png;
+    const int            c_off_pngSize = 6870;
+
+    extern const char*   c_on_png;
+    const int            c_on_pngSize = 10251;
+
+    extern const char*   d_on_png;
+    const int            d_on_pngSize = 12927;
+
     extern const char*   logo_png;
     const int            logo_pngSize = 20845;
 
     extern const char*   knob_png;
     const int            knob_pngSize = 8323;
 
-    extern const char*   d_on_png;
-    const int            d_on_pngSize = 12927;
-
-    extern const char*   m_on_png;
-    const int            m_on_pngSize = 13592;
-
     extern const char*   d_off_png;
     const int            d_off_pngSize = 6617;
-
-    extern const char*   m_off_png;
-    const int            m_off_pngSize = 6505;
 
     extern const char*   marker_png;
     const int            marker_pngSize = 7907;
 
     extern const char*   frame_png;
-    const int            frame_pngSize = 129393;
+    const int            frame_pngSize = 131357;
 
     // Number of elements in the namedResourceList and originalFileNames arrays.
     const int namedResourceListSize = 8;
