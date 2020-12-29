@@ -77,6 +77,7 @@ private:
     juce::Slider mSlider;
     juce::Slider dSlider;
     
+    
 public:
     std::unique_ptr <juce::AudioProcessorValueTreeState::SliderAttachment> mSliderAttachment;
     std::unique_ptr <juce::AudioProcessorValueTreeState::SliderAttachment> dSliderAttachment;

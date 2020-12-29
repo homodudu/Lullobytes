@@ -90,14 +90,21 @@ void DistortionAudioProcessorEditor:: gui()
     dSlider.setColour(juce::Slider::ColourIds::rotarySliderFillColourId, juce::Colours::burlywood);
     dSlider.setColour(juce::Slider::ColourIds::trackColourId, juce::Colours::burlywood);
     dSlider.setColour(juce::Slider::ColourIds::thumbColourId, juce::Colours::burlywood);
+   
     dSliderAttachment = std::make_unique<juce::AudioProcessorValueTreeState::SliderAttachment>(audioProcessor.treeState, "drive", dSlider);;
+    
+    dKnobImageComponent.setTransform(dKnobTransform.rotation(4.72f*  *audioProcessor.treeState.getRawParameterValue("drive"),dKnobArea.getCentreX(), dKnobArea.getCentreY()));
+    
     dSlider.onValueChange = [this]
     {
-        dKnobImageComponent.setTransform(dKnobTransform.rotation(4.72f*dSlider.getValue(),dKnobArea.getCentreX(), dKnobArea.getCentreY()));
+        dKnobImageComponent.setTransform(dKnobTransform.rotation(4.72f*  *audioProcessor.treeState.getRawParameterValue("drive"),dKnobArea.getCentreX(), dKnobArea.getCentreY()));
         if(dSlider.getValue()>0.01f)
         dOnImageComponent.setAlpha(0.5f * dSlider.getValue() + 0.5f);
         else dOnImageComponent.setAlpha(0.0f);
     };
+    
+    *audioProcessor.treeState.getRawParameterValue("drive") = dSlider.getValue();
+
     addAndMakeVisible (dSlider);
     
     mSlider.setSliderStyle (juce::Slider::Rotary);
@@ -108,14 +115,20 @@ void DistortionAudioProcessorEditor:: gui()
     mSlider.setColour(juce::Slider::ColourIds::rotarySliderFillColourId, juce::Colours::burlywood);
     mSlider.setColour(juce::Slider::ColourIds::trackColourId, juce::Colours::burlywood);
     mSlider.setColour(juce::Slider::ColourIds::thumbColourId, juce::Colours::burlywood);
+  
     mSliderAttachment = std::make_unique<juce::AudioProcessorValueTreeState::SliderAttachment>(audioProcessor.treeState, "mix", mSlider);
+    mKnobImageComponent.setTransform(mKnobTransform.rotation(4.72f* *audioProcessor.treeState.getRawParameterValue("mix"),mKnobArea.getCentreX(), mKnobArea.getCentreY()));
+    
     mSlider.onValueChange = [this]
     {
-        mKnobImageComponent.setTransform(mKnobTransform.rotation(4.72f*mSlider.getValue(),mKnobArea.getCentreX(), mKnobArea.getCentreY()));
+        mKnobImageComponent.setTransform(mKnobTransform.rotation(4.72f* *audioProcessor.treeState.getRawParameterValue("mix"),mKnobArea.getCentreX(), mKnobArea.getCentreY()));
         if(mSlider.getValue()>0.01f)
             mOnImageComponent.setAlpha(0.5f * mSlider.getValue() + 0.5f);
         else mOnImageComponent.setAlpha(0.0f);
     };
+    
+    *audioProcessor.treeState.getRawParameterValue("mix") = mSlider.getValue();
+    
     addAndMakeVisible (mSlider);
     
     dOnImage = juce::ImageCache::getFromMemory (BinaryData::d_on_png, BinaryData::d_on_pngSize);
@@ -138,6 +151,8 @@ void DistortionAudioProcessorEditor:: gui()
 
     audioProcessor.treeState.addParameterListener("drive", &audioProcessor);
     audioProcessor.treeState.addParameterListener("mix", &audioProcessor);
+    
+
 }
 
 
