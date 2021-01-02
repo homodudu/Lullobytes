@@ -15,7 +15,7 @@ namespace BinaryData
     const int            button_on_pngSize = 669;
 
     extern const char*   info_png;
-    const int            info_pngSize = 30266;
+    const int            info_pngSize = 46472;
 
     extern const char*   c_off_png;
     const int            c_off_pngSize = 6870;
