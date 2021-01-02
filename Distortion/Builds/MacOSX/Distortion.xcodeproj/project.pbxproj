@@ -362,6 +362,13 @@
 			path = System/Library/Frameworks/CoreAudioKit.framework;
 			sourceTree = SDKROOT;
 		};
+		7361C993B8C8499A555BBA04 = {
+			isa = PBXFileReference;
+			lastKnownFileType = image.png;
+			name = "button_off.png";
+			path = "../../Assets/button_off.png";
+			sourceTree = "SOURCE_ROOT";
+		};
 		738C9F040F9C1C70B238A7A7 = {
 			isa = PBXFileReference;
 			lastKnownFileType = wrapper.framework;
@@ -523,6 +530,13 @@
 			path = ../../JuceLibraryCode/BinaryData.cpp;
 			sourceTree = "SOURCE_ROOT";
 		};
+		C10F3AD646F36187CB4C7E51 = {
+			isa = PBXFileReference;
+			lastKnownFileType = image.png;
+			name = info.png;
+			path = ../../Assets/info.png;
+			sourceTree = "SOURCE_ROOT";
+		};
 		C39CB4EFFA41EED5B551AEC6 = {
 			isa = PBXFileReference;
 			lastKnownFileType = wrapper.framework;
@@ -572,6 +586,13 @@
 			path = "/Applications/JUCE/modules/juce_gui_extra";
 			sourceTree = "<absolute>";
 		};
+		F1040F194CC858340AC49961 = {
+			isa = PBXFileReference;
+			lastKnownFileType = image.png;
+			name = "button_on.png";
+			path = "../../Assets/button_on.png";
+			sourceTree = "SOURCE_ROOT";
+		};
 		F60E61AAE989924194BC084D = {
 			isa = PBXFileReference;
 			lastKnownFileType = file;
@@ -582,6 +603,9 @@
 		EEC80F8D43E0FC5C3E4ACDB3 = {
 			isa = PBXGroup;
 			children = (
+				7361C993B8C8499A555BBA04,
+				F1040F194CC858340AC49961,
+				C10F3AD646F36187CB4C7E51,
 				DCEF8907B9D3264547EDAE4E,
 				D12E350385FB5FB08C31912D,
 				5BD4F8ADDEF10CB4CBA9FBC3,

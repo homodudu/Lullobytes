@@ -13,11 +13,7 @@
 DistortionAudioProcessorEditor::DistortionAudioProcessorEditor (DistortionAudioProcessor& p)
     : AudioProcessorEditor (&p), audioProcessor (p)
 {
-
-    
     gui();
-
-
 }
 
 DistortionAudioProcessorEditor::~DistortionAudioProcessorEditor()
@@ -39,7 +35,9 @@ void DistortionAudioProcessorEditor::resized()
 {
     frameImageComponent.setBounds(frameArea);
     
-    logoImageComponent.setBounds(logoArea);
+    infoImageComponent.setBounds(infoArea);
+    
+    buttonImageComponent.setBounds(buttonArea);
     
     dOffImageComponent.setBounds(dImageArea);
     dOnImageComponent.setBounds(dImageArea);
@@ -58,13 +56,14 @@ void DistortionAudioProcessorEditor:: gui()
 {
     setSize (400, 400);
     
+    infoImage = juce::ImageCache::getFromMemory (BinaryData::info_png, BinaryData::info_pngSize);
+    infoImageComponent.setImage(infoImage);
+    addAndMakeVisible (&infoImageComponent);
+    infoImageComponent.setVisible(buttonImageComponent.getToggleState());
+    
     frameImage = juce::ImageCache::getFromMemory (BinaryData::frame_png, BinaryData::frame_pngSize);
     frameImageComponent.setImage(frameImage);
     addAndMakeVisible (&frameImageComponent);
-    
-    logoImage = juce::ImageCache::getFromMemory (BinaryData::logo_png, BinaryData::logo_pngSize);
-    logoImageComponent.setImage(logoImage);
-    addAndMakeVisible (&logoImageComponent);
     
     dOffImage = juce::ImageCache::getFromMemory (BinaryData::d_off_png, BinaryData::d_off_pngSize);
     dOffImageComponent.setImage(dOffImage);
@@ -104,7 +103,7 @@ void DistortionAudioProcessorEditor:: gui()
     };
     
     *audioProcessor.treeState.getRawParameterValue("drive") = dSlider.getValue();
-
+    audioProcessor.treeState.addParameterListener("drive", &audioProcessor);
     addAndMakeVisible (dSlider);
     
     cSlider.setSliderStyle (juce::Slider::Rotary);
@@ -128,17 +127,17 @@ void DistortionAudioProcessorEditor:: gui()
     };
     
     *audioProcessor.treeState.getRawParameterValue("clean") = cSlider.getValue();
-    
+    audioProcessor.treeState.addParameterListener("clean", &audioProcessor);
     addAndMakeVisible (cSlider);
     
     dOnImage = juce::ImageCache::getFromMemory (BinaryData::d_on_png, BinaryData::d_on_pngSize);
     dOnImageComponent.setImage(dOnImage);
-    dOnImageComponent.setAlpha(0);
+    dOnImageComponent.setAlpha(dSlider.getValue());
     addAndMakeVisible (&dOnImageComponent);
     
     cOnImage = juce::ImageCache::getFromMemory (BinaryData::c_on_png, BinaryData::c_on_pngSize);
     cOnImageComponent.setImage(cOnImage);
-    cOnImageComponent.setAlpha(0);
+    cOnImageComponent.setAlpha(cSlider.getValue());
     addAndMakeVisible (&cOnImageComponent);
     
     dMarkerImage = juce::ImageCache::getFromMemory (BinaryData::marker_png, BinaryData::marker_pngSize);
@@ -148,11 +147,27 @@ void DistortionAudioProcessorEditor:: gui()
     cMarkerImage = juce::ImageCache::getFromMemory (BinaryData::marker_png, BinaryData::marker_pngSize);
     cMarkerImageComponent.setImage(cMarkerImage);
     addAndMakeVisible (&cMarkerImageComponent);
-
-    audioProcessor.treeState.addParameterListener("drive", &audioProcessor);
-    audioProcessor.treeState.addParameterListener("clean", &audioProcessor);
+ 
+    buttonOffImage = juce::ImageCache::getFromMemory (BinaryData::button_off_png, BinaryData::button_off_pngSize);
+    buttonOnImage = juce::ImageCache::getFromMemory (BinaryData::button_on_png, BinaryData::button_on_pngSize);
+    buttonImageComponent.setImages (false, false, true, buttonOffImage, 1.0f, {}, {}, 1.0f, {}, buttonOnImage, 1.0f, {});
+    buttonImageComponent.setClickingTogglesState(true);
+    buttonImageComponent.onStateChange = [this]
+    {
+        infoImageComponent.setVisible(buttonImageComponent.getToggleState());
+        dSlider.setVisible(!buttonImageComponent.getToggleState());
+        cSlider.setVisible(!buttonImageComponent.getToggleState());
+        dOnImageComponent.setVisible(!buttonImageComponent.getToggleState());
+        cOnImageComponent.setVisible(!buttonImageComponent.getToggleState());
+        dOffImageComponent.setVisible(!buttonImageComponent.getToggleState());
+        cOffImageComponent.setVisible(!buttonImageComponent.getToggleState());
+        dKnobImageComponent.setVisible(!buttonImageComponent.getToggleState());
+        cKnobImageComponent.setVisible(!buttonImageComponent.getToggleState());
+        dMarkerImageComponent.setVisible(!buttonImageComponent.getToggleState());
+        cMarkerImageComponent.setVisible(!buttonImageComponent.getToggleState());
+    };
+    addAndMakeVisible (&buttonImageComponent);
     
-
 }
 
 

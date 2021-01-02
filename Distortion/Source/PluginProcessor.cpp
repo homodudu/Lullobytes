@@ -116,8 +116,19 @@ juce::AudioProcessorValueTreeState::ParameterLayout DistortionAudioProcessor::cr
     return layout;
 }
 void DistortionAudioProcessor::parameterChanged  (const juce::String &parameterID, float newValue){
-    if (parameterID.compare("drive")==0) drive = newValue;
-    if (parameterID.compare("clean")==0) clean = newValue;
+    if (parameterID.compare("drive")==0)
+    {
+        drive = newValue;
+        targetDrive.setTargetValue(drive);
+    }
+    else targetDrive.reset(getSampleRate(), 0.1f);
+
+    if (parameterID.compare("clean")==0)
+    {
+        clean = newValue;
+        targetClean.setTargetValue(clean);
+    }
+    else targetClean.reset(getSampleRate(), 0.1f);
 }
 
 //==============================================================================
@@ -185,13 +196,17 @@ void DistortionAudioProcessor::processBlock (juce::AudioBuffer<float>& buffer, j
         
         for (int sample = 0; sample < buffer.getNumSamples(); sample++)
         {
-            float wetSignal = (2.0f / juce::float_Pi) * atanf(*channelData * drive * 10.0f);
             
+            drive = targetDrive.getNextValue();
+            clean = targetClean.getNextValue();
+            
+            float wetSignal = (2.0f / juce::float_Pi) * atanf(*channelData * drive * 10.0f);
             *channelData = (clean * *channelData) + (wetSignal*0.707f);
             channelData++;
         }
         
     }
+    
 
 }
 

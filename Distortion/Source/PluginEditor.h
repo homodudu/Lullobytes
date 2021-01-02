@@ -34,7 +34,10 @@ private:
     
     juce::Image frameImage;
     
-    juce::Image logoImage;
+    juce::Image infoImage;
+    
+    juce::Image buttonOffImage;
+    juce::Image buttonOnImage;
     
     juce::Image cOffImage;
     juce::Image cOnImage;
@@ -48,7 +51,9 @@ private:
 
     juce::ImageComponent frameImageComponent;
     
-    juce::ImageComponent logoImageComponent;
+    juce::ImageComponent infoImageComponent;
+    
+    juce::ImageButton buttonImageComponent;
 
     juce::ImageComponent cOffImageComponent;
     juce::ImageComponent cOnImageComponent;
@@ -62,7 +67,9 @@ private:
 
     juce::Rectangle<int> frameArea {20, 20, 360, 360};
     
-    juce::Rectangle<int> logoArea {25, 365, 30, 30};
+    juce::Rectangle<int> infoArea {20, 20, 360, 360};
+    
+    juce::Rectangle<int> buttonArea {20, 360, 25, 25};
     
     juce::Rectangle<int> cImageArea {185, 190, 140, 140};
     juce::Rectangle<int> cKnobArea {75, 215, 115, 115};
