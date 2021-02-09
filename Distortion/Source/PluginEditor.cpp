@@ -37,6 +37,8 @@ void DistortionAudioProcessorEditor::resized()
     
     infoImageComponent.setBounds(infoArea);
     
+    logoImageComponent.setBounds(logoArea);
+    
     buttonImageComponent.setBounds(buttonArea);
     
     dOffImageComponent.setBounds(dImageArea);
@@ -61,6 +63,10 @@ void DistortionAudioProcessorEditor:: gui()
     addAndMakeVisible (&infoImageComponent);
     infoImageComponent.setVisible(buttonImageComponent.getToggleState());
     
+    logoImage = juce::ImageCache::getFromMemory (BinaryData::logo_png, BinaryData::logo_pngSize);
+    logoImageComponent.setImage(logoImage);
+    addAndMakeVisible (&logoImageComponent);
+    
     frameImage = juce::ImageCache::getFromMemory (BinaryData::frame_png, BinaryData::frame_pngSize);
     frameImageComponent.setImage(frameImage);
     addAndMakeVisible (&frameImageComponent);
@@ -75,10 +81,12 @@ void DistortionAudioProcessorEditor:: gui()
 
     dKnobImage = juce::ImageCache::getFromMemory (BinaryData::knob_png, BinaryData::knob_pngSize);
     dKnobImageComponent.setImage(dKnobImage);
+    dKnobImageComponent.setBufferedToImage(true);
     addAndMakeVisible (&dKnobImageComponent);
     
     cKnobImage = juce::ImageCache::getFromMemory (BinaryData::knob_png, BinaryData::knob_pngSize);
     cKnobImageComponent.setImage(cKnobImage);
+    cKnobImageComponent.setBufferedToImage(true);
     addAndMakeVisible (&cKnobImageComponent);
     
     dSlider.setSliderStyle (juce::Slider::Rotary);
@@ -150,7 +158,7 @@ void DistortionAudioProcessorEditor:: gui()
  
     buttonOffImage = juce::ImageCache::getFromMemory (BinaryData::button_off_png, BinaryData::button_off_pngSize);
     buttonOnImage = juce::ImageCache::getFromMemory (BinaryData::button_on_png, BinaryData::button_on_pngSize);
-    buttonImageComponent.setImages (false, false, true, buttonOffImage, 1.0f, {}, {}, 1.0f, {}, buttonOnImage, 1.0f, {});
+    buttonImageComponent.setImages (false, true, true, buttonOffImage, 1.0f, {}, {}, 1.0f, {}, buttonOnImage, 1.0f, {});
     buttonImageComponent.setClickingTogglesState(true);
     buttonImageComponent.onStateChange = [this]
     {
