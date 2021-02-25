@@ -67,10 +67,11 @@ private:
 
     float clean;
     float drive;
+
     juce::SmoothedValue<float> targetClean;
     juce::SmoothedValue<float> targetDrive;
-  
     
+    bool linked;
     
     //==============================================================================
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (DistortionAudioProcessor)

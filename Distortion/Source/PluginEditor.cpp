@@ -34,12 +34,10 @@ void DistortionAudioProcessorEditor::paint (juce::Graphics& g)
 void DistortionAudioProcessorEditor::resized()
 {
     frameImageComponent.setBounds(frameArea);
-    
     infoImageComponent.setBounds(infoArea);
     
-    logoImageComponent.setBounds(logoArea);
-    
-    buttonImageComponent.setBounds(buttonArea);
+    linkButtonImageComponent.setBounds(linkButtonArea);
+    infoButtonImageComponent.setBounds(infoButtonArea);
     
     dOffImageComponent.setBounds(dImageArea);
     dOnImageComponent.setBounds(dImageArea);
@@ -61,11 +59,7 @@ void DistortionAudioProcessorEditor:: gui()
     infoImage = juce::ImageCache::getFromMemory (BinaryData::info_png, BinaryData::info_pngSize);
     infoImageComponent.setImage(infoImage);
     addAndMakeVisible (&infoImageComponent);
-    infoImageComponent.setVisible(buttonImageComponent.getToggleState());
-    
-    logoImage = juce::ImageCache::getFromMemory (BinaryData::logo_png, BinaryData::logo_pngSize);
-    logoImageComponent.setImage(logoImage);
-    addAndMakeVisible (&logoImageComponent);
+    infoImageComponent.setVisible(infoButtonImageComponent.getToggleState());
     
     frameImage = juce::ImageCache::getFromMemory (BinaryData::frame_png, BinaryData::frame_pngSize);
     frameImageComponent.setImage(frameImage);
@@ -97,10 +91,11 @@ void DistortionAudioProcessorEditor:: gui()
     dSlider.setColour(juce::Slider::ColourIds::rotarySliderFillColourId, juce::Colours::burlywood);
     dSlider.setColour(juce::Slider::ColourIds::trackColourId, juce::Colours::burlywood);
     dSlider.setColour(juce::Slider::ColourIds::thumbColourId, juce::Colours::burlywood);
-   
-    dSliderAttachment = std::make_unique<juce::AudioProcessorValueTreeState::SliderAttachment>(audioProcessor.treeState, "drive", dSlider);;
     
+    dSliderAttachment = std::make_unique<juce::AudioProcessorValueTreeState::SliderAttachment>(audioProcessor.treeState, "drive", dSlider);;
     dKnobImageComponent.setTransform(dKnobTransform.rotation(4.72f*  *audioProcessor.treeState.getRawParameterValue("drive"),dKnobArea.getCentreX(), dKnobArea.getCentreY()));
+    *audioProcessor.treeState.getRawParameterValue("drive") = dSlider.getValue();
+    audioProcessor.treeState.addParameterListener("drive", &audioProcessor);
     
     dSlider.onValueChange = [this]
     {
@@ -108,10 +103,10 @@ void DistortionAudioProcessorEditor:: gui()
         if(dSlider.getValue()>0.01f)
         dOnImageComponent.setAlpha(0.5f * dSlider.getValue() + 0.5f);
         else dOnImageComponent.setAlpha(0.0f);
+        if (linkButtonImageComponent.getToggleState()) {
+            cSlider.setValue(1 - dSlider.getValue());
+        }
     };
-    
-    *audioProcessor.treeState.getRawParameterValue("drive") = dSlider.getValue();
-    audioProcessor.treeState.addParameterListener("drive", &audioProcessor);
     addAndMakeVisible (dSlider);
     
     cSlider.setSliderStyle (juce::Slider::Rotary);
@@ -126,16 +121,19 @@ void DistortionAudioProcessorEditor:: gui()
     cSliderAttachment = std::make_unique<juce::AudioProcessorValueTreeState::SliderAttachment>(audioProcessor.treeState, "clean", cSlider);
     cKnobImageComponent.setTransform(cKnobTransform.rotation(4.72f* *audioProcessor.treeState.getRawParameterValue("clean"),cKnobArea.getCentreX(), cKnobArea.getCentreY()));
     
+    *audioProcessor.treeState.getRawParameterValue("clean") = cSlider.getValue();
+    audioProcessor.treeState.addParameterListener("clean", &audioProcessor);
+    
     cSlider.onValueChange = [this]
     {
         cKnobImageComponent.setTransform(cKnobTransform.rotation(4.72f* *audioProcessor.treeState.getRawParameterValue("clean"),cKnobArea.getCentreX(), cKnobArea.getCentreY()));
         if(cSlider.getValue()>0.01f)
             cOnImageComponent.setAlpha(0.5f * cSlider.getValue() + 0.5f);
         else cOnImageComponent.setAlpha(0.0f);
+        if (linkButtonImageComponent.getToggleState()) {
+            dSlider.setValue(1 - cSlider.getValue());
+        }
     };
-    
-    *audioProcessor.treeState.getRawParameterValue("clean") = cSlider.getValue();
-    audioProcessor.treeState.addParameterListener("clean", &audioProcessor);
     addAndMakeVisible (cSlider);
     
     dOnImage = juce::ImageCache::getFromMemory (BinaryData::d_on_png, BinaryData::d_on_pngSize);
@@ -156,25 +154,34 @@ void DistortionAudioProcessorEditor:: gui()
     cMarkerImageComponent.setImage(cMarkerImage);
     addAndMakeVisible (&cMarkerImageComponent);
  
-    buttonOffImage = juce::ImageCache::getFromMemory (BinaryData::button_off_png, BinaryData::button_off_pngSize);
-    buttonOnImage = juce::ImageCache::getFromMemory (BinaryData::button_on_png, BinaryData::button_on_pngSize);
-    buttonImageComponent.setImages (false, true, true, buttonOffImage, 1.0f, {}, {}, 1.0f, {}, buttonOnImage, 1.0f, {});
-    buttonImageComponent.setClickingTogglesState(true);
-    buttonImageComponent.onStateChange = [this]
+    infoButtonOffImage = juce::ImageCache::getFromMemory (BinaryData::info_button_off_png, BinaryData::info_button_off_pngSize);
+    infoButtonOnImage = juce::ImageCache::getFromMemory (BinaryData::info_button_on_png, BinaryData::info_button_on_pngSize);
+    infoButtonImageComponent.setImages (false, true, true, infoButtonOffImage, 1.0f, {}, {}, 1.0f, {}, infoButtonOnImage, 1.0f, {});
+    infoButtonImageComponent.setClickingTogglesState(true);
+    infoButtonImageComponent.onStateChange = [this]
     {
-        infoImageComponent.setVisible(buttonImageComponent.getToggleState());
-        dSlider.setVisible(!buttonImageComponent.getToggleState());
-        cSlider.setVisible(!buttonImageComponent.getToggleState());
-        dOnImageComponent.setVisible(!buttonImageComponent.getToggleState());
-        cOnImageComponent.setVisible(!buttonImageComponent.getToggleState());
-        dOffImageComponent.setVisible(!buttonImageComponent.getToggleState());
-        cOffImageComponent.setVisible(!buttonImageComponent.getToggleState());
-        dKnobImageComponent.setVisible(!buttonImageComponent.getToggleState());
-        cKnobImageComponent.setVisible(!buttonImageComponent.getToggleState());
-        dMarkerImageComponent.setVisible(!buttonImageComponent.getToggleState());
-        cMarkerImageComponent.setVisible(!buttonImageComponent.getToggleState());
+        infoImageComponent.setVisible(infoButtonImageComponent.getToggleState());
+        dSlider.setVisible(!infoButtonImageComponent.getToggleState());
+        cSlider.setVisible(!infoButtonImageComponent.getToggleState());
+        dOnImageComponent.setVisible(!infoButtonImageComponent.getToggleState());
+        cOnImageComponent.setVisible(!infoButtonImageComponent.getToggleState());
+        dOffImageComponent.setVisible(!infoButtonImageComponent.getToggleState());
+        cOffImageComponent.setVisible(!infoButtonImageComponent.getToggleState());
+        dKnobImageComponent.setVisible(!infoButtonImageComponent.getToggleState());
+        cKnobImageComponent.setVisible(!infoButtonImageComponent.getToggleState());
+        dMarkerImageComponent.setVisible(!infoButtonImageComponent.getToggleState());
+        cMarkerImageComponent.setVisible(!infoButtonImageComponent.getToggleState());
     };
-    addAndMakeVisible (&buttonImageComponent);
+    addAndMakeVisible (&infoButtonImageComponent);
+    
+    linkButtonOffImage = juce::ImageCache::getFromMemory (BinaryData::link_button_off_png, BinaryData::link_button_off_pngSize);
+    linkButtonOnImage = juce::ImageCache::getFromMemory (BinaryData::link_button_on_png, BinaryData::link_button_on_pngSize);
+    linkButtonImageComponent.setImages (false, true, true, linkButtonOffImage, 1.0f, {}, {}, 1.0f, {}, linkButtonOnImage, 1.0f, {});
+    linkButtonImageComponent.setClickingTogglesState(true);
+    lButtonAttachment = std::make_unique<juce::AudioProcessorValueTreeState::ButtonAttachment>(audioProcessor.treeState, "linked", linkButtonImageComponent);
+    linkButtonImageComponent.setToggleState(*audioProcessor.treeState.getRawParameterValue("linked"), juce::dontSendNotification);
+    audioProcessor.treeState.addParameterListener("linked", &audioProcessor);
+    addAndMakeVisible (&linkButtonImageComponent);
     
 }
 

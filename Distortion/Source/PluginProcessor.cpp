@@ -1,7 +1,7 @@
 /*
   ==============================================================================
 
-    This file contains the basic framework code for a JUCE plugin processor.
+    Lullobytes - Distortion
 
   ==============================================================================
 */
@@ -37,6 +37,8 @@ DistortionAudioProcessor::DistortionAudioProcessor()
         treeState.getParameter ("drive")->setValue (0.0f);
         treeState.addParameterListener("clean", this);
         treeState.getParameter ("clean")->setValue (0.0f);
+        treeState.addParameterListener("linked", this);
+        treeState.getParameter ("linked")->setValue (true);
     }
     
 
@@ -109,13 +111,18 @@ void DistortionAudioProcessor::changeProgramName (int index, const juce::String&
 }
 
 //==============================================================================
-juce::AudioProcessorValueTreeState::ParameterLayout DistortionAudioProcessor::createParameterLayout(){
+juce::AudioProcessorValueTreeState::ParameterLayout DistortionAudioProcessor::createParameterLayout()
+{
     juce::AudioProcessorValueTreeState::ParameterLayout layout;
     layout.add(std::make_unique<juce::AudioParameterFloat>("drive", "Drive", 0.0f, 1.0f, 0.0f));
-    layout.add(std::make_unique<juce::AudioParameterFloat>("clean", "Clean", 0.0f, 1.0f, 0.0f));
+    layout.add(std::make_unique<juce::AudioParameterFloat>("clean", "Clean", 0.0f, 1.0f, 1.0f));
+    layout.add(std::make_unique<juce::AudioParameterBool>("linked", "Linked", true));
     return layout;
 }
-void DistortionAudioProcessor::parameterChanged  (const juce::String &parameterID, float newValue){
+
+//==============================================================================
+void DistortionAudioProcessor::parameterChanged  (const juce::String &parameterID, float newValue)
+{
     if (parameterID.compare("drive")==0)
     {
         drive = newValue;
@@ -129,20 +136,34 @@ void DistortionAudioProcessor::parameterChanged  (const juce::String &parameterI
         targetClean.setTargetValue(clean);
     }
     else targetClean.reset(getSampleRate(), 0.1f);
+    
+    if (parameterID.compare("linked")==0)
+    {
+        if (linked)
+        {
+            linked = false;
+        }
+        else if (!linked)
+        {
+            linked = true;
+        }
+    }
 }
 
-//==============================================================================
 void DistortionAudioProcessor::prepareToPlay (double sampleRate, int samplesPerBlock)
 {
 
 }
 
+//==============================================================================
 void DistortionAudioProcessor::releaseResources()
 {
     // When playback stops, you can use this as an opportunity to free up any
     // spare memory, etc.
 }
 
+
+//==============================================================================
 #ifndef JucePlugin_PreferredChannelConfigurations
 bool DistortionAudioProcessor::isBusesLayoutSupported (const BusesLayout& layouts) const
 {
@@ -167,28 +188,17 @@ bool DistortionAudioProcessor::isBusesLayoutSupported (const BusesLayout& layout
 }
 #endif
 
+//==============================================================================
 void DistortionAudioProcessor::processBlock (juce::AudioBuffer<float>& buffer, juce::MidiBuffer& midiMessages)
 {
     juce::ScopedNoDenormals noDenormals;
     auto totalNumInputChannels  = getTotalNumInputChannels();
     auto totalNumOutputChannels = getTotalNumOutputChannels();
 
-    // In case we have more outputs than inputs, this code clears any output
-    // channels that didn't contain input data, (because these aren't
-    // guaranteed to be empty - they may contain garbage).
-    // This is here to avoid people getting screaming feedback
-    // when they first compile a plugin, but obviously you don't need to keep
-    // this code if your algorithm always overwrites all the output channels. 
     
     for (auto i = totalNumInputChannels; i < totalNumOutputChannels; ++i)
         buffer.clear (i, 0, buffer.getNumSamples());
 
-    // This is the place where you'd normally do the guts of your plugin's
-    // audio processing...
-    // Make sure to reset the state if your inner loop is processing
-    // the samples and the outer loop is handling the channels.
-    // Alternatively, you can process the samples with the channels
-    // interleaved by keeping the same state.
     
     for (int channel = 0; channel < totalNumInputChannels; ++channel)
     {
@@ -196,7 +206,6 @@ void DistortionAudioProcessor::processBlock (juce::AudioBuffer<float>& buffer, j
         
         for (int sample = 0; sample < buffer.getNumSamples(); sample++)
         {
-            
             drive = targetDrive.getNextValue();
             clean = targetClean.getNextValue();
             
@@ -209,14 +218,6 @@ void DistortionAudioProcessor::processBlock (juce::AudioBuffer<float>& buffer, j
     
 
 }
-
-//==============================================================================
-
-
-
-
-
-//==============================================================================
 
 //==============================================================================
 bool DistortionAudioProcessor::hasEditor() const
@@ -232,15 +233,9 @@ juce::AudioProcessorEditor* DistortionAudioProcessor::createEditor()
 //==============================================================================
 void DistortionAudioProcessor::getStateInformation (juce::MemoryBlock& destData)
 {
-    // You should use this method to store your parameters in the memory block.
-    // You could do that either as raw data, or use the XML or ValueTree classes
-    // as intermediaries to make it easy to save and load complex data.
-    
-    std::unique_ptr<juce::XmlElement> xml (new juce::XmlElement ("Distortion"));
-    xml->setAttribute ("clean", (double) clean);
-    xml->setAttribute ("drive", (double) drive);
+    auto state = treeState.copyState();
+    std::unique_ptr<juce::XmlElement> xml (state.createXml());
     copyXmlToBinary (*xml, destData);
-
 }
 
 void DistortionAudioProcessor::setStateInformation (const void* data, int sizeInBytes)
@@ -252,16 +247,12 @@ void DistortionAudioProcessor::setStateInformation (const void* data, int sizeIn
     
     if (xmlState.get() != nullptr)
     {
-       
-        if (xmlState->hasTagName ("Distortion"))
-        {
-           
-            clean = (float) xmlState->getDoubleAttribute ("clean");
-            drive = (float) xmlState->getDoubleAttribute ("drive");
         
+        if (xmlState->hasTagName (treeState.state.getType()))
+        {
+            treeState.replaceState (juce::ValueTree::fromXml (*xmlState));
         }
-
-
+        
     }
 
 }

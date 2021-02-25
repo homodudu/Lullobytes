@@ -236,12 +236,26 @@
 			path = "../../JuceLibraryCode/include_juce_gui_extra.mm";
 			sourceTree = "SOURCE_ROOT";
 		};
+		3D711BCCC55F96CDD293EFE2 = {
+			isa = PBXFileReference;
+			lastKnownFileType = image.png;
+			name = "link_button_on.png";
+			path = "../../Assets/link_button_on.png";
+			sourceTree = "SOURCE_ROOT";
+		};
 		3D8304D41137D525F2CCECA1 = {
 			isa = PBXFileReference;
 			lastKnownFileType = wrapper.framework;
 			name = AudioToolbox.framework;
 			path = System/Library/Frameworks/AudioToolbox.framework;
 			sourceTree = SDKROOT;
+		};
+		3FB9E5423034ACFF4CCB44BC = {
+			isa = PBXFileReference;
+			lastKnownFileType = image.png;
+			name = "info_button_on.png";
+			path = "../../Assets/info_button_on.png";
+			sourceTree = "SOURCE_ROOT";
 		};
 		3FBC72EB9F7786FE1E9F8D88 = {
 			isa = PBXFileReference;
@@ -290,6 +304,13 @@
 			lastKnownFileType = sourcecode.cpp.objcpp;
 			name = "include_juce_audio_plugin_client_AU_2.mm";
 			path = "../../JuceLibraryCode/include_juce_audio_plugin_client_AU_2.mm";
+			sourceTree = "SOURCE_ROOT";
+		};
+		562C47988D513ECA5677A436 = {
+			isa = PBXFileReference;
+			lastKnownFileType = image.png;
+			name = "info_button_off.png";
+			path = "../../Assets/info_button_off.png";
 			sourceTree = "SOURCE_ROOT";
 		};
 		57BAD40C6F79EBC8A2E34FB1 = {
@@ -362,13 +383,6 @@
 			path = System/Library/Frameworks/CoreAudioKit.framework;
 			sourceTree = SDKROOT;
 		};
-		7361C993B8C8499A555BBA04 = {
-			isa = PBXFileReference;
-			lastKnownFileType = image.png;
-			name = "button_off.png";
-			path = "../../Assets/button_off.png";
-			sourceTree = "SOURCE_ROOT";
-		};
 		738C9F040F9C1C70B238A7A7 = {
 			isa = PBXFileReference;
 			lastKnownFileType = wrapper.framework;
@@ -396,13 +410,6 @@
 			name = "juce_core";
 			path = "/Applications/JUCE/modules/juce_core";
 			sourceTree = "<absolute>";
-		};
-		78CBE46CC8D468CD369C41C9 = {
-			isa = PBXFileReference;
-			lastKnownFileType = image.png;
-			name = logo.png;
-			path = ../../Assets/logo.png;
-			sourceTree = "SOURCE_ROOT";
 		};
 		7A9E50AE9AB16DAB8445CAC5 = {
 			isa = PBXFileReference;
@@ -586,13 +593,6 @@
 			path = "/Applications/JUCE/modules/juce_gui_extra";
 			sourceTree = "<absolute>";
 		};
-		F1040F194CC858340AC49961 = {
-			isa = PBXFileReference;
-			lastKnownFileType = image.png;
-			name = "button_on.png";
-			path = "../../Assets/button_on.png";
-			sourceTree = "SOURCE_ROOT";
-		};
 		F60E61AAE989924194BC084D = {
 			isa = PBXFileReference;
 			lastKnownFileType = file;
@@ -600,18 +600,26 @@
 			path = "/Applications/JUCE/modules/juce_audio_devices";
 			sourceTree = "<absolute>";
 		};
+		F634E7FAE69DEB04BE4B8607 = {
+			isa = PBXFileReference;
+			lastKnownFileType = image.png;
+			name = "link_button_off.png";
+			path = "../../Assets/link_button_off.png";
+			sourceTree = "SOURCE_ROOT";
+		};
 		EEC80F8D43E0FC5C3E4ACDB3 = {
 			isa = PBXGroup;
 			children = (
-				78CBE46CC8D468CD369C41C9,
-				7361C993B8C8499A555BBA04,
-				F1040F194CC858340AC49961,
+				562C47988D513ECA5677A436,
+				3FB9E5423034ACFF4CCB44BC,
+				F634E7FAE69DEB04BE4B8607,
+				3D711BCCC55F96CDD293EFE2,
 				C10F3AD646F36187CB4C7E51,
 				DCEF8907B9D3264547EDAE4E,
 				D12E350385FB5FB08C31912D,
+				0573CE010CB9DF5426B9AC63,
 				5BD4F8ADDEF10CB4CBA9FBC3,
 				7C059FE8E1FE6C380519D822,
-				0573CE010CB9DF5426B9AC63,
 				7503E9A0042A58EDE5CDB319,
 				A218357643BE681474EBE16E,
 			);

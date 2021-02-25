@@ -36,10 +36,11 @@ private:
     
     juce::Image infoImage;
     
-    juce::Image logoImage;
+    juce::Image linkButtonOffImage;
+    juce::Image linkButtonOnImage;
     
-    juce::Image buttonOffImage;
-    juce::Image buttonOnImage;
+    juce::Image infoButtonOffImage;
+    juce::Image infoButtonOnImage;
     
     juce::Image cOffImage;
     juce::Image cOnImage;
@@ -57,7 +58,8 @@ private:
     
     juce::ImageComponent logoImageComponent;
     
-    juce::ImageButton buttonImageComponent;
+    juce::ImageButton infoButtonImageComponent;
+    juce::ImageButton linkButtonImageComponent;
 
     juce::ImageComponent cOffImageComponent;
     juce::ImageComponent cOnImageComponent;
@@ -73,9 +75,9 @@ private:
     
     juce::Rectangle<int> infoArea {20, 20, 360, 360};
     
-    juce::Rectangle<int> logoArea {350, 360, 25, 25};
+    juce::Rectangle<int> linkButtonArea {350, 360, 25, 25};
     
-    juce::Rectangle<int> buttonArea {20, 360, 25, 25};
+    juce::Rectangle<int> infoButtonArea {20, 360, 25, 25};
     
     juce::Rectangle<int> cImageArea {185, 190, 140, 140};
     juce::Rectangle<int> cKnobArea {75, 215, 115, 115};
@@ -95,6 +97,8 @@ private:
 public:
     std::unique_ptr <juce::AudioProcessorValueTreeState::SliderAttachment> cSliderAttachment;
     std::unique_ptr <juce::AudioProcessorValueTreeState::SliderAttachment> dSliderAttachment;
+    
+    std::unique_ptr <juce::AudioProcessorValueTreeState::ButtonAttachment> lButtonAttachment;
 
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (DistortionAudioProcessorEditor)
 };

@@ -5,15 +5,20 @@
               companyName="Lullobytes" displaySplashScreen="1" version="1.0.1">
   <MAINGROUP id="xcJgGJ" name="Distortion">
     <GROUP id="{E2042A58-6DC0-7AB7-0564-28F97AF4C33C}" name="Assets">
-      <FILE id="w28naA" name="logo.png" compile="0" resource="1" file="Assets/logo.png"/>
-      <FILE id="i8PrBg" name="button_off.png" compile="0" resource="1" file="Assets/button_off.png"/>
-      <FILE id="FcyuJU" name="button_on.png" compile="0" resource="1" file="Assets/button_on.png"/>
+      <FILE id="KRRhuE" name="info_button_off.png" compile="0" resource="1"
+            file="Assets/info_button_off.png"/>
+      <FILE id="kqpqIA" name="info_button_on.png" compile="0" resource="1"
+            file="Assets/info_button_on.png"/>
+      <FILE id="q2dV9C" name="link_button_off.png" compile="0" resource="1"
+            file="Assets/link_button_off.png"/>
+      <FILE id="XwbKAY" name="link_button_on.png" compile="0" resource="1"
+            file="Assets/link_button_on.png"/>
       <FILE id="Lv92v2" name="info.png" compile="0" resource="1" file="Assets/info.png"/>
       <FILE id="QdpHUS" name="c_off.png" compile="0" resource="1" file="Assets/c_off.png"/>
       <FILE id="Gr1sdR" name="c_on.png" compile="0" resource="1" file="Assets/c_on.png"/>
+      <FILE id="MnzooO" name="d_off.png" compile="0" resource="1" file="Assets/d_off.png"/>
       <FILE id="Ddxm2G" name="d_on.png" compile="0" resource="1" file="Assets/d_on.png"/>
       <FILE id="aG2QOz" name="knob.png" compile="0" resource="1" file="Assets/knob.png"/>
-      <FILE id="MnzooO" name="d_off.png" compile="0" resource="1" file="Assets/d_off.png"/>
       <FILE id="eh7MgN" name="marker.png" compile="0" resource="1" file="Assets/marker.png"/>
       <FILE id="rWgRTL" name="frame.png" compile="0" resource="1" file="Assets/frame.png"/>
     </GROUP>
