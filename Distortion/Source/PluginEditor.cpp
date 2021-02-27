@@ -165,7 +165,7 @@ void DistortionAudioProcessorEditor:: gui()
         cSlider.setVisible(!infoButtonImageComponent.getToggleState());
         dOnImageComponent.setVisible(!infoButtonImageComponent.getToggleState());
         cOnImageComponent.setVisible(!infoButtonImageComponent.getToggleState());
-        dOffImageComponent.setVisible(!infoButtonImageComponent.getToggleState());
+        dOffImageComponent.setVisible(!infoButtonImageComponent.getToggleState()); 
         cOffImageComponent.setVisible(!infoButtonImageComponent.getToggleState());
         dKnobImageComponent.setVisible(!infoButtonImageComponent.getToggleState());
         cKnobImageComponent.setVisible(!infoButtonImageComponent.getToggleState());
