@@ -33,12 +33,12 @@ MidSideProcessor::MidSideProcessor()
 
 #endif
     {
-        treeState.addParameterListener("drive", this);
-        treeState.getParameter ("drive")->setValue (0.0f);
-        treeState.addParameterListener("clean", this);
-        treeState.getParameter ("clean")->setValue (0.0f);
-        treeState.addParameterListener("linked", this);
-        treeState.getParameter ("linked")->setValue (true);
+        treeState.addParameterListener("mid", this);
+        treeState.getParameter ("mid")->setValue (0.0f);
+        treeState.addParameterListener("side", this);
+        treeState.getParameter ("side")->setValue (0.0f);
+        treeState.addParameterListener("mode", this);
+        treeState.getParameter ("mode")->setValue (true);
     }
     
 
@@ -114,38 +114,38 @@ void MidSideProcessor::changeProgramName (int index, const juce::String& newName
 juce::AudioProcessorValueTreeState::ParameterLayout MidSideProcessor::createParameterLayout()
 {
     juce::AudioProcessorValueTreeState::ParameterLayout layout;
-    layout.add(std::make_unique<juce::AudioParameterFloat>("drive", "Drive", 0.0f, 1.0f, 0.0f));
-    layout.add(std::make_unique<juce::AudioParameterFloat>("clean", "Clean", 0.0f, 1.0f, 1.0f));
-    layout.add(std::make_unique<juce::AudioParameterBool>("linked", "Linked", true));
+    layout.add(std::make_unique<juce::AudioParameterFloat>("mid", "mid", 0.0f, 1.0f, 1.0f));
+    layout.add(std::make_unique<juce::AudioParameterFloat>("side", "side", 0.0f, 1.0f, 0.0f));
+    layout.add(std::make_unique<juce::AudioParameterBool>("mode", "mode", false));
     return layout;
 }
 
 //==============================================================================
 void MidSideProcessor::parameterChanged  (const juce::String &parameterID, float newValue)
 {
-    if (parameterID.compare("drive")==0)
+    if (parameterID.compare("mid")==0)
     {
-        drive = newValue;
-        targetDrive.setTargetValue(drive);
+        mid = newValue;
+        targetMid.setTargetValue(mid);
     }
-    else targetDrive.reset(getSampleRate(), 0.1f);
+    else targetMid.reset(getSampleRate(), 0.1f);
 
-    if (parameterID.compare("clean")==0)
+    if (parameterID.compare("side")==0)
     {
-        clean = newValue;
-        targetClean.setTargetValue(clean);
+        side = newValue;
+        targetSide.setTargetValue(side);
     }
-    else targetClean.reset(getSampleRate(), 0.1f);
+    else targetSide.reset(getSampleRate(), 0.1f);
     
-    if (parameterID.compare("linked")==0)
+    if (parameterID.compare("mode")==0)
     {
-        if (linked)
+        if (mode)
         {
-            linked = false;
+            mode = false;
         }
-        else if (!linked)
+        else if (!mode)
         {
-            linked = true;
+            mode = true;
         }
     }
 }
@@ -206,12 +206,9 @@ void MidSideProcessor::processBlock (juce::AudioBuffer<float>& buffer, juce::Mid
         
         for (int sample = 0; sample < buffer.getNumSamples(); sample++)
         {
-            drive = targetDrive.getNextValue();
-            clean = targetClean.getNextValue();
-            
-            float wetSignal = (2.0f / juce::float_Pi) * atanf(*channelData * drive * 10.0f);
-            *channelData = (clean * *channelData) + (wetSignal*0.707f);
-            channelData++;
+            mid = targetMid.getNextValue();
+            side = targetSide.getNextValue();
+
         }
         
     }

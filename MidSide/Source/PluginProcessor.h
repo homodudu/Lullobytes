@@ -65,13 +65,13 @@ public:
 private:
     //==============================================================================
 
-    float clean;
-    float drive;
+    float mid;
+    float side;
 
-    juce::SmoothedValue<float> targetClean;
-    juce::SmoothedValue<float> targetDrive;
+    juce::SmoothedValue<float> targetMid;
+    juce::SmoothedValue<float> targetSide;
     
-    bool linked;
+    bool mode;
     
     //==============================================================================
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (MidSideProcessor)

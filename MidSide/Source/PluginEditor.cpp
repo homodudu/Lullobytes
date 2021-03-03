@@ -96,10 +96,10 @@ void MidSideProcessorEditor::gui()
     mSlider.setColour(juce::Slider::ColourIds::thumbColourId, juce::Colours::black);
     mSlider.setLookAndFeel(&customLookAndFeel);
     
-    mSliderAttachment = std::make_unique<juce::AudioProcessorValueTreeState::SliderAttachment>(audioProcessor.treeState, "drive", mSlider);;
+    mSliderAttachment = std::make_unique<juce::AudioProcessorValueTreeState::SliderAttachment>(audioProcessor.treeState, "mid", mSlider);;
 
-    *audioProcessor.treeState.getRawParameterValue("drive") = mSlider.getValue();
-    audioProcessor.treeState.addParameterListener("drive", &audioProcessor);
+    *audioProcessor.treeState.getRawParameterValue("mid") = mSlider.getValue();
+    audioProcessor.treeState.addParameterListener("mid", &audioProcessor);
     
     mSlider.onValueChange = [this]
     {
@@ -122,10 +122,10 @@ void MidSideProcessorEditor::gui()
     sSlider.setColour(juce::Slider::ColourIds::thumbColourId, juce::Colours::black);
     sSlider.setLookAndFeel(&customLookAndFeel);
     
-    sSliderAttachment = std::make_unique<juce::AudioProcessorValueTreeState::SliderAttachment>(audioProcessor.treeState, "clean", sSlider);
+    sSliderAttachment = std::make_unique<juce::AudioProcessorValueTreeState::SliderAttachment>(audioProcessor.treeState, "side", sSlider);
     
-    *audioProcessor.treeState.getRawParameterValue("clean") = sSlider.getValue();
-    audioProcessor.treeState.addParameterListener("clean", &audioProcessor);
+    *audioProcessor.treeState.getRawParameterValue("side") = sSlider.getValue();
+    audioProcessor.treeState.addParameterListener("side", &audioProcessor);
     
     sSlider.onValueChange = [this]
     {
@@ -150,11 +150,11 @@ void MidSideProcessorEditor::gui()
     
     mMarkerImage = juce::ImageCache::getFromMemory (BinaryData::marker_png, BinaryData::marker_pngSize);
     mMarkerImageComponent.setImage(mMarkerImage);
-    addAndMakeVisible (&mMarkerImageComponent);
+    //addAndMakeVisible (&mMarkerImageComponent);
     
     sMarkerImage = juce::ImageCache::getFromMemory (BinaryData::marker_png, BinaryData::marker_pngSize);
     sMarkerImageComponent.setImage(sMarkerImage);
-    addAndMakeVisible (&sMarkerImageComponent);
+    //addAndMakeVisible (&sMarkerImageComponent);
     
     infoButtonOffImage = juce::ImageCache::getFromMemory (BinaryData::info_button_off_png, BinaryData::info_button_off_pngSize);
     infoButtonOnImage = juce::ImageCache::getFromMemory (BinaryData::info_button_on_png, BinaryData::info_button_on_pngSize);
@@ -180,9 +180,9 @@ void MidSideProcessorEditor::gui()
     linkButtonOnImage = juce::ImageCache::getFromMemory (BinaryData::link_button_on_png, BinaryData::link_button_on_pngSize);
     linkButtonImageComponent.setImages (false, true, true, linkButtonOffImage, 1.0f, {}, {}, 1.0f, {}, linkButtonOnImage, 1.0f, {});
     linkButtonImageComponent.setClickingTogglesState(true);
-    lButtonAttachment = std::make_unique<juce::AudioProcessorValueTreeState::ButtonAttachment>(audioProcessor.treeState, "linked", linkButtonImageComponent);
-    linkButtonImageComponent.setToggleState(*audioProcessor.treeState.getRawParameterValue("linked"), juce::dontSendNotification);
-    audioProcessor.treeState.addParameterListener("linked", &audioProcessor);
+    lButtonAttachment = std::make_unique<juce::AudioProcessorValueTreeState::ButtonAttachment>(audioProcessor.treeState, "mode", linkButtonImageComponent);
+    linkButtonImageComponent.setToggleState(*audioProcessor.treeState.getRawParameterValue("mode"), juce::dontSendNotification);
+    audioProcessor.treeState.addParameterListener("mode", &audioProcessor);
     addAndMakeVisible (&linkButtonImageComponent);
     
 }
