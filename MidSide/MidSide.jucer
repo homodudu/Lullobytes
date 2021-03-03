@@ -10,6 +10,7 @@
       <FILE id="metDrn" name="d_off.png" compile="0" resource="1" file="Assets/d_off.png"/>
       <FILE id="khnLBE" name="d_on.png" compile="0" resource="1" file="Assets/d_on.png"/>
       <FILE id="dCUP75" name="frame.png" compile="0" resource="1" file="Assets/frame.png"/>
+      <FILE id="P9Ep6B" name="handle.png" compile="0" resource="1" file="Assets/handle.png"/>
       <FILE id="enpryL" name="info.png" compile="0" resource="1" file="Assets/info.png"/>
       <FILE id="gJVFL8" name="info_button_off.png" compile="0" resource="1"
             file="Assets/info_button_off.png"/>
@@ -20,9 +21,17 @@
             file="Assets/link_button_off.png"/>
       <FILE id="WTPpMK" name="link_button_on.png" compile="0" resource="1"
             file="Assets/link_button_on.png"/>
+      <FILE id="LAdSwO" name="m_off.png" compile="0" resource="1" file="Assets/m_off.png"/>
+      <FILE id="AbcWRg" name="m_on.png" compile="0" resource="1" file="Assets/m_on.png"/>
       <FILE id="Qfp2Ek" name="marker.png" compile="0" resource="1" file="Assets/marker.png"/>
+      <FILE id="UxywAH" name="s_off.png" compile="0" resource="1" file="Assets/s_off.png"/>
+      <FILE id="DKJPRL" name="s_on.png" compile="0" resource="1" file="Assets/s_on.png"/>
     </GROUP>
     <GROUP id="{CC2F159C-A374-F4AC-5A7E-C63C734CABDF}" name="Source">
+      <FILE id="XnT9hs" name="CustomLookAndFeel.h" compile="0" resource="0"
+            file="Source/CustomLookAndFeel.h"/>
+      <FILE id="FKd8JQ" name="CustomLookAndFeel.cpp" compile="1" resource="0"
+            file="Source/CustomLookAndFeel.cpp"/>
       <FILE id="y4oH1R" name="PluginProcessor.cpp" compile="1" resource="0"
             file="Source/PluginProcessor.cpp"/>
       <FILE id="rFn7vv" name="PluginProcessor.h" compile="0" resource="0"

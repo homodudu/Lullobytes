@@ -10,11 +10,11 @@
 
 #include <JuceHeader.h>
 #include "PluginProcessor.h"
+#include "CustomLookAndFeel.h"
 
 //==============================================================================
-/**
- */
 class MidSideProcessorEditor  : public juce::AudioProcessorEditor
+
 
 {
 public:
@@ -25,12 +25,13 @@ public:
     void paint(juce::Graphics&) override;
     void resized() override;
     void gui();
+
     
     
 private:
-    // This reference is provided as a quick way for your editor to
-    // access the processor object that created it.
     MidSideProcessor& audioProcessor;
+    
+    CustomLookAndFeel customLookAndFeel;
     
     juce::Image frameImage;
     
@@ -42,15 +43,15 @@ private:
     juce::Image infoButtonOffImage;
     juce::Image infoButtonOnImage;
     
-    juce::Image cOffImage;
-    juce::Image cOnImage;
-    juce::Image cKnobImage;
-    juce::Image cMarkerImage;
+    juce::Image sOffImage;
+    juce::Image sOnImage;
+    juce::Image sHandleImage;
+    juce::Image sMarkerImage;
     
-    juce::Image dOffImage;
-    juce::Image dOnImage;
-    juce::Image dKnobImage;
-    juce::Image dMarkerImage;
+    juce::Image mOffImage;
+    juce::Image mOnImage;
+    juce::Image mHandleImage;
+    juce::Image mMarkerImage;
     
     juce::ImageComponent frameImageComponent;
     
@@ -61,15 +62,15 @@ private:
     juce::ImageButton infoButtonImageComponent;
     juce::ImageButton linkButtonImageComponent;
     
-    juce::ImageComponent cOffImageComponent;
-    juce::ImageComponent cOnImageComponent;
-    juce::ImageComponent cKnobImageComponent;
-    juce::ImageComponent cMarkerImageComponent;
+    juce::ImageComponent sOffImageComponent;
+    juce::ImageComponent sOnImageComponent;
+    juce::ImageComponent sHandleImageComponent;
+    juce::ImageComponent sMarkerImageComponent;
     
-    juce::ImageComponent dOffImageComponent;
-    juce::ImageComponent dOnImageComponent;
-    juce::ImageComponent dKnobImageComponent;
-    juce::ImageComponent dMarkerImageComponent;
+    juce::ImageComponent mOffImageComponent;
+    juce::ImageComponent mOnImageComponent;
+    juce::ImageComponent mHandleImageComponent;
+    juce::ImageComponent mMarkerImageComponent;
     
     juce::Rectangle<int> frameArea {20, 20, 360, 360};
     
@@ -79,26 +80,30 @@ private:
     
     juce::Rectangle<int> infoButtonArea {20, 360, 25, 25};
     
-    juce::Rectangle<int> cImageArea {185, 190, 140, 140};
-    juce::Rectangle<int> cKnobArea {75, 215, 115, 115};
-    juce::Rectangle<int> cMarkerArea {95, 300, 10, 10};
+    juce::Rectangle<int> sImageArea {185, 190, 140, 140};
+    juce::Rectangle<int> sHandleArea {75, 215, 115, 115};
+    juce::Rectangle<int> sSliderArea {75, 215, 115, 115};
+    juce::Rectangle<int> sMarkerArea {95, 300, 10, 10};
     
-    juce::Rectangle<int> dImageArea {75, 80, 140, 140};
-    juce::Rectangle<int> dKnobArea {210, 75, 115, 115};
-    juce::Rectangle<int> dMarkerArea {230, 160, 10, 10};
+    juce::Rectangle<int> mImageArea {75, 80, 140, 140};
+    juce::Rectangle<int> mHandleArea {210, 75, 115, 115};
+    juce::Rectangle<int> mSliderArea {210, 75, 115, 115};
+    juce::Rectangle<int> mMarkerArea {230, 160, 10, 10};
     
-    juce::AffineTransform cKnobTransform;
-    juce::AffineTransform dKnobTransform;
+    juce::AffineTransform sHandleTransform;
+    juce::AffineTransform mHandleTransform;
     
-    juce::Slider cSlider;
-    juce::Slider dSlider;
-    
+    juce::Slider sSlider;
+    juce::Slider mSlider;
+
     
 public:
-    std::unique_ptr <juce::AudioProcessorValueTreeState::SliderAttachment> cSliderAttachment;
-    std::unique_ptr <juce::AudioProcessorValueTreeState::SliderAttachment> dSliderAttachment;
+    std::unique_ptr <juce::AudioProcessorValueTreeState::SliderAttachment> sSliderAttachment;
+    std::unique_ptr <juce::AudioProcessorValueTreeState::SliderAttachment> mSliderAttachment;
     
     std::unique_ptr <juce::AudioProcessorValueTreeState::ButtonAttachment> lButtonAttachment;
     
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (MidSideProcessorEditor)
 };
+
+

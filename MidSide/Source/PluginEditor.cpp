@@ -1,7 +1,7 @@
 /*
  ==============================================================================
  
- This file contains the basic framework code for a JUCE plugin editor.
+ This file Contains the basic framework code for a JUCE plugin editor.
  
  ==============================================================================
  */
@@ -14,21 +14,23 @@ MidSideProcessorEditor::MidSideProcessorEditor (MidSideProcessor& p)
 : AudioProcessorEditor (&p), audioProcessor (p)
 {
     gui();
+    
 }
 
 MidSideProcessorEditor::~MidSideProcessorEditor()
 {
 }
 
+
+
 //==============================================================================
 void MidSideProcessorEditor::paint (juce::Graphics& g)
 {
     
-    g.fillAll (juce::Colours::purple);
+    g.fillAll (juce::Colours::plum);
     g.setColour (juce::Colours::black);
     g.setFont (15.0f);
     //g.drawFittedText ("Lulloybtes Distortion", getLocalBounds(), juce::Justification::centred, 1);
-    
 }
 
 void MidSideProcessorEditor::resized()
@@ -39,20 +41,20 @@ void MidSideProcessorEditor::resized()
     linkButtonImageComponent.setBounds(linkButtonArea);
     infoButtonImageComponent.setBounds(infoButtonArea);
     
-    dOffImageComponent.setBounds(dImageArea);
-    dOnImageComponent.setBounds(dImageArea);
-    dKnobImageComponent.setBounds(dKnobArea);
-    dMarkerImageComponent.setBounds(dMarkerArea);
-    dSlider.setBounds(dKnobArea);
+    mOffImageComponent.setBounds(mImageArea);
+    mOnImageComponent.setBounds(mImageArea);
+    //mHandleImageComponent.setBounds(mHandleArea);
+    mMarkerImageComponent.setBounds(mMarkerArea);
+    mSlider.setBounds(mSliderArea);
     
-    cOffImageComponent.setBounds(cImageArea);
-    cOnImageComponent.setBounds(cImageArea);
-    cKnobImageComponent.setBounds(cKnobArea);
-    cMarkerImageComponent.setBounds(cMarkerArea);
-    cSlider.setBounds(cKnobArea);
+    sOffImageComponent.setBounds(sImageArea);
+    sOnImageComponent.setBounds(sImageArea);
+    //sHandleImageComponent.setBounds(sHandleArea);
+    sMarkerImageComponent.setBounds(sMarkerArea);
+    sSlider.setBounds(sSliderArea);
 }
 
-void MidSideProcessorEditor:: gui()
+void MidSideProcessorEditor::gui()
 {
     setSize (400, 400);
     
@@ -65,94 +67,94 @@ void MidSideProcessorEditor:: gui()
     frameImageComponent.setImage(frameImage);
     addAndMakeVisible (&frameImageComponent);
     
-    dOffImage = juce::ImageCache::getFromMemory (BinaryData::d_off_png, BinaryData::d_off_pngSize);
-    dOffImageComponent.setImage(dOffImage);
-    //addAndMakeVisible (&dOffImageComponent);
+    mOffImage = juce::ImageCache::getFromMemory (BinaryData::m_off_png, BinaryData::m_off_pngSize);
+    mOffImageComponent.setImage(mOffImage);
+    addAndMakeVisible (&mOffImageComponent);
     
-    cOffImage = juce::ImageCache::getFromMemory (BinaryData::c_off_png, BinaryData::c_off_pngSize);
-    cOffImageComponent.setImage(cOffImage);
-    //addAndMakeVisible (&cOffImageComponent);
+    sOffImage = juce::ImageCache::getFromMemory (BinaryData::s_off_png, BinaryData::s_off_pngSize);
+    sOffImageComponent.setImage(sOffImage);
+    addAndMakeVisible (&sOffImageComponent);
     
-    dKnobImage = juce::ImageCache::getFromMemory (BinaryData::knob_png, BinaryData::knob_pngSize);
-    dKnobImageComponent.setImage(dKnobImage);
-    dKnobImageComponent.setBufferedToImage(true);
-    //addAndMakeVisible (&dKnobImageComponent);
+    mHandleImage = juce::ImageCache::getFromMemory (BinaryData::handle_png, BinaryData::handle_pngSize);
+    mHandleImageComponent.setImage(mHandleImage);
+    mHandleImageComponent.setBufferedToImage(true);
+    addAndMakeVisible (&mHandleImageComponent);
     
-    cKnobImage = juce::ImageCache::getFromMemory (BinaryData::knob_png, BinaryData::knob_pngSize);
-    cKnobImageComponent.setImage(cKnobImage);
-    cKnobImageComponent.setBufferedToImage(true);
-    //addAndMakeVisible (&cKnobImageComponent);
+    sHandleImage = juce::ImageCache::getFromMemory (BinaryData::handle_png, BinaryData::handle_pngSize);
+    sHandleImageComponent.setImage(sHandleImage);
+    sHandleImageComponent.setBufferedToImage(true);
+    addAndMakeVisible (&sHandleImageComponent);
     
-    dSlider.setSliderStyle (juce::Slider::LinearVertical);
-    dSlider.setRange (0, 1);
-    dSlider.setTextBoxStyle (juce::Slider::NoTextBox, false, 0, 0);
-    dSlider.setColour(juce::Slider::ColourIds::backgroundColourId, juce::Colours::black);
-    dSlider.setColour(juce::Slider::ColourIds::rotarySliderOutlineColourId, juce::Colours::black);
-    dSlider.setColour(juce::Slider::ColourIds::rotarySliderFillColourId, juce::Colours::black);
-    dSlider.setColour(juce::Slider::ColourIds::trackColourId, juce::Colours::black);
-    dSlider.setColour(juce::Slider::ColourIds::thumbColourId, juce::Colours::black);
     
-    dSliderAttachment = std::make_unique<juce::AudioProcessorValueTreeState::SliderAttachment>(audioProcessor.treeState, "drive", dSlider);;
-    dKnobImageComponent.setTransform(dKnobTransform.rotation(4.72f*  *audioProcessor.treeState.getRawParameterValue("drive"),dKnobArea.getCentreX(), dKnobArea.getCentreY()));
-    *audioProcessor.treeState.getRawParameterValue("drive") = dSlider.getValue();
+    mSlider.setSliderStyle (juce::Slider::LinearVertical);
+    mSlider.setRange (0, 1);
+    mSlider.setTextBoxStyle (juce::Slider::NoTextBox, false, 0, 0);
+    mSlider.setColour(juce::Slider::ColourIds::backgroundColourId, juce::Colours::black);
+    mSlider.setColour(juce::Slider::ColourIds::rotarySliderOutlineColourId, juce::Colours::black);
+    mSlider.setColour(juce::Slider::ColourIds::rotarySliderFillColourId, juce::Colours::black);
+    mSlider.setColour(juce::Slider::ColourIds::trackColourId, juce::Colours::black);
+    mSlider.setColour(juce::Slider::ColourIds::thumbColourId, juce::Colours::black);
+    mSlider.setLookAndFeel(&customLookAndFeel);
+    
+    mSliderAttachment = std::make_unique<juce::AudioProcessorValueTreeState::SliderAttachment>(audioProcessor.treeState, "drive", mSlider);;
+
+    *audioProcessor.treeState.getRawParameterValue("drive") = mSlider.getValue();
     audioProcessor.treeState.addParameterListener("drive", &audioProcessor);
     
-    dSlider.onValueChange = [this]
+    mSlider.onValueChange = [this]
     {
-        dKnobImageComponent.setTransform(dKnobTransform.rotation(4.72f*  *audioProcessor.treeState.getRawParameterValue("drive"),dKnobArea.getCentreX(), dKnobArea.getCentreY()));
-        if(dSlider.getValue()>0.01f)
-            dOnImageComponent.setAlpha(0.5f * dSlider.getValue() + 0.5f);
-        else dOnImageComponent.setAlpha(0.0f);
+        if(mSlider.getValue()>0.01f)
+            mOnImageComponent.setAlpha(mSlider.getValue());
+        else mOnImageComponent.setAlpha(0.0f);
         if (linkButtonImageComponent.getToggleState()) {
-            cSlider.setValue(1 - dSlider.getValue());
+            sSlider.setValue(1 - mSlider.getValue());
         }
     };
-    addAndMakeVisible (dSlider);
+    addAndMakeVisible (mSlider);
     
-    cSlider.setSliderStyle (juce::Slider::LinearVertical);
-    cSlider.setRange (0, 1.0);
-    cSlider.setTextBoxStyle (juce::Slider::NoTextBox, false, 0, 0);
-    cSlider.setColour(juce::Slider::ColourIds::backgroundColourId, juce::Colours::black);
-    cSlider.setColour(juce::Slider::ColourIds::rotarySliderOutlineColourId, juce::Colours::black);
-    cSlider.setColour(juce::Slider::ColourIds::rotarySliderFillColourId, juce::Colours::black);
-    cSlider.setColour(juce::Slider::ColourIds::trackColourId, juce::Colours::black);
-    cSlider.setColour(juce::Slider::ColourIds::thumbColourId, juce::Colours::black);
+    sSlider.setSliderStyle (juce::Slider::LinearVertical);
+    sSlider.setRange (0, 1.0);
+    sSlider.setTextBoxStyle (juce::Slider::NoTextBox, false, 0, 0);
+    sSlider.setColour(juce::Slider::ColourIds::backgroundColourId, juce::Colours::black);
+    sSlider.setColour(juce::Slider::ColourIds::rotarySliderOutlineColourId, juce::Colours::black);
+    sSlider.setColour(juce::Slider::ColourIds::rotarySliderFillColourId, juce::Colours::black);
+    sSlider.setColour(juce::Slider::ColourIds::trackColourId, juce::Colours::black);
+    sSlider.setColour(juce::Slider::ColourIds::thumbColourId, juce::Colours::black);
+    sSlider.setLookAndFeel(&customLookAndFeel);
     
-    cSliderAttachment = std::make_unique<juce::AudioProcessorValueTreeState::SliderAttachment>(audioProcessor.treeState, "clean", cSlider);
-    cKnobImageComponent.setTransform(cKnobTransform.rotation(4.72f* *audioProcessor.treeState.getRawParameterValue("clean"),cKnobArea.getCentreX(), cKnobArea.getCentreY()));
+    sSliderAttachment = std::make_unique<juce::AudioProcessorValueTreeState::SliderAttachment>(audioProcessor.treeState, "clean", sSlider);
     
-    *audioProcessor.treeState.getRawParameterValue("clean") = cSlider.getValue();
+    *audioProcessor.treeState.getRawParameterValue("clean") = sSlider.getValue();
     audioProcessor.treeState.addParameterListener("clean", &audioProcessor);
     
-    cSlider.onValueChange = [this]
+    sSlider.onValueChange = [this]
     {
-        cKnobImageComponent.setTransform(cKnobTransform.rotation(4.72f* *audioProcessor.treeState.getRawParameterValue("clean"),cKnobArea.getCentreX(), cKnobArea.getCentreY()));
-        if(cSlider.getValue()>0.01f)
-            cOnImageComponent.setAlpha(0.5f * cSlider.getValue() + 0.5f);
-        else cOnImageComponent.setAlpha(0.0f);
+        if(sSlider.getValue()>0.01f)
+            sOnImageComponent.setAlpha(sSlider.getValue());
+        else sOnImageComponent.setAlpha(0.0f);
         if (linkButtonImageComponent.getToggleState()) {
-            dSlider.setValue(1 - cSlider.getValue());
+            mSlider.setValue(1 - sSlider.getValue());
         }
     };
-    addAndMakeVisible (cSlider);
+    addAndMakeVisible (sSlider);
     
-    dOnImage = juce::ImageCache::getFromMemory (BinaryData::d_on_png, BinaryData::d_on_pngSize);
-    dOnImageComponent.setImage(dOnImage);
-    dOnImageComponent.setAlpha(dSlider.getValue());
-    //addAndMakeVisible (&dOnImageComponent);
+    mOnImage = juce::ImageCache::getFromMemory (BinaryData::m_on_png, BinaryData::m_on_pngSize);
+    mOnImageComponent.setImage(mOnImage);
+    mOnImageComponent.setAlpha(mSlider.getValue());
+    addAndMakeVisible (&mOnImageComponent);
     
-    cOnImage = juce::ImageCache::getFromMemory (BinaryData::c_on_png, BinaryData::c_on_pngSize);
-    cOnImageComponent.setImage(cOnImage);
-    cOnImageComponent.setAlpha(cSlider.getValue());
-    //addAndMakeVisible (&cOnImageComponent);
+    sOnImage = juce::ImageCache::getFromMemory (BinaryData::s_on_png, BinaryData::s_on_pngSize);
+    sOnImageComponent.setImage(sOnImage);
+    sOnImageComponent.setAlpha(sSlider.getValue());
+    addAndMakeVisible (&sOnImageComponent);
     
-    dMarkerImage = juce::ImageCache::getFromMemory (BinaryData::marker_png, BinaryData::marker_pngSize);
-    dMarkerImageComponent.setImage(dMarkerImage);
-    //addAndMakeVisible (&dMarkerImageComponent);
+    mMarkerImage = juce::ImageCache::getFromMemory (BinaryData::marker_png, BinaryData::marker_pngSize);
+    mMarkerImageComponent.setImage(mMarkerImage);
+    addAndMakeVisible (&mMarkerImageComponent);
     
-    cMarkerImage = juce::ImageCache::getFromMemory (BinaryData::marker_png, BinaryData::marker_pngSize);
-    cMarkerImageComponent.setImage(cMarkerImage);
-    //addAndMakeVisible (&cMarkerImageComponent);
+    sMarkerImage = juce::ImageCache::getFromMemory (BinaryData::marker_png, BinaryData::marker_pngSize);
+    sMarkerImageComponent.setImage(sMarkerImage);
+    addAndMakeVisible (&sMarkerImageComponent);
     
     infoButtonOffImage = juce::ImageCache::getFromMemory (BinaryData::info_button_off_png, BinaryData::info_button_off_pngSize);
     infoButtonOnImage = juce::ImageCache::getFromMemory (BinaryData::info_button_on_png, BinaryData::info_button_on_pngSize);
@@ -161,16 +163,16 @@ void MidSideProcessorEditor:: gui()
     infoButtonImageComponent.onStateChange = [this]
     {
         infoImageComponent.setVisible(infoButtonImageComponent.getToggleState());
-        dSlider.setVisible(!infoButtonImageComponent.getToggleState());
-        cSlider.setVisible(!infoButtonImageComponent.getToggleState());
-        dOnImageComponent.setVisible(!infoButtonImageComponent.getToggleState());
-        cOnImageComponent.setVisible(!infoButtonImageComponent.getToggleState());
-        dOffImageComponent.setVisible(!infoButtonImageComponent.getToggleState());
-        cOffImageComponent.setVisible(!infoButtonImageComponent.getToggleState());
-        dKnobImageComponent.setVisible(!infoButtonImageComponent.getToggleState());
-        cKnobImageComponent.setVisible(!infoButtonImageComponent.getToggleState());
-        dMarkerImageComponent.setVisible(!infoButtonImageComponent.getToggleState());
-        cMarkerImageComponent.setVisible(!infoButtonImageComponent.getToggleState());
+        mSlider.setVisible(!infoButtonImageComponent.getToggleState());
+        sSlider.setVisible(!infoButtonImageComponent.getToggleState());
+        mOnImageComponent.setVisible(!infoButtonImageComponent.getToggleState());
+        sOnImageComponent.setVisible(!infoButtonImageComponent.getToggleState());
+        mOffImageComponent.setVisible(!infoButtonImageComponent.getToggleState());
+        sOffImageComponent.setVisible(!infoButtonImageComponent.getToggleState());
+        mHandleImageComponent.setVisible(!infoButtonImageComponent.getToggleState());
+        sHandleImageComponent.setVisible(!infoButtonImageComponent.getToggleState());
+        mMarkerImageComponent.setVisible(!infoButtonImageComponent.getToggleState());
+        sMarkerImageComponent.setVisible(!infoButtonImageComponent.getToggleState());
     };
     addAndMakeVisible (&infoButtonImageComponent);
     
@@ -184,6 +186,15 @@ void MidSideProcessorEditor:: gui()
     addAndMakeVisible (&linkButtonImageComponent);
     
 }
+
+//==============================================================================
+
+
+
+
+
+
+
 
 
 
