@@ -26,7 +26,7 @@ public:
     void resized() override;
     void gui();
 
-    
+
     
 private:
     MidSideProcessor& audioProcessor;
@@ -71,7 +71,7 @@ private:
     juce::ImageComponent mOnImageComponent;
     juce::ImageComponent mHandleImageComponent;
     juce::ImageComponent mMarkerImageComponent;
-    
+
     juce::Rectangle<int> frameArea {20, 20, 360, 360};
     
     juce::Rectangle<int> infoArea {20, 20, 360, 360};

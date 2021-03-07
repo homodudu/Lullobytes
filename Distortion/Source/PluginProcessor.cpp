@@ -143,7 +143,7 @@ void DistortionAudioProcessor::parameterChanged  (const juce::String &parameterI
         {
             linked = false;
         }
-        else if (!linked)
+        else
         {
             linked = true;
         }
@@ -206,11 +206,11 @@ void DistortionAudioProcessor::processBlock (juce::AudioBuffer<float>& buffer, j
         
         for (int sample = 0; sample < buffer.getNumSamples(); sample++)
         {
-            drive = targetDrive.getNextValue();
-            clean = targetClean.getNextValue();
+            //targetDrive.getNextValue();
+            //targetClean.getNextValue();
             
-            float wetSignal = (2.0f / juce::float_Pi) * atanf(*channelData * drive * 10.0f);
-            *channelData = (clean * *channelData) + (wetSignal*0.707f);
+            float wetSignal = (2.0f / juce::float_Pi) * atanf(*channelData * targetDrive.getNextValue() * 10.0f);
+            *channelData = (targetClean.getNextValue() * *channelData) + (wetSignal*0.707f);
             channelData++;
         }
         

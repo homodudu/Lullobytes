@@ -71,7 +71,7 @@ private:
     juce::SmoothedValue<float> targetMid;
     juce::SmoothedValue<float> targetSide;
     
-    bool mode;
+    bool linked;
     
     //==============================================================================
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (MidSideProcessor)

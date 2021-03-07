@@ -5,6 +5,7 @@
               companyName="Lullobytes" displaySplashScreen="1" version="1.0.1">
   <MAINGROUP id="xcJgGJ" name="Distortion">
     <GROUP id="{E2042A58-6DC0-7AB7-0564-28F97AF4C33C}" name="Assets">
+      <FILE id="Yg7lHb" name="handle.png" compile="0" resource="1" file="Assets/handle.png"/>
       <FILE id="KRRhuE" name="info_button_off.png" compile="0" resource="1"
             file="Assets/info_button_off.png"/>
       <FILE id="kqpqIA" name="info_button_on.png" compile="0" resource="1"
@@ -23,6 +24,10 @@
       <FILE id="rWgRTL" name="frame.png" compile="0" resource="1" file="Assets/frame.png"/>
     </GROUP>
     <GROUP id="{92BFB88B-CC1E-A625-E87A-785FA4260138}" name="Source">
+      <FILE id="msLC9i" name="CustomLookAndFeel.cpp" compile="1" resource="0"
+            file="Source/CustomLookAndFeel.cpp"/>
+      <FILE id="T0DAk4" name="CustomLookAndFeel.h" compile="0" resource="0"
+            file="Source/CustomLookAndFeel.h"/>
       <FILE id="ASq34V" name="PluginProcessor.cpp" compile="1" resource="0"
             file="Source/PluginProcessor.cpp"/>
       <FILE id="XZaufo" name="PluginProcessor.h" compile="0" resource="0"

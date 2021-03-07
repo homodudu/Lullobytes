@@ -83,6 +83,7 @@ void DistortionAudioProcessorEditor:: gui()
     cKnobImageComponent.setBufferedToImage(true);
     addAndMakeVisible (&cKnobImageComponent);
     
+    dSlider.setSliderSnapsToMousePosition(false);
     dSlider.setSliderStyle (juce::Slider::Rotary);
     dSlider.setRange (0, 1);
     dSlider.setTextBoxStyle (juce::Slider::NoTextBox, false, 0, 0);
@@ -92,9 +93,9 @@ void DistortionAudioProcessorEditor:: gui()
     dSlider.setColour(juce::Slider::ColourIds::trackColourId, juce::Colours::burlywood);
     dSlider.setColour(juce::Slider::ColourIds::thumbColourId, juce::Colours::burlywood);
     
-    dSliderAttachment = std::make_unique<juce::AudioProcessorValueTreeState::SliderAttachment>(audioProcessor.treeState, "drive", dSlider);;
+    dSliderAttachment = std::make_unique<juce::AudioProcessorValueTreeState::SliderAttachment>(audioProcessor.treeState, "drive", dSlider);
     dKnobImageComponent.setTransform(dKnobTransform.rotation(4.72f*  *audioProcessor.treeState.getRawParameterValue("drive"),dKnobArea.getCentreX(), dKnobArea.getCentreY()));
-    *audioProcessor.treeState.getRawParameterValue("drive") = dSlider.getValue();
+    dSlider.setValue(*audioProcessor.treeState.getRawParameterValue("drive"));
     audioProcessor.treeState.addParameterListener("drive", &audioProcessor);
     
     dSlider.onValueChange = [this]
@@ -109,6 +110,7 @@ void DistortionAudioProcessorEditor:: gui()
     };
     addAndMakeVisible (dSlider);
     
+    cSlider.setSliderSnapsToMousePosition(false);
     cSlider.setSliderStyle (juce::Slider::Rotary);
     cSlider.setRange (0, 1.0);
     cSlider.setTextBoxStyle (juce::Slider::NoTextBox, false, 0, 0);
@@ -121,7 +123,7 @@ void DistortionAudioProcessorEditor:: gui()
     cSliderAttachment = std::make_unique<juce::AudioProcessorValueTreeState::SliderAttachment>(audioProcessor.treeState, "clean", cSlider);
     cKnobImageComponent.setTransform(cKnobTransform.rotation(4.72f* *audioProcessor.treeState.getRawParameterValue("clean"),cKnobArea.getCentreX(), cKnobArea.getCentreY()));
     
-    *audioProcessor.treeState.getRawParameterValue("clean") = cSlider.getValue();
+    cSlider.setValue(*audioProcessor.treeState.getRawParameterValue("clean"));
     audioProcessor.treeState.addParameterListener("clean", &audioProcessor);
     
     cSlider.onValueChange = [this]

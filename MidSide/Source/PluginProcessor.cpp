@@ -37,8 +37,8 @@ MidSideProcessor::MidSideProcessor()
         treeState.getParameter ("mid")->setValue (0.0f);
         treeState.addParameterListener("side", this);
         treeState.getParameter ("side")->setValue (0.0f);
-        treeState.addParameterListener("mode", this);
-        treeState.getParameter ("mode")->setValue (true);
+        treeState.addParameterListener("linked", this);
+        treeState.getParameter ("linked")->setValue (true);
     }
     
 
@@ -114,9 +114,9 @@ void MidSideProcessor::changeProgramName (int index, const juce::String& newName
 juce::AudioProcessorValueTreeState::ParameterLayout MidSideProcessor::createParameterLayout()
 {
     juce::AudioProcessorValueTreeState::ParameterLayout layout;
-    layout.add(std::make_unique<juce::AudioParameterFloat>("mid", "mid", 0.0f, 1.0f, 1.0f));
-    layout.add(std::make_unique<juce::AudioParameterFloat>("side", "side", 0.0f, 1.0f, 0.0f));
-    layout.add(std::make_unique<juce::AudioParameterBool>("mode", "mode", false));
+    layout.add(std::make_unique<juce::AudioParameterFloat>("mid", "Mid", 0.0f, 1.0f, 1.0f));
+    layout.add(std::make_unique<juce::AudioParameterFloat>("side", "Side", 0.0f, 1.0f, 0.0f));
+    layout.add(std::make_unique<juce::AudioParameterBool>("linked", "Linked", true)); 
     return layout;
 }
 
@@ -137,15 +137,15 @@ void MidSideProcessor::parameterChanged  (const juce::String &parameterID, float
     }
     else targetSide.reset(getSampleRate(), 0.1f);
     
-    if (parameterID.compare("mode")==0)
+    if (parameterID.compare("linked")==0)
     {
-        if (mode)
+        if (linked)
         {
-            mode = false;
+            linked = false;
         }
-        else if (!mode)
+        else
         {
-            mode = true;
+            linked = true;
         }
     }
 }
@@ -198,20 +198,36 @@ void MidSideProcessor::processBlock (juce::AudioBuffer<float>& buffer, juce::Mid
     
     for (auto i = totalNumInputChannels; i < totalNumOutputChannels; ++i)
         buffer.clear (i, 0, buffer.getNumSamples());
+    
 
     
-    for (int channel = 0; channel < totalNumInputChannels; ++channel)
+    if (totalNumInputChannels == 2)
     {
-        auto* channelData = buffer.getWritePointer(channel); 
+        
+        auto* channelLeft = buffer.getWritePointer(0);
+        auto* channelRight = buffer.getWritePointer(1);
         
         for (int sample = 0; sample < buffer.getNumSamples(); sample++)
         {
-            mid = targetMid.getNextValue();
-            side = targetSide.getNextValue();
+            //mid = targetMid.getNextValue();
+            //side = targetSide.getNextValue();
+            
+            float midDecode = (*channelLeft + *channelRight) * 0.5f;
+            float sideDecode = (*channelLeft - *channelRight) * 2.0f;
 
+            *channelLeft = (midDecode * targetMid.getNextValue() + sideDecode * targetSide.getNextValue());
+            *channelRight = (midDecode * targetMid.getNextValue() - sideDecode * targetSide.getNextValue());
+            
+            //*channelLeft = mid * (midDecode + sideDecode);
+            //*channelRight = side * (midDecode - sideDecode);
+            
+            channelLeft++;
+            channelRight++;
         }
-        
     }
+    
+
+    
     
 
 }

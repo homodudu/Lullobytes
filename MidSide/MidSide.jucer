@@ -17,6 +17,8 @@
       <FILE id="y2MdDO" name="info_button_on.png" compile="0" resource="1"
             file="Assets/info_button_on.png"/>
       <FILE id="Jzu0EX" name="knob.png" compile="0" resource="1" file="Assets/knob.png"/>
+      <FILE id="gvgyHK" name="l_off.png" compile="0" resource="1" file="Assets/l_off.png"/>
+      <FILE id="aEFH9Q" name="l_on.png" compile="0" resource="1" file="Assets/l_on.png"/>
       <FILE id="uDLUiN" name="link_button_off.png" compile="0" resource="1"
             file="Assets/link_button_off.png"/>
       <FILE id="WTPpMK" name="link_button_on.png" compile="0" resource="1"
@@ -24,6 +26,8 @@
       <FILE id="LAdSwO" name="m_off.png" compile="0" resource="1" file="Assets/m_off.png"/>
       <FILE id="AbcWRg" name="m_on.png" compile="0" resource="1" file="Assets/m_on.png"/>
       <FILE id="Qfp2Ek" name="marker.png" compile="0" resource="1" file="Assets/marker.png"/>
+      <FILE id="hI04Jm" name="r_off.png" compile="0" resource="1" file="Assets/r_off.png"/>
+      <FILE id="Qblml4" name="r_on.png" compile="0" resource="1" file="Assets/r_on.png"/>
       <FILE id="UxywAH" name="s_off.png" compile="0" resource="1" file="Assets/s_off.png"/>
       <FILE id="DKJPRL" name="s_on.png" compile="0" resource="1" file="Assets/s_on.png"/>
     </GROUP>

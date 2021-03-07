@@ -65,6 +65,10 @@
 			isa = PBXBuildFile;
 			fileRef = B6EA0E3038A407E4786FA0DE;
 		};
+		B0EDEC1B86F90B7BB9DBC91F = {
+			isa = PBXBuildFile;
+			fileRef = 5C2CCA941770E5FFA43C40F7;
+		};
 		FB7BEC71FFBF40E0CE86AF77 = {
 			isa = PBXBuildFile;
 			fileRef = 0A9B7DA15FAF58AE16DEC827;
@@ -341,6 +345,13 @@
 			path = "../../Assets/d_on.png";
 			sourceTree = "SOURCE_ROOT";
 		};
+		5C2CCA941770E5FFA43C40F7 = {
+			isa = PBXFileReference;
+			lastKnownFileType = sourcecode.cpp.cpp;
+			name = CustomLookAndFeel.cpp;
+			path = ../../Source/CustomLookAndFeel.cpp;
+			sourceTree = "SOURCE_ROOT";
+		};
 		5EB336F0A1570BD53751A05B = {
 			isa = PBXFileReference;
 			lastKnownFileType = sourcecode.c.h;
@@ -389,6 +400,13 @@
 			name = CoreMIDI.framework;
 			path = System/Library/Frameworks/CoreMIDI.framework;
 			sourceTree = SDKROOT;
+		};
+		744CC1FD797061F27AE5974E = {
+			isa = PBXFileReference;
+			lastKnownFileType = image.png;
+			name = handle.png;
+			path = ../../Assets/handle.png;
+			sourceTree = "SOURCE_ROOT";
 		};
 		74BFC7B0BFF48AD1DDF9B334 = {
 			isa = PBXFileReference;
@@ -459,6 +477,13 @@
 			includeInIndex = 0;
 			path = libDistortion.a;
 			sourceTree = "BUILT_PRODUCTS_DIR";
+		};
+		914035EED2D2FE967FE70C91 = {
+			isa = PBXFileReference;
+			lastKnownFileType = sourcecode.c.h;
+			name = CustomLookAndFeel.h;
+			path = ../../Source/CustomLookAndFeel.h;
+			sourceTree = "SOURCE_ROOT";
 		};
 		9514816290F7CB57A50FBFD9 = {
 			isa = PBXFileReference;
@@ -610,6 +635,7 @@
 		EEC80F8D43E0FC5C3E4ACDB3 = {
 			isa = PBXGroup;
 			children = (
+				744CC1FD797061F27AE5974E,
 				562C47988D513ECA5677A436,
 				3FB9E5423034ACFF4CCB44BC,
 				F634E7FAE69DEB04BE4B8607,
@@ -629,6 +655,8 @@
 		6A4BCF8D2B5E5476B2B4FBF8 = {
 			isa = PBXGroup;
 			children = (
+				5C2CCA941770E5FFA43C40F7,
+				914035EED2D2FE967FE70C91,
 				0A9B7DA15FAF58AE16DEC827,
 				2CE8E248135161BE62B6E9F4,
 				63C8F2EE6645C725E0DCC9DD,
@@ -1443,6 +1471,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B0EDEC1B86F90B7BB9DBC91F,
 				FB7BEC71FFBF40E0CE86AF77,
 				DEE1812F3962969CEA989EFB,
 				805CD05514661F551E3D4E80,
