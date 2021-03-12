@@ -1,7 +1,7 @@
 /*
  ==============================================================================
  
- This file contains the basic framework code for a JUCE plugin editor.
+    Lullobytes - MidSide editor.
  
  ==============================================================================
  */
@@ -13,50 +13,47 @@
 #include "CustomLookAndFeel.h"
 
 //==============================================================================
-class MidSideProcessorEditor  : public juce::AudioProcessorEditor
+class MidSideAudioProcessorEditor  : public juce::AudioProcessorEditor
 
 
 {
 public:
-    MidSideProcessorEditor (MidSideProcessor&);
-    ~MidSideProcessorEditor() override;
+    MidSideAudioProcessorEditor (MidSideAudioProcessor&);
+    ~MidSideAudioProcessorEditor() override;
     
     //==============================================================================
     void paint(juce::Graphics&) override;
     void resized() override;
     void gui();
-
+    void setSlider(juce::Slider &slider, juce::Colour defaultColour);
+    void setImage(juce::Image image, juce::ImageComponent &imageComponent, bool setVisible);
 
     
 private:
-    MidSideProcessor& audioProcessor;
+    MidSideAudioProcessor& audioProcessor;
     
     CustomLookAndFeel customLookAndFeel;
     
-    juce::Image frameImage;
+    juce::Colour backgroundColor = juce::Colours::plum;
+    juce::Colour sliderColor = juce::Colours::black;
     
-    juce::Image infoImage;
+    juce::Image frameImage = juce::ImageCache::getFromMemory (BinaryData::frame_png, BinaryData::frame_pngSize);
+    juce::Image infoImage = juce::ImageCache::getFromMemory (BinaryData::info_png, BinaryData::info_pngSize);
     
-    juce::Image linkButtonOffImage;
-    juce::Image linkButtonOnImage;
+    juce::Image linkButtonOffImage = juce::ImageCache::getFromMemory (BinaryData::link_button_off_png, BinaryData::link_button_off_pngSize);
+    juce::Image linkButtonOnImage = juce::ImageCache::getFromMemory (BinaryData::link_button_on_png, BinaryData::link_button_on_pngSize);
     
-    juce::Image infoButtonOffImage;
-    juce::Image infoButtonOnImage;
+    juce::Image infoButtonOffImage = juce::ImageCache::getFromMemory (BinaryData::info_button_off_png, BinaryData::info_button_off_pngSize);
+    juce::Image infoButtonOnImage = juce::ImageCache::getFromMemory (BinaryData::info_button_on_png, BinaryData::info_button_on_pngSize);
     
-    juce::Image sOffImage;
-    juce::Image sOnImage;
-    juce::Image sHandleImage;
-    juce::Image sMarkerImage;
+    juce::Image sOffImage = juce::ImageCache::getFromMemory (BinaryData::s_off_png, BinaryData::s_off_pngSize);;
+    juce::Image sOnImage = juce::ImageCache::getFromMemory (BinaryData::s_on_png, BinaryData::s_on_pngSize);
     
-    juce::Image mOffImage;
-    juce::Image mOnImage;
-    juce::Image mHandleImage;
-    juce::Image mMarkerImage;
+    juce::Image mOffImage = juce::ImageCache::getFromMemory (BinaryData::m_off_png, BinaryData::m_off_pngSize);
+    juce::Image mOnImage = juce::ImageCache::getFromMemory (BinaryData::m_on_png, BinaryData::m_on_pngSize);
     
     juce::ImageComponent frameImageComponent;
-    
     juce::ImageComponent infoImageComponent;
-    
     juce::ImageComponent logoImageComponent;
     
     juce::ImageButton infoButtonImageComponent;
@@ -64,13 +61,9 @@ private:
     
     juce::ImageComponent sOffImageComponent;
     juce::ImageComponent sOnImageComponent;
-    juce::ImageComponent sHandleImageComponent;
-    juce::ImageComponent sMarkerImageComponent;
     
     juce::ImageComponent mOffImageComponent;
     juce::ImageComponent mOnImageComponent;
-    juce::ImageComponent mHandleImageComponent;
-    juce::ImageComponent mMarkerImageComponent;
 
     juce::Rectangle<int> frameArea {20, 20, 360, 360};
     
@@ -81,17 +74,10 @@ private:
     juce::Rectangle<int> infoButtonArea {20, 360, 25, 25};
     
     juce::Rectangle<int> sImageArea {185, 190, 140, 140};
-    juce::Rectangle<int> sHandleArea {75, 215, 115, 115};
     juce::Rectangle<int> sSliderArea {75, 215, 115, 115};
-    juce::Rectangle<int> sMarkerArea {95, 300, 10, 10};
     
     juce::Rectangle<int> mImageArea {75, 80, 140, 140};
-    juce::Rectangle<int> mHandleArea {210, 75, 115, 115};
     juce::Rectangle<int> mSliderArea {210, 75, 115, 115};
-    juce::Rectangle<int> mMarkerArea {230, 160, 10, 10};
-    
-    juce::AffineTransform sHandleTransform;
-    juce::AffineTransform mHandleTransform;
     
     juce::Slider sSlider;
     juce::Slider mSlider;
@@ -100,10 +86,9 @@ private:
 public:
     std::unique_ptr <juce::AudioProcessorValueTreeState::SliderAttachment> sSliderAttachment;
     std::unique_ptr <juce::AudioProcessorValueTreeState::SliderAttachment> mSliderAttachment;
-    
     std::unique_ptr <juce::AudioProcessorValueTreeState::ButtonAttachment> lButtonAttachment;
     
-    JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (MidSideProcessorEditor)
+    JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (MidSideAudioProcessorEditor)
 };
 
 

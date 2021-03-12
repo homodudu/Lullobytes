@@ -1,10 +1,10 @@
 /*
-  ==============================================================================
-
-    CUSTOM LOOK AND FEEL CLASS
-
-  ==============================================================================
-*/
+ ==============================================================================
+ 
+    Custom look and feel class.
+ 
+ ==============================================================================
+ */
 
 #pragma once
 
@@ -20,8 +20,8 @@ public:
     //==============================================================================
     
     virtual void drawLinearSlider (juce::Graphics& g, int x, int y, int width, int height,
-                              float sliderPos, float minSliderPos, float maxSliderPos,
-                              const juce::Slider::SliderStyle style, juce::Slider& slider)
+                                   float sliderPos, float minSliderPos, float maxSliderPos,
+                                   const juce::Slider::SliderStyle style, juce::Slider& slider)
     override;
     
     virtual void drawRotarySlider (juce::Graphics& g, int x, int y, int width, int height, float sliderPos,
@@ -33,6 +33,7 @@ public:
     juce::Rectangle<float> handleArea;
     float handleLength = 90.0f;
     
+    juce::Image rotaryImage;
     
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (CustomLookAndFeel)
     

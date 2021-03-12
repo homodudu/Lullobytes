@@ -1,7 +1,7 @@
 /*
   ==============================================================================
 
-    This file contains the basic framework code for a JUCE plugin processor.
+    Lullobytes - MidSide processor.
 
   ==============================================================================
 */
@@ -13,12 +13,12 @@
 //==============================================================================
 /**
 */
-class MidSideProcessor  : public juce::AudioProcessor, public juce::AudioProcessorValueTreeState::Listener
+class MidSideAudioProcessor  : public juce::AudioProcessor, public juce::AudioProcessorValueTreeState::Listener
 {
 public:
     //==============================================================================
-    MidSideProcessor();
-    ~MidSideProcessor() override;
+    MidSideAudioProcessor();
+    ~MidSideAudioProcessor() override;
 
     //==============================================================================
     void prepareToPlay (double sampleRate, int samplesPerBlock) override;
@@ -65,8 +65,8 @@ public:
 private:
     //==============================================================================
 
-    float mid;
-    float side;
+    float mid = 1.0f;
+    float side = 0.0f;
 
     juce::SmoothedValue<float> targetMid;
     juce::SmoothedValue<float> targetSide;
@@ -74,5 +74,5 @@ private:
     bool linked;
     
     //==============================================================================
-    JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (MidSideProcessor)
+    JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (MidSideAudioProcessor)
 };

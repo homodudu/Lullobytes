@@ -1,7 +1,7 @@
 /*
   ==============================================================================
 
-    Lullobytes - Mid/Side
+    Lullobytes - MidSide processor.
 
   ==============================================================================
 */
@@ -10,7 +10,7 @@
 #include "PluginEditor.h"
 
 //==============================================================================
-MidSideProcessor::MidSideProcessor()
+MidSideAudioProcessor::MidSideAudioProcessor()
 #ifndef JucePlugin_PreferredChannelConfigurations
      : AudioProcessor (BusesProperties()
                      #if ! JucePlugin_IsMidiEffect
@@ -44,17 +44,17 @@ MidSideProcessor::MidSideProcessor()
 
 
 
-MidSideProcessor::~MidSideProcessor()
+MidSideAudioProcessor::~MidSideAudioProcessor()
 {
 }
 
 //==============================================================================
-const juce::String MidSideProcessor::getName() const
+const juce::String MidSideAudioProcessor::getName() const
 {
     return JucePlugin_Name;
 }
 
-bool MidSideProcessor::acceptsMidi() const
+bool MidSideAudioProcessor::acceptsMidi() const
 {
    #if JucePlugin_WantsMidiInput
     return true;
@@ -63,7 +63,7 @@ bool MidSideProcessor::acceptsMidi() const
    #endif
 }
 
-bool MidSideProcessor::producesMidi() const
+bool MidSideAudioProcessor::producesMidi() const
 {
    #if JucePlugin_ProducesMidiOutput
     return true;
@@ -72,7 +72,7 @@ bool MidSideProcessor::producesMidi() const
    #endif
 }
 
-bool MidSideProcessor::isMidiEffect() const
+bool MidSideAudioProcessor::isMidiEffect() const
 {
    #if JucePlugin_IsMidiEffect
     return true;
@@ -81,47 +81,47 @@ bool MidSideProcessor::isMidiEffect() const
    #endif
 }
 
-double MidSideProcessor::getTailLengthSeconds() const
+double MidSideAudioProcessor::getTailLengthSeconds() const
 {
     return 0.0;
 }
 
-int MidSideProcessor::getNumPrograms()
+int MidSideAudioProcessor::getNumPrograms()
 {
     return 1;   // NB: some hosts don't cope very well if you tell them there are 0 programs,
                 // so this should be at least 1, even if you're not really implementing programs.
 }
 
-int MidSideProcessor::getCurrentProgram()
+int MidSideAudioProcessor::getCurrentProgram()
 {
     return 0;
 }
 
-void MidSideProcessor::setCurrentProgram (int index)
+void MidSideAudioProcessor::setCurrentProgram (int index)
 {
 }
 
-const juce::String MidSideProcessor::getProgramName (int index)
+const juce::String MidSideAudioProcessor::getProgramName (int index)
 {
     return {};
 }
 
-void MidSideProcessor::changeProgramName (int index, const juce::String& newName)
+void MidSideAudioProcessor::changeProgramName (int index, const juce::String& newName)
 {
 }
 
 //==============================================================================
-juce::AudioProcessorValueTreeState::ParameterLayout MidSideProcessor::createParameterLayout()
+juce::AudioProcessorValueTreeState::ParameterLayout MidSideAudioProcessor::createParameterLayout()
 {
     juce::AudioProcessorValueTreeState::ParameterLayout layout;
-    layout.add(std::make_unique<juce::AudioParameterFloat>("mid", "Mid", 0.0f, 1.0f, 1.0f));
-    layout.add(std::make_unique<juce::AudioParameterFloat>("side", "Side", 0.0f, 1.0f, 0.0f));
+    layout.add(std::make_unique<juce::AudioParameterFloat>("mid", "Mid", 0.0f, 1.0f, mid));
+    layout.add(std::make_unique<juce::AudioParameterFloat>("side", "Side", 0.0f, 1.0f, side));
     layout.add(std::make_unique<juce::AudioParameterBool>("linked", "Linked", true)); 
     return layout;
 }
 
 //==============================================================================
-void MidSideProcessor::parameterChanged  (const juce::String &parameterID, float newValue)
+void MidSideAudioProcessor::parameterChanged  (const juce::String &parameterID, float newValue)
 {
     if (parameterID.compare("mid")==0)
     {
@@ -140,23 +140,19 @@ void MidSideProcessor::parameterChanged  (const juce::String &parameterID, float
     if (parameterID.compare("linked")==0)
     {
         if (linked)
-        {
             linked = false;
-        }
         else
-        {
             linked = true;
-        }
     }
 }
 
-void MidSideProcessor::prepareToPlay (double sampleRate, int samplesPerBlock)
+void MidSideAudioProcessor::prepareToPlay (double sampleRate, int samplesPerBlock)
 {
 
 }
 
 //==============================================================================
-void MidSideProcessor::releaseResources()
+void MidSideAudioProcessor::releaseResources()
 {
     // When playback stops, you can use this as an opportunity to free up any
     // spare memory, etc.
@@ -165,7 +161,7 @@ void MidSideProcessor::releaseResources()
 
 //==============================================================================
 #ifndef JucePlugin_PreferredChannelConfigurations
-bool MidSideProcessor::isBusesLayoutSupported (const BusesLayout& layouts) const
+bool MidSideAudioProcessor::isBusesLayoutSupported (const BusesLayout& layouts) const
 {
   #if JucePlugin_IsMidiEffect
     juce::ignoreUnused (layouts);
@@ -189,7 +185,7 @@ bool MidSideProcessor::isBusesLayoutSupported (const BusesLayout& layouts) const
 #endif
 
 //==============================================================================
-void MidSideProcessor::processBlock (juce::AudioBuffer<float>& buffer, juce::MidiBuffer& midiMessages)
+void MidSideAudioProcessor::processBlock (juce::AudioBuffer<float>& buffer, juce::MidiBuffer& midiMessages)
 {
     juce::ScopedNoDenormals noDenormals;
     auto totalNumInputChannels  = getTotalNumInputChannels();
@@ -218,6 +214,7 @@ void MidSideProcessor::processBlock (juce::AudioBuffer<float>& buffer, juce::Mid
             *channelLeft = (midDecode * targetMid.getNextValue() + sideDecode * targetSide.getNextValue());
             *channelRight = (midDecode * targetMid.getNextValue() - sideDecode * targetSide.getNextValue());
             
+            // Left and right panning algorithms - implement with GUI later.
             //*channelLeft = mid * (midDecode + sideDecode);
             //*channelRight = side * (midDecode - sideDecode);
             
@@ -225,33 +222,29 @@ void MidSideProcessor::processBlock (juce::AudioBuffer<float>& buffer, juce::Mid
             channelRight++;
         }
     }
-    
-
-    
-    
 
 }
 
 //==============================================================================
-bool MidSideProcessor::hasEditor() const
+bool MidSideAudioProcessor::hasEditor() const
 {
     return true; // (change this to false if you choose to not supply an editor)
 }
 
-juce::AudioProcessorEditor* MidSideProcessor::createEditor()
+juce::AudioProcessorEditor* MidSideAudioProcessor::createEditor()
 {
-    return new MidSideProcessorEditor (*this);
+    return new MidSideAudioProcessorEditor (*this);
 }
 
 //==============================================================================
-void MidSideProcessor::getStateInformation (juce::MemoryBlock& destData)
+void MidSideAudioProcessor::getStateInformation (juce::MemoryBlock& destData)
 {
     auto state = treeState.copyState();
     std::unique_ptr<juce::XmlElement> xml (state.createXml());
     copyXmlToBinary (*xml, destData);
 }
 
-void MidSideProcessor::setStateInformation (const void* data, int sizeInBytes)
+void MidSideAudioProcessor::setStateInformation (const void* data, int sizeInBytes)
 {
     // You should use this method to restore your parameters from this memory block,
     // whose contents will have been created by the getStateInformation() call.
@@ -274,5 +267,5 @@ void MidSideProcessor::setStateInformation (const void* data, int sizeInBytes)
 // This creates new instances of the plugin..
 juce::AudioProcessor* JUCE_CALLTYPE createPluginFilter()
 {
-    return new MidSideProcessor();
+    return new MidSideAudioProcessor();
 }

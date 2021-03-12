@@ -1,7 +1,7 @@
 /*
   ==============================================================================
 
-    Lullobytes - Distortion
+    Lullobytes - Distortion Processor.
 
   ==============================================================================
 */
@@ -114,8 +114,8 @@ void DistortionAudioProcessor::changeProgramName (int index, const juce::String&
 juce::AudioProcessorValueTreeState::ParameterLayout DistortionAudioProcessor::createParameterLayout()
 {
     juce::AudioProcessorValueTreeState::ParameterLayout layout;
-    layout.add(std::make_unique<juce::AudioParameterFloat>("drive", "Drive", 0.0f, 1.0f, 0.0f));
-    layout.add(std::make_unique<juce::AudioParameterFloat>("clean", "Clean", 0.0f, 1.0f, 1.0f));
+    layout.add(std::make_unique<juce::AudioParameterFloat>("drive", "Drive", 0.0f, 1.0f, drive));
+    layout.add(std::make_unique<juce::AudioParameterFloat>("clean", "Clean", 0.0f, 1.0f, clean));
     layout.add(std::make_unique<juce::AudioParameterBool>("linked", "Linked", true));
     return layout;
 }
@@ -140,13 +140,9 @@ void DistortionAudioProcessor::parameterChanged  (const juce::String &parameterI
     if (parameterID.compare("linked")==0)
     {
         if (linked)
-        {
             linked = false;
-        }
         else
-        {
             linked = true;
-        }
     }
 }
 
@@ -216,7 +212,6 @@ void DistortionAudioProcessor::processBlock (juce::AudioBuffer<float>& buffer, j
         
     }
     
-
 }
 
 //==============================================================================

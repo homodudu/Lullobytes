@@ -1,7 +1,7 @@
 /*
   ==============================================================================
 
-    Distortion plugin editor.
+    Lullobytes - Distortion Editor.
 
   ==============================================================================
 */
@@ -114,7 +114,7 @@ void DistortionAudioProcessorEditor::gui()
     };
     addAndMakeVisible (&infoButtonImageComponent);
     
-    // Link button - proportion drive signal with clean . 
+    // Link button - proportion drive signal with clean. 
     linkButtonImageComponent.setImages (false, true, true, linkButtonOffImage, 1.0f, {}, {}, 1.0f, {}, linkButtonOnImage, 1.0f, {});
     linkButtonImageComponent.setClickingTogglesState(true);
     lButtonAttachment = std::make_unique<juce::AudioProcessorValueTreeState::ButtonAttachment>(audioProcessor.treeState, "linked", linkButtonImageComponent);

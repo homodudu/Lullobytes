@@ -1,7 +1,7 @@
 /*
  ==============================================================================
  
- CUSTOM LOOK AND FEEL CLASS
+    Custom look and feel class.
  
  ==============================================================================
  */
@@ -15,18 +15,19 @@
 //==============================================================================
 CustomLookAndFeel::CustomLookAndFeel()
 {
- 
+    
 }
 
 CustomLookAndFeel::~CustomLookAndFeel()
 {
 }
 
-
-
 //==============================================================================
-void CustomLookAndFeel:: drawRotarySlider (juce::Graphics& g, int x, int y, int width, int height, float sliderPos,
-                       const float rotaryStartAngle, const float rotaryEndAngle, juce::Slider& slider)
+
+// Draw custom rotary image on top layer that transforms with rotary slider position.
+
+void CustomLookAndFeel::drawRotarySlider (juce::Graphics& g, int x, int y, int width, int height, float sliderPos,
+                                          const float rotaryStartAngle, const float rotaryEndAngle, juce::Slider& slider)
 {
     auto outline = slider.findColour (juce::Slider::rotarySliderOutlineColourId);
     auto fill    = slider.findColour (juce::Slider::rotarySliderFillColourId);
@@ -37,6 +38,15 @@ void CustomLookAndFeel:: drawRotarySlider (juce::Graphics& g, int x, int y, int 
     auto toAngle = rotaryStartAngle + sliderPos * (rotaryEndAngle - rotaryStartAngle);
     auto lineW = fmin (8.0f, radius * 0.5f);
     auto arcRadius = radius - lineW * 0.5f;
+    
+    
+    rotaryImage = juce::ImageCache::getFromMemory (BinaryData::knob_png, BinaryData::knob_pngSize);
+    
+    float rotation = 4.72f * sliderPos;
+    int centreX = int(width / 2);
+    int centreY = int(height / 2);
+    juce::AffineTransform transform;
+    float centreImage = float(centreX) - float(centreY);
     
     juce::Path backgroundArc;
     backgroundArc.addCentredArc (bounds.getCentreX(),
@@ -49,7 +59,7 @@ void CustomLookAndFeel:: drawRotarySlider (juce::Graphics& g, int x, int y, int 
                                  true);
     
     g.setColour (outline);
-    //g.strokePath (backgroundArc, PathStrokeType (lineW, juce::PathStrokeType::curved, juce::PathStrokeType::rounded));
+    // g.strokePath (backgroundArc, PathStrokeType (lineW, juce::PathStrokeType::curved, juce::PathStrokeType::rounded));
     
     if (slider.isEnabled())
     {
@@ -64,26 +74,28 @@ void CustomLookAndFeel:: drawRotarySlider (juce::Graphics& g, int x, int y, int 
                                 true);
         
         g.setColour (fill);
-        //g.strokePath (valueArc, PathStrokeType (lineW, juce::PathStrokeType::cujuce::PathStrokeTypekeType::rounded));
+        // g.strokePath (valueArc, PathStrokeType (lineW, juce::PathStrokeType::curved, juce::PathStrokeType::rounded));
+        
+        transform = transform.rotation(rotation, centreX, centreY).translated(centreImage,0);
+        
     }
     
     auto thumbWidth = lineW * 2.0f;
     juce::Point<float> thumbPoint (bounds.getCentreX() + arcRadius * std::cos (toAngle - juce::MathConstants<float>::halfPi),
-                             bounds.getCentreY() + arcRadius * std::sin (toAngle - juce::MathConstants<float>::halfPi));
+                                   bounds.getCentreY() + arcRadius * std::sin (toAngle - juce::MathConstants<float>::halfPi));
     
     g.setColour (slider.findColour (juce::Slider::thumbColourId));
     g.fillEllipse (juce::Rectangle<float> (thumbWidth, thumbWidth).withCentre (thumbPoint));
+    
+    g.setOpacity(1.0);
+    g.drawImageTransformed(rotaryImage.rescaled(width, height), transform, false);
+    
+    
 }
-
-
-
-
-
-
 
 //==============================================================================
 
-
+// Draw custom slider image on top layer that translates with linear slider position.
 
 void CustomLookAndFeel::drawLinearSlider (juce::Graphics& g, int x, int y, int width, int height,
                                           float sliderPos, float minSliderPos, float maxSliderPos,
@@ -103,10 +115,10 @@ void CustomLookAndFeel::drawLinearSlider (juce::Graphics& g, int x, int y, int w
         auto trackWidth = fmin (6.0f, slider.isHorizontal() ? (float) height * 0.25f : (float) width * 0.25f);
         
         juce::Point<float> startPoint (slider.isHorizontal() ? (float) x : (float) x + (float) width * 0.5f,
-                                 slider.isHorizontal() ? (float) y + (float) height * 0.5f : (float) (height + y));
+                                       slider.isHorizontal() ? (float) y + (float) height * 0.5f : (float) (height + y));
         
         juce::Point<float> endPoint (slider.isHorizontal() ? (float) (width + x) : startPoint.x,
-                               slider.isHorizontal() ? startPoint.y : (float) y);
+                                     slider.isHorizontal() ? startPoint.y : (float) y);
         
         juce::Path backgroundTrack;
         backgroundTrack.startNewSubPath (startPoint);
@@ -145,7 +157,7 @@ void CustomLookAndFeel::drawLinearSlider (juce::Graphics& g, int x, int y, int w
                 g.setOpacity(1.0);
                 g.drawImage(handleImage, handleArea);
             }
-
+            
         }
         
         auto thumbWidth = getSliderThumbRadius (slider);
@@ -188,3 +200,6 @@ void CustomLookAndFeel::drawLinearSlider (juce::Graphics& g, int x, int y, int w
         }
     }
 }
+
+
+

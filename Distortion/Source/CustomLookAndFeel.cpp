@@ -1,7 +1,7 @@
 /*
  ==============================================================================
  
- CUSTOM LOOK AND FEEL CLASS
+    Custom look and feel class.
  
  ==============================================================================
  */
@@ -25,6 +25,8 @@ CustomLookAndFeel::~CustomLookAndFeel()
 
 
 //==============================================================================
+
+// Draw custom rotary image on top layer that transforms with rotary slider position.
 
 
 void CustomLookAndFeel::drawRotarySlider (juce::Graphics& g, int x, int y, int width, int height, float sliderPos,

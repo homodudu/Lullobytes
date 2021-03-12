@@ -15,7 +15,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "210"
             endingLineNumber = "210"
-            landmarkName = "MidSideProcessor::processBlock (juce::AudioBuffer&lt;float&gt;&amp; buffer, juce::MidiBuffer&amp; midiMessages)"
+            landmarkName = "MidSideAudioProcessor::processBlock (juce::AudioBuffer&lt;float&gt;&amp; buffer, juce::MidiBuffer&amp; midiMessages)"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -31,7 +31,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "215"
             endingLineNumber = "215"
-            landmarkName = "MidSideProcessor::processBlock (juce::AudioBuffer&lt;float&gt;&amp; buffer, juce::MidiBuffer&amp; midiMessages)"
+            landmarkName = "MidSideAudioProcessor::processBlock (juce::AudioBuffer&lt;float&gt;&amp; buffer, juce::MidiBuffer&amp; midiMessages)"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -47,7 +47,39 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "216"
             endingLineNumber = "216"
-            landmarkName = "MidSideProcessor::processBlock (juce::AudioBuffer&lt;float&gt;&amp; buffer, juce::MidiBuffer&amp; midiMessages)"
+            landmarkName = "MidSideAudioProcessor::processBlock (juce::AudioBuffer&lt;float&gt;&amp; buffer, juce::MidiBuffer&amp; midiMessages)"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "../../Source/PluginEditor.cpp"
+            timestampString = "637272798.073807"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "13"
+            endingLineNumber = "13"
+            landmarkName = "MidSideAudioProcessorEditor::MidSideAudioProcessorEditor (MidSideAudioProcessor&amp; p)"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "../../Source/PluginProcessor.cpp"
+            timestampString = "637278923.726343"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "128"
+            endingLineNumber = "128"
+            landmarkName = "MidSideAudioProcessor::parameterChanged (const juce::String &amp;parameterID, float newValue)"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
