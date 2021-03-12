@@ -39,6 +39,15 @@ void CustomLookAndFeel::drawRotarySlider (juce::Graphics& g, int x, int y, int w
     auto toAngle = rotaryStartAngle + sliderPos * (rotaryEndAngle - rotaryStartAngle);
     auto lineW = fmin (8.0f, radius * 0.5f);
     auto arcRadius = radius - lineW * 0.5f;
+
+    
+    rotaryImage = juce::ImageCache::getFromMemory (BinaryData::knob_png, BinaryData::knob_pngSize);
+
+    float rotation = 4.72f * sliderPos;
+    int centreX = int(width / 2);
+    int centreY = int(height / 2);
+    juce::AffineTransform transform;
+    float centreImage = float(centreX) - float(centreY);
     
     juce::Path backgroundArc;
     backgroundArc.addCentredArc (bounds.getCentreX(),
@@ -67,6 +76,9 @@ void CustomLookAndFeel::drawRotarySlider (juce::Graphics& g, int x, int y, int w
         
         g.setColour (fill);
        // g.strokePath (valueArc, PathStrokeType (lineW, juce::PathStrokeType::curved, juce::PathStrokeType::rounded));
+
+       transform = transform.rotation(rotation, centreX, centreY).translated(centreImage,0);
+        
     }
     
     auto thumbWidth = lineW * 2.0f;
@@ -75,6 +87,11 @@ void CustomLookAndFeel::drawRotarySlider (juce::Graphics& g, int x, int y, int w
     
     g.setColour (slider.findColour (juce::Slider::thumbColourId));
     g.fillEllipse (juce::Rectangle<float> (thumbWidth, thumbWidth).withCentre (thumbPoint));
+    
+    g.setOpacity(1.0);
+    g.drawImageTransformed(rotaryImage.rescaled(width, height), transform, false);
+
+
 }
 
 

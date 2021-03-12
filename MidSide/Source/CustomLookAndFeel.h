@@ -24,6 +24,10 @@ public:
                               const juce::Slider::SliderStyle style, juce::Slider& slider)
     override;
     
+    virtual void drawRotarySlider (juce::Graphics& g, int x, int y, int width, int height, float sliderPos,
+                                   const float rotaryStartAngle, const float rotaryEndAngle, juce::Slider& slider)
+    override;
+    
 public:
     juce::Image handleImage;
     juce::Rectangle<float> handleArea;

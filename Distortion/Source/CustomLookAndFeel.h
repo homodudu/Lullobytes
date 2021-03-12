@@ -33,6 +33,7 @@ public:
     juce::Rectangle<float> handleArea;
     float handleLength = 90.0f;
     
+    juce::Image rotaryImage;
     
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (CustomLookAndFeel)
     
