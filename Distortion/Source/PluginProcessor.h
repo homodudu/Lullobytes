@@ -65,8 +65,8 @@ public:
 private:
     //==============================================================================
 
-    float clean;
-    float drive;
+    float clean = 1.0f;
+    float drive = 0.0f;
 
     juce::SmoothedValue<float> targetClean;
     juce::SmoothedValue<float> targetDrive;
