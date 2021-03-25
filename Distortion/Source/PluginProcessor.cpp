@@ -34,9 +34,9 @@ DistortionAudioProcessor::DistortionAudioProcessor()
 #endif
     {
         treeState.addParameterListener("drive", this);
-        treeState.getParameter ("drive")->setValue (0.0f);
+        treeState.getParameter ("drive")->setValue (drive);
         treeState.addParameterListener("clean", this);
-        treeState.getParameter ("clean")->setValue (0.0f);
+        treeState.getParameter ("clean")->setValue (clean);
         treeState.addParameterListener("linked", this);
         treeState.getParameter ("linked")->setValue (true);
     }

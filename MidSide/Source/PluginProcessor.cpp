@@ -34,9 +34,9 @@ MidSideAudioProcessor::MidSideAudioProcessor()
 #endif
     {
         treeState.addParameterListener("mid", this);
-        treeState.getParameter ("mid")->setValue (0.0f);
+        treeState.getParameter ("mid")->setValue (mid);
         treeState.addParameterListener("side", this);
-        treeState.getParameter ("side")->setValue (0.0f);
+        treeState.getParameter ("side")->setValue(side);
         treeState.addParameterListener("linked", this);
         treeState.getParameter ("linked")->setValue (true);
     }
