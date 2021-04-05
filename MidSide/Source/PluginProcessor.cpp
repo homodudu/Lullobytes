@@ -34,11 +34,13 @@ MidSideAudioProcessor::MidSideAudioProcessor()
 #endif
     {
         treeState.addParameterListener("mid", this);
-        treeState.getParameter ("mid")->setValue (mid);
+        treeState.getParameter ("mid")->setValue (1.0f);
         treeState.addParameterListener("side", this);
-        treeState.getParameter ("side")->setValue(side);
+        treeState.getParameter ("side")->setValue(0.0f);
         treeState.addParameterListener("linked", this);
         treeState.getParameter ("linked")->setValue (true);
+        mid = 1.0f;
+        side = 0.0f;
     }
     
 
@@ -114,9 +116,9 @@ void MidSideAudioProcessor::changeProgramName (int index, const juce::String& ne
 juce::AudioProcessorValueTreeState::ParameterLayout MidSideAudioProcessor::createParameterLayout()
 {
     juce::AudioProcessorValueTreeState::ParameterLayout layout;
-    layout.add(std::make_unique<juce::AudioParameterFloat>("mid", "Mid", 0.0f, 1.0f, mid));
-    layout.add(std::make_unique<juce::AudioParameterFloat>("side", "Side", 0.0f, 1.0f, side));
-    layout.add(std::make_unique<juce::AudioParameterBool>("linked", "Linked", true)); 
+    layout.add(std::make_unique<juce::AudioParameterFloat>("mid", "Mid", 0.0f, 1.0f, 1.0f));
+    layout.add(std::make_unique<juce::AudioParameterFloat>("side", "Side", 0.0f, 1.0f, 0.0f));
+    layout.add(std::make_unique<juce::AudioParameterBool>("linked", "Linked", true));
     return layout;
 }
 
@@ -126,16 +128,12 @@ void MidSideAudioProcessor::parameterChanged  (const juce::String &parameterID, 
     if (parameterID.compare("mid")==0)
     {
         mid = newValue;
-        targetMid.setTargetValue(mid);
     }
-    else targetMid.reset(getSampleRate(), 0.1f);
 
     if (parameterID.compare("side")==0)
     {
         side = newValue;
-        targetSide.setTargetValue(side);
     }
-    else targetSide.reset(getSampleRate(), 0.1f);
     
     if (parameterID.compare("linked")==0)
     {
@@ -205,14 +203,12 @@ void MidSideAudioProcessor::processBlock (juce::AudioBuffer<float>& buffer, juce
         
         for (int sample = 0; sample < buffer.getNumSamples(); sample++)
         {
-            //mid = targetMid.getNextValue();
-            //side = targetSide.getNextValue();
             
             float midDecode = (*channelLeft + *channelRight) * 0.5f;
             float sideDecode = (*channelLeft - *channelRight) * 2.0f;
 
-            *channelLeft = (midDecode * targetMid.getNextValue() + sideDecode * targetSide.getNextValue());
-            *channelRight = (midDecode * targetMid.getNextValue() - sideDecode * targetSide.getNextValue());
+            *channelLeft = (midDecode * mid + sideDecode * side);
+            *channelRight = (midDecode * mid - sideDecode * side);
             
             // Left and right panning algorithms - implement with GUI later.
             //*channelLeft = mid * (midDecode + sideDecode);

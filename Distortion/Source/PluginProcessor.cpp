@@ -34,11 +34,13 @@ DistortionAudioProcessor::DistortionAudioProcessor()
 #endif
     {
         treeState.addParameterListener("drive", this);
-        treeState.getParameter ("drive")->setValue (drive);
+        treeState.getParameter ("drive")->setValue (0.0f);
         treeState.addParameterListener("clean", this);
-        treeState.getParameter ("clean")->setValue (clean);
+        treeState.getParameter ("clean")->setValue (1.0f);
         treeState.addParameterListener("linked", this);
         treeState.getParameter ("linked")->setValue (true);
+        drive = 0.0f;
+        clean = 1.0f;
     }
     
 
@@ -114,8 +116,8 @@ void DistortionAudioProcessor::changeProgramName (int index, const juce::String&
 juce::AudioProcessorValueTreeState::ParameterLayout DistortionAudioProcessor::createParameterLayout()
 {
     juce::AudioProcessorValueTreeState::ParameterLayout layout;
-    layout.add(std::make_unique<juce::AudioParameterFloat>("drive", "Drive", 0.0f, 1.0f, drive));
-    layout.add(std::make_unique<juce::AudioParameterFloat>("clean", "Clean", 0.0f, 1.0f, clean));
+    layout.add(std::make_unique<juce::AudioParameterFloat>("drive", "Drive", 0.0f, 1.0f, 0.0f));
+    layout.add(std::make_unique<juce::AudioParameterFloat>("clean", "Clean", 0.0f, 1.0f, 1.0f));
     layout.add(std::make_unique<juce::AudioParameterBool>("linked", "Linked", true));
     return layout;
 }
@@ -126,16 +128,12 @@ void DistortionAudioProcessor::parameterChanged  (const juce::String &parameterI
     if (parameterID.compare("drive")==0)
     {
         drive = newValue;
-        targetDrive.setTargetValue(drive);
     }
-    else targetDrive.reset(getSampleRate(), 0.1f);
 
     if (parameterID.compare("clean")==0)
     {
         clean = newValue;
-        targetClean.setTargetValue(clean);
     }
-    else targetClean.reset(getSampleRate(), 0.1f);
     
     if (parameterID.compare("linked")==0)
     {
@@ -202,11 +200,9 @@ void DistortionAudioProcessor::processBlock (juce::AudioBuffer<float>& buffer, j
         
         for (int sample = 0; sample < buffer.getNumSamples(); sample++)
         {
-            //targetDrive.getNextValue();
-            //targetClean.getNextValue();
             
-            float wetSignal = (2.0f / juce::float_Pi) * atanf(*channelData * targetDrive.getNextValue() * 10.0f);
-            *channelData = (targetClean.getNextValue() * *channelData) + (wetSignal*0.707f);
+            auto wetSignal = (2.0f / juce::float_Pi) * atanf(*channelData * drive * 10.0f);
+            *channelData = (clean * *channelData) + (wetSignal * 0.707f);
             channelData++;
         }
         

@@ -65,12 +65,8 @@ public:
 private:
     //==============================================================================
 
-    float mid = 0.0f;
-    float side = 1.0f;
-
-    juce::SmoothedValue<float> targetMid;
-    juce::SmoothedValue<float> targetSide;
-    
+    float mid;
+    float side;
     bool linked;
     
     //==============================================================================
