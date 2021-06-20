@@ -34,7 +34,7 @@ private:
     
     CustomLookAndFeel customLookAndFeel;
     
-    juce::Colour backgroundColor = juce::Colours::plum;
+    juce::Colour backgroundColor = juce::Colours::lightpink;
     juce::Colour sliderColor = juce::Colours::black;
     
     juce::Image frameImage = juce::ImageCache::getFromMemory (BinaryData::frame_png, BinaryData::frame_pngSize);

@@ -8,18 +8,6 @@
 
 namespace BinaryData
 {
-    extern const char*   c_off_png;
-    const int            c_off_pngSize = 6870;
-
-    extern const char*   c_on_png;
-    const int            c_on_pngSize = 10251;
-
-    extern const char*   d_off_png;
-    const int            d_off_pngSize = 6617;
-
-    extern const char*   d_on_png;
-    const int            d_on_pngSize = 12927;
-
     extern const char*   frame_png;
     const int            frame_pngSize = 14300;
 
@@ -38,12 +26,6 @@ namespace BinaryData
     extern const char*   knob_png;
     const int            knob_pngSize = 8323;
 
-    extern const char*   l_off_png;
-    const int            l_off_pngSize = 6196;
-
-    extern const char*   l_on_png;
-    const int            l_on_pngSize = 13904;
-
     extern const char*   link_button_off_png;
     const int            link_button_off_pngSize = 26862;
 
@@ -59,12 +41,6 @@ namespace BinaryData
     extern const char*   marker_png;
     const int            marker_pngSize = 7907;
 
-    extern const char*   r_off_png;
-    const int            r_off_pngSize = 7277;
-
-    extern const char*   r_on_png;
-    const int            r_on_pngSize = 16352;
-
     extern const char*   s_off_png;
     const int            s_off_pngSize = 6979;
 
@@ -72,7 +48,7 @@ namespace BinaryData
     const int            s_on_pngSize = 9501;
 
     // Number of elements in the namedResourceList and originalFileNames arrays.
-    const int namedResourceListSize = 21;
+    const int namedResourceListSize = 13;
 
     // Points to the start of a list of resource names.
     extern const char* namedResourceList[];
