@@ -47,8 +47,74 @@ namespace BinaryData
     extern const char*   v_on_png;
     const int            v_on_pngSize = 19902;
 
+    extern const char*   AAFilter_lo;
+    const int            AAFilter_loSize = 268;
+
+    extern const char*   BPMDetect_lo;
+    const int            BPMDetect_loSize = 270;
+
+    extern const char*   cpu_detect_x86_lo;
+    const int            cpu_detect_x86_loSize = 280;
+
+    extern const char*   FIFOSampleBuffer_lo;
+    const int            FIFOSampleBuffer_loSize = 284;
+
+    extern const char*   FIRFilter_lo;
+    const int            FIRFilter_loSize = 270;
+
+    extern const char*   InterpolateCubic_lo;
+    const int            InterpolateCubic_loSize = 284;
+
+    extern const char*   InterpolateLinear_lo;
+    const int            InterpolateLinear_loSize = 286;
+
+    extern const char*   InterpolateShannon_lo;
+    const int            InterpolateShannon_loSize = 288;
+
+    extern const char*   libSoundTouch_la;
+    const int            libSoundTouch_laSize = 933;
+
+    extern const char*   libSoundTouchMMX_la;
+    const int            libSoundTouchMMX_laSize = 878;
+
+    extern const char*   libSoundTouchMMX_lammx_optimized_lo;
+    const int            libSoundTouchMMX_lammx_optimized_loSize = 318;
+
+    extern const char*   libSoundTouchSSE_la;
+    const int            libSoundTouchSSE_laSize = 878;
+
+    extern const char*   libSoundTouchSSE_lasse_optimized_lo;
+    const int            libSoundTouchSSE_lasse_optimized_loSize = 318;
+
+    extern const char*   Makefile;
+    const int            MakefileSize = 27353;
+
+    extern const char*   Makefile_am;
+    const int            Makefile_amSize = 2876;
+
+    extern const char*   Makefile_in;
+    const int            Makefile_inSize = 28153;
+
+    extern const char*   PeakFinder_lo;
+    const int            PeakFinder_loSize = 272;
+
+    extern const char*   RateTransposer_lo;
+    const int            RateTransposer_loSize = 280;
+
+    extern const char*   SoundTouch_lo;
+    const int            SoundTouch_loSize = 272;
+
+    extern const char*   SoundTouch_sln;
+    const int            SoundTouch_slnSize = 1422;
+
+    extern const char*   SoundTouch_vcxproj;
+    const int            SoundTouch_vcxprojSize = 20341;
+
+    extern const char*   TDStretch_lo;
+    const int            TDStretch_loSize = 270;
+
     // Number of elements in the namedResourceList and originalFileNames arrays.
-    const int namedResourceListSize = 13;
+    const int namedResourceListSize = 35;
 
     // Points to the start of a list of resource names.
     extern const char* namedResourceList[];

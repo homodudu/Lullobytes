@@ -65,9 +65,13 @@ public:
 private:
     //==============================================================================
     
-    float mid;
-    float side;
+    float vibe;
+    float trem;
+    float vibeRate;
+    float tremRate;
     bool linked;
+    bool vibrato;
+    bool tremolo;
     
     //==============================================================================
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (VibroloAudioProcessor)

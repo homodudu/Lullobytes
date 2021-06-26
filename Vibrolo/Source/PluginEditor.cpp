@@ -37,18 +37,18 @@ void VibroloAudioProcessorEditor::resized()
     frameImageComponent.setBounds(frameArea);
     infoImageComponent.setBounds(infoArea);
     
+    vButtonImageComponent.setBounds(infoButtonArea);
+    tButtonImageComponent.setBounds(infoButtonArea);
     linkButtonImageComponent.setBounds(linkButtonArea);
     infoButtonImageComponent.setBounds(infoButtonArea);
     
-    mOffImageComponent.setBounds(mImageArea);
-    mOnImageComponent.setBounds(mImageArea);
-    mSlider.setBounds(mSliderArea);
-    mmSlider.setBounds(mmSliderArea);
+    vButtonImageComponent.setBounds(vButtonArea);
+    vSlider.setBounds(vSliderArea);
+    vRateSlider.setBounds(vRateSliderArea);
     
-    sOffImageComponent.setBounds(sImageArea);
-    sOnImageComponent.setBounds(sImageArea);
-    sSlider.setBounds(sSliderArea);
-    ssSlider.setBounds(ssSliderArea);
+    tButtonImageComponent.setBounds(tButtonArea);
+    tSlider.setBounds(tSliderArea);
+    tRateSlider.setBounds(tRateSliderArea);
 }
 
 void VibroloAudioProcessorEditor::gui()
@@ -58,65 +58,63 @@ void VibroloAudioProcessorEditor::gui()
     // Set images and add to components.
     setImage(infoImage, infoImageComponent, false);
     setImage(frameImage, frameImageComponent, true);
-    setImage(mOffImage, mOffImageComponent, true);
-    setImage(mOnImage, mOnImageComponent, true);
-    setImage(sOffImage, sOffImageComponent, true);
-    setImage(sOnImage, sOnImageComponent, true);
-    setSlider(mSlider, sliderColor);
-    setSlider(sSlider, sliderColor);
-    setSlider(mmSlider, sliderColor);
-    setSlider(ssSlider, sliderColor);
+    setSlider(vSlider, sliderColor);
+    setSlider(tSlider, sliderColor);
+    setSlider(vRateSlider, sliderColor);
+    setSlider(tRateSlider, sliderColor);
+    setButton(vButtonOffImage, vButtonOnImage, vButtonImageComponent);
+    setButton(tButtonOffImage, tButtonOnImage, tButtonImageComponent);
+    setButton(infoButtonOffImage, infoButtonOnImage, infoButtonImageComponent);
+    setButton(linkButtonOffImage, linkButtonOnImage, linkButtonImageComponent);
+
     
     // Set alpha to provide visual feeback of signal parameters.
-    mOnImageComponent.setAlpha(*audioProcessor.treeState.getRawParameterValue("mid"));
-    sOnImageComponent.setAlpha(*audioProcessor.treeState.getRawParameterValue("side"));
+    //vOnImageComponent.setAlpha(*audioProcessor.treeState.getRawParameterValue("mid"));
+    //tOnImageComponent.setAlpha(*audioProcessor.treeState.getRawParameterValue("side"));
     
-    // Mid parameter attachment and listener.
-    audioProcessor.treeState.addParameterListener("mid", &audioProcessor);
-    mSliderAttachment = std::make_unique<juce::AudioProcessorValueTreeState::SliderAttachment>(audioProcessor.treeState, "mid", mSlider);
-    mSlider.setValue(*audioProcessor.treeState.getRawParameterValue("mid"));
-    mSlider.onValueChange = [this]
+    // Vibrato parameter attachments and listeners.
+    audioProcessor.treeState.addParameterListener("vibe", &audioProcessor);
+    audioProcessor.treeState.addParameterListener("vibeRate", &audioProcessor);
+    vSliderAttachment = std::make_unique<juce::AudioProcessorValueTreeState::SliderAttachment>(audioProcessor.treeState, "vibe",vSlider);
+    vRateSliderAttachment = std::make_unique<juce::AudioProcessorValueTreeState::SliderAttachment>(audioProcessor.treeState, "vibeRate",vRateSlider);
+    vSlider.setValue(*audioProcessor.treeState.getRawParameterValue("vibe"));
+    vRateSlider.setValue(*audioProcessor.treeState.getRawParameterValue("vibeRate"));
+    vSlider.onValueChange = [this]
     {
-        mSlider.getValue()>0.01f ? mOnImageComponent.setAlpha(mSlider.getValue()) : mOnImageComponent.setAlpha(0.0f);
         if (linkButtonImageComponent.getToggleState())
-            sSlider.setValue(1 - mSlider.getValue());
+           tSlider.setValue(1 -vSlider.getValue());
     };
     
-    // Side parameter attachment and listener.
-    audioProcessor.treeState.addParameterListener("side", &audioProcessor);
-    sSliderAttachment = std::make_unique<juce::AudioProcessorValueTreeState::SliderAttachment>(audioProcessor.treeState, "side", sSlider);
-    sSlider.setValue(*audioProcessor.treeState.getRawParameterValue("side"));
-    sSlider.onValueChange = [this]
+    // Tremolo parameter attachments and listeners.
+    audioProcessor.treeState.addParameterListener("trem", &audioProcessor);
+    audioProcessor.treeState.addParameterListener("tremRate", &audioProcessor);
+    tSliderAttachment = std::make_unique<juce::AudioProcessorValueTreeState::SliderAttachment>(audioProcessor.treeState, "trem",tSlider);
+    tRateSliderAttachment = std::make_unique<juce::AudioProcessorValueTreeState::SliderAttachment>(audioProcessor.treeState, "tremRate",tSlider);
+    tSlider.setValue(*audioProcessor.treeState.getRawParameterValue("trem"));
+    tRateSlider.setValue(*audioProcessor.treeState.getRawParameterValue("tremRate"));
+    tSlider.onValueChange = [this]
     {
-        sSlider.getValue()>0.01f ? sOnImageComponent.setAlpha(sSlider.getValue()) : sOnImageComponent.setAlpha(0.0f);
         if (linkButtonImageComponent.getToggleState())
-            mSlider.setValue(1 - sSlider.getValue());
+           vSlider.setValue(1 -tSlider.getValue());
     };
     
     // Info button - toggle editor window display.
-    infoButtonImageComponent.setImages (false, true, true, infoButtonOffImage, 1.0f, {}, {}, 1.0f, {}, infoButtonOnImage, 1.0f, {});
-    infoButtonImageComponent.setClickingTogglesState(true);
     infoButtonImageComponent.onStateChange = [this]
     {
         infoImageComponent.setVisible(infoButtonImageComponent.getToggleState());
-        mSlider.setVisible(!infoButtonImageComponent.getToggleState());
-        mmSlider.setVisible(!infoButtonImageComponent.getToggleState());
-        sSlider.setVisible(!infoButtonImageComponent.getToggleState());
-        ssSlider.setVisible(!infoButtonImageComponent.getToggleState());
-        mOnImageComponent.setVisible(!infoButtonImageComponent.getToggleState());
-        sOnImageComponent.setVisible(!infoButtonImageComponent.getToggleState());
-        mOffImageComponent.setVisible(!infoButtonImageComponent.getToggleState());
-        sOffImageComponent.setVisible(!infoButtonImageComponent.getToggleState());
+        vSlider.setVisible(!infoButtonImageComponent.getToggleState());
+        vRateSlider.setVisible(!infoButtonImageComponent.getToggleState());
+        tSlider.setVisible(!infoButtonImageComponent.getToggleState());
+        tRateSlider.setVisible(!infoButtonImageComponent.getToggleState());
+        vButtonImageComponent.setVisible(!infoButtonImageComponent.getToggleState());
+        tButtonImageComponent.setVisible(!infoButtonImageComponent.getToggleState());
     };
-    addAndMakeVisible (&infoButtonImageComponent);
+
     
     // Link button - proportion drive signal with clean.
-    linkButtonImageComponent.setImages (false, true, true, linkButtonOffImage, 1.0f, {}, {}, 1.0f, {}, linkButtonOnImage, 1.0f, {});
-    linkButtonImageComponent.setClickingTogglesState(true);
-    audioProcessor.treeState.addParameterListener("linked", &audioProcessor);
     lButtonAttachment = std::make_unique<juce::AudioProcessorValueTreeState::ButtonAttachment>(audioProcessor.treeState, "linked", linkButtonImageComponent);
     linkButtonImageComponent.setToggleState(*audioProcessor.treeState.getRawParameterValue("linked"), juce::dontSendNotification);
-    addAndMakeVisible (&linkButtonImageComponent);
+  
     
 }
 
@@ -142,6 +140,14 @@ void VibroloAudioProcessorEditor::setImage(juce::Image image, juce::ImageCompone
     imageComponent.setImage(image);
     addAndMakeVisible(&imageComponent);
     imageComponent.setVisible(setVisible);
+}
+
+//==============================================================================
+void VibroloAudioProcessorEditor::setButton(juce::Image offImage, juce::Image onImage, juce::ImageButton &imageButton)
+{
+    imageButton.setImages (false, true, true, offImage, 1.0f, {}, {}, 1.0f, {}, onImage, 1.0f, {});
+    imageButton.setClickingTogglesState(true);
+    addAndMakeVisible (imageButton);
 }
 
 

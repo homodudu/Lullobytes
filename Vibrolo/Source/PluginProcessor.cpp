@@ -33,14 +33,24 @@ VibroloAudioProcessor::VibroloAudioProcessor()
 
 #endif
 {
-    treeState.addParameterListener("mid", this);
-    treeState.getParameter ("mid")->setValue (1.0f);
-    treeState.addParameterListener("side", this);
-    treeState.getParameter ("side")->setValue(0.0f);
+    treeState.addParameterListener("vibe", this);
+    treeState.getParameter ("vibe")->setValue (0.0f);
+    treeState.addParameterListener("vibeRate", this);
+    treeState.getParameter ("vibeRate")->setValue (0.0f);
+    treeState.addParameterListener("trem", this);
+    treeState.getParameter ("trem")->setValue (0.0f);
+    treeState.addParameterListener("tremRate", this);
+    treeState.getParameter ("tremRate")->setValue (0.0f);
+    treeState.addParameterListener("vibrato", this);
+    treeState.getParameter ("vibrato")->setValue (true);
+    treeState.addParameterListener("tremolo", this);
+    treeState.getParameter ("tremolo")->setValue (true);
     treeState.addParameterListener("linked", this);
-    treeState.getParameter ("linked")->setValue (true);
-    mid = 1.0f;
-    side = 0.0f;
+    treeState.getParameter ("linked")->setValue (false);
+    vibe = 0.0f;
+    vibeRate = 0.0f;
+    trem = 0.0f;
+    tremRate = 0.0f;
 }
 
 
@@ -116,23 +126,53 @@ void VibroloAudioProcessor::changeProgramName (int index, const juce::String& ne
 juce::AudioProcessorValueTreeState::ParameterLayout VibroloAudioProcessor::createParameterLayout()
 {
     juce::AudioProcessorValueTreeState::ParameterLayout layout;
-    layout.add(std::make_unique<juce::AudioParameterFloat>("mid", "Mid", 0.0f, 1.0f, 1.0f));
-    layout.add(std::make_unique<juce::AudioParameterFloat>("side", "Side", 0.0f, 1.0f, 0.0f));
-    layout.add(std::make_unique<juce::AudioParameterBool>("linked", "Linked", true));
+    layout.add(std::make_unique<juce::AudioParameterFloat>("vibe", "Vibe", 0.0f, 1.0f, 0.0f));
+    layout.add(std::make_unique<juce::AudioParameterFloat>("trem", "Trem", 0.0f, 1.0f, 0.0f));
+    layout.add(std::make_unique<juce::AudioParameterFloat>("vibeRate", "VibeRate", 0.0f, 1.0f, 0.0f));
+    layout.add(std::make_unique<juce::AudioParameterFloat>("tremRate", "TremRate", 0.0f, 1.0f, 0.0f));
+    layout.add(std::make_unique<juce::AudioParameterBool>("vibrato", "Vibrato", true));
+    layout.add(std::make_unique<juce::AudioParameterBool>("tremolo", "Tremolo", true));
+    layout.add(std::make_unique<juce::AudioParameterBool>("linked", "Linked", false));
     return layout;
 }
 
 //==============================================================================
 void VibroloAudioProcessor::parameterChanged  (const juce::String &parameterID, float newValue)
 {
-    if (parameterID.compare("mid")==0)
+    if (parameterID.compare("vibe")==0)
     {
-        mid = newValue;
+        vibe = newValue;
     }
     
-    if (parameterID.compare("side")==0)
+    if (parameterID.compare("trem")==0)
     {
-        side = newValue;
+        trem = newValue;
+    }
+    
+    if (parameterID.compare("vibRate")==0)
+    {
+        vibeRate = newValue;
+    }
+
+    if (parameterID.compare("tremRate")==0)
+    {
+        tremRate = newValue;
+    }
+    
+    if (parameterID.compare("vibrato")==0)
+    {
+        if (vibrato)
+            vibrato = false;
+        else
+            vibrato = true;
+    }
+    
+    if (parameterID.compare("tremolo")==0)
+    {
+        if (tremolo)
+            tremolo = false;
+        else
+            tremolo = true;
     }
     
     if (parameterID.compare("linked")==0)

@@ -65,6 +65,62 @@
 			isa = PBXBuildFile;
 			fileRef = 274C27E2B8150994418BBE4D;
 		};
+		47E64B6E86C7A6F0E66D90C5 = {
+			isa = PBXBuildFile;
+			fileRef = 4F1DE236CDBE803E1068F41D;
+		};
+		01204DBDE8E9A92CDFF287A2 = {
+			isa = PBXBuildFile;
+			fileRef = 9F7FC03376E3438AC538FD4A;
+		};
+		DCBCAB21325B6C9945FDAB64 = {
+			isa = PBXBuildFile;
+			fileRef = 6278DF49696FFF7D4D9BF155;
+		};
+		A81153C5515DA8A10B340CAE = {
+			isa = PBXBuildFile;
+			fileRef = E9F19F807B08EAD37ABB4753;
+		};
+		B7EA41C87B9BCA785CB58C31 = {
+			isa = PBXBuildFile;
+			fileRef = 91EF3A66F478C36BFACD7747;
+		};
+		BAC74C72CFC29DCCE680C833 = {
+			isa = PBXBuildFile;
+			fileRef = EDA19AE438C6BFBFFDF4BA92;
+		};
+		B9CF0DAC0650E288799D956E = {
+			isa = PBXBuildFile;
+			fileRef = 2390DCEE578F8F73048E8BC9;
+		};
+		74BA309F62ADBD4AB1561F27 = {
+			isa = PBXBuildFile;
+			fileRef = 13D8DD29FD278081E8E51479;
+		};
+		503297D92A413CD4C7DEE11F = {
+			isa = PBXBuildFile;
+			fileRef = 29B3CA6EFE541662A10C4EDD;
+		};
+		9C7EC3B973E52E5C4C321D70 = {
+			isa = PBXBuildFile;
+			fileRef = A384B87BAD686E406845647A;
+		};
+		EF2646FB4D88B6E2D79154B7 = {
+			isa = PBXBuildFile;
+			fileRef = 8B81C7165A2944905DE94FD6;
+		};
+		D802C541BB1BAB675CF6E29C = {
+			isa = PBXBuildFile;
+			fileRef = BFC8F7F0E2BC81522A7A0E52;
+		};
+		763DDE60564B3ED8AA45D293 = {
+			isa = PBXBuildFile;
+			fileRef = C87A01E2E30C917115725718;
+		};
+		B9CA6344D4EA57A8A322B090 = {
+			isa = PBXBuildFile;
+			fileRef = 2D96277FE4376E2078397A74;
+		};
 		C1A0DB444AD9A55DCB4D64E8 = {
 			isa = PBXBuildFile;
 			fileRef = 0F290F795E7190BA534CA54F;
@@ -145,6 +201,13 @@
 			isa = PBXBuildFile;
 			fileRef = ED1904D627D3158A7B4E08C4;
 		};
+		08BC7029BADEEFE91AEA0F55 = {
+			isa = PBXFileReference;
+			lastKnownFileType = file.lo;
+			name = FIFOSampleBuffer.lo;
+			path = ../../Source/SoundTouch/FIFOSampleBuffer.lo;
+			sourceTree = "SOURCE_ROOT";
+		};
 		09B0C024D31FCC405114BFB7 = {
 			isa = PBXFileReference;
 			lastKnownFileType = image.png;
@@ -187,6 +250,20 @@
 			path = ../../Source/CustomLookAndFeel.cpp;
 			sourceTree = "SOURCE_ROOT";
 		};
+		0F6795137FB1325AE97EF541 = {
+			isa = PBXFileReference;
+			lastKnownFileType = file.lo;
+			name = InterpolateShannon.lo;
+			path = ../../Source/SoundTouch/InterpolateShannon.lo;
+			sourceTree = "SOURCE_ROOT";
+		};
+		13D8DD29FD278081E8E51479 = {
+			isa = PBXFileReference;
+			lastKnownFileType = sourcecode.cpp.cpp;
+			name = InterpolateShannon.cpp;
+			path = ../../Source/SoundTouch/InterpolateShannon.cpp;
+			sourceTree = "SOURCE_ROOT";
+		};
 		19D0A319218668F6BBD217F1 = {
 			isa = PBXFileReference;
 			lastKnownFileType = wrapper.framework;
@@ -200,6 +277,13 @@
 			name = "juce_audio_basics";
 			path = "/Applications/JUCE/modules/juce_audio_basics";
 			sourceTree = "<absolute>";
+		};
+		1EEF31A993CCC461CC782BF4 = {
+			isa = PBXFileReference;
+			lastKnownFileType = file.la;
+			name = libSoundTouchSSE.la;
+			path = ../../Source/SoundTouch/libSoundTouchSSE.la;
+			sourceTree = "SOURCE_ROOT";
 		};
 		21ED6CED91359EDB126EF173 = {
 			isa = PBXFileReference;
@@ -215,11 +299,39 @@
 			path = "../../Assets/info_button_on.png";
 			sourceTree = "SOURCE_ROOT";
 		};
+		2390DCEE578F8F73048E8BC9 = {
+			isa = PBXFileReference;
+			lastKnownFileType = sourcecode.cpp.cpp;
+			name = InterpolateLinear.cpp;
+			path = ../../Source/SoundTouch/InterpolateLinear.cpp;
+			sourceTree = "SOURCE_ROOT";
+		};
+		24AF9C72BC666B864329E8CA = {
+			isa = PBXFileReference;
+			lastKnownFileType = file.am;
+			name = Makefile.am;
+			path = ../../Source/SoundTouch/Makefile.am;
+			sourceTree = "SOURCE_ROOT";
+		};
+		2548C24411DF1A9438CC1377 = {
+			isa = PBXFileReference;
+			lastKnownFileType = sourcecode.c.h;
+			name = InterpolateShannon.h;
+			path = ../../Source/SoundTouch/InterpolateShannon.h;
+			sourceTree = "SOURCE_ROOT";
+		};
 		274C27E2B8150994418BBE4D = {
 			isa = PBXFileReference;
 			lastKnownFileType = file.nib;
 			name = RecentFilesMenuTemplate.nib;
 			path = RecentFilesMenuTemplate.nib;
+			sourceTree = "SOURCE_ROOT";
+		};
+		2865A2046FA37DF3787E242A = {
+			isa = PBXFileReference;
+			lastKnownFileType = sourcecode.c.h;
+			name = AAFilter.h;
+			path = ../../Source/SoundTouch/AAFilter.h;
 			sourceTree = "SOURCE_ROOT";
 		};
 		28C4DAE073E4C979B023A8F1 = {
@@ -236,6 +348,13 @@
 			path = System/Library/Frameworks/CoreAudio.framework;
 			sourceTree = SDKROOT;
 		};
+		29B3CA6EFE541662A10C4EDD = {
+			isa = PBXFileReference;
+			lastKnownFileType = sourcecode.cpp.cpp;
+			name = "mmx_optimized.cpp";
+			path = "../../Source/SoundTouch/mmx_optimized.cpp";
+			sourceTree = "SOURCE_ROOT";
+		};
 		29F72A5F710DE575A8379954 = {
 			isa = PBXFileReference;
 			lastKnownFileType = image.png;
@@ -248,6 +367,20 @@
 			lastKnownFileType = image.png;
 			name = "v_on.png";
 			path = "../../Assets/v_on.png";
+			sourceTree = "SOURCE_ROOT";
+		};
+		2CFD5B5F618BE0B48891A088 = {
+			isa = PBXFileReference;
+			lastKnownFileType = file;
+			name = Makefile;
+			path = ../../Source/SoundTouch/Makefile;
+			sourceTree = "SOURCE_ROOT";
+		};
+		2D96277FE4376E2078397A74 = {
+			isa = PBXFileReference;
+			lastKnownFileType = sourcecode.cpp.cpp;
+			name = TDStretch.cpp;
+			path = ../../Source/SoundTouch/TDStretch.cpp;
 			sourceTree = "SOURCE_ROOT";
 		};
 		2F4903CD88F2D833F19DA187 = {
@@ -278,11 +411,25 @@
 			path = "../../Assets/t_off.png";
 			sourceTree = "SOURCE_ROOT";
 		};
+		3FE10CD04E931712EDE2A337 = {
+			isa = PBXFileReference;
+			lastKnownFileType = sourcecode.c.h;
+			name = "cpu_detect.h";
+			path = "../../Source/SoundTouch/cpu_detect.h";
+			sourceTree = "SOURCE_ROOT";
+		};
 		3FE5E02F5E0FBA12F6B1F6AC = {
 			isa = PBXFileReference;
 			lastKnownFileType = sourcecode.cpp.cpp;
 			name = BinaryData.cpp;
 			path = ../../JuceLibraryCode/BinaryData.cpp;
+			sourceTree = "SOURCE_ROOT";
+		};
+		43156ED4BDD0D356F176480D = {
+			isa = PBXFileReference;
+			lastKnownFileType = sourcecode.c.h;
+			name = FIRFilter.h;
+			path = ../../Source/SoundTouch/FIRFilter.h;
 			sourceTree = "SOURCE_ROOT";
 		};
 		46475608304B1BE9B17FDBA0 = {
@@ -320,6 +467,20 @@
 			path = "../../JuceLibraryCode/include_juce_audio_plugin_client_VST_utils.mm";
 			sourceTree = "SOURCE_ROOT";
 		};
+		4E7645AD406C551C00880672 = {
+			isa = PBXFileReference;
+			lastKnownFileType = file.la;
+			name = libSoundTouch.la;
+			path = ../../Source/SoundTouch/libSoundTouch.la;
+			sourceTree = "SOURCE_ROOT";
+		};
+		4F1DE236CDBE803E1068F41D = {
+			isa = PBXFileReference;
+			lastKnownFileType = sourcecode.cpp.cpp;
+			name = AAFilter.cpp;
+			path = ../../Source/SoundTouch/AAFilter.cpp;
+			sourceTree = "SOURCE_ROOT";
+		};
 		4F9B584B8AA69831E2EAA92F = {
 			isa = PBXFileReference;
 			lastKnownFileType = wrapper.framework;
@@ -341,11 +502,53 @@
 			path = ../../JuceLibraryCode/BinaryData.h;
 			sourceTree = "SOURCE_ROOT";
 		};
+		5441500FB99E5DB06026CC8E = {
+			isa = PBXFileReference;
+			lastKnownFileType = file.lo;
+			name = "libSoundTouchSSE_la-sse_optimized.lo";
+			path = "../../Source/SoundTouch/libSoundTouchSSE_la-sse_optimized.lo";
+			sourceTree = "SOURCE_ROOT";
+		};
 		5900CE5BC60D7B696C131068 = {
 			isa = PBXFileReference;
 			lastKnownFileType = sourcecode.c.h;
 			name = JuceHeader.h;
 			path = ../../JuceLibraryCode/JuceHeader.h;
+			sourceTree = "SOURCE_ROOT";
+		};
+		5BA275C1F8DCFE7E77283542 = {
+			isa = PBXFileReference;
+			lastKnownFileType = sourcecode.c.h;
+			name = InterpolateCubic.h;
+			path = ../../Source/SoundTouch/InterpolateCubic.h;
+			sourceTree = "SOURCE_ROOT";
+		};
+		5C0ADBA4059347E901C7FAA2 = {
+			isa = PBXFileReference;
+			lastKnownFileType = file.lo;
+			name = "cpu_detect_x86.lo";
+			path = "../../Source/SoundTouch/cpu_detect_x86.lo";
+			sourceTree = "SOURCE_ROOT";
+		};
+		5CF4FF6C37707906CE487633 = {
+			isa = PBXFileReference;
+			lastKnownFileType = sourcecode.c.h;
+			name = "soundtouch_config.h";
+			path = "../../Source/SoundTouch/soundtouch_config.h";
+			sourceTree = "SOURCE_ROOT";
+		};
+		611C8E2CF378206F5593AE23 = {
+			isa = PBXFileReference;
+			lastKnownFileType = file.lo;
+			name = TDStretch.lo;
+			path = ../../Source/SoundTouch/TDStretch.lo;
+			sourceTree = "SOURCE_ROOT";
+		};
+		6278DF49696FFF7D4D9BF155 = {
+			isa = PBXFileReference;
+			lastKnownFileType = sourcecode.cpp.cpp;
+			name = "cpu_detect_x86.cpp";
+			path = "../../Source/SoundTouch/cpu_detect_x86.cpp";
 			sourceTree = "SOURCE_ROOT";
 		};
 		68803D1390F3D0C58778E8A0 = {
@@ -361,6 +564,13 @@
 			name = "juce_events";
 			path = "/Applications/JUCE/modules/juce_events";
 			sourceTree = "<absolute>";
+		};
+		6C5930A4913790A6C6BF4332 = {
+			isa = PBXFileReference;
+			lastKnownFileType = file.lo;
+			name = SoundTouch.lo;
+			path = ../../Source/SoundTouch/SoundTouch.lo;
+			sourceTree = "SOURCE_ROOT";
 		};
 		6F7088F52B1EA1D7C1E0B991 = {
 			isa = PBXFileReference;
@@ -383,6 +593,34 @@
 			path = "../../JuceLibraryCode/include_juce_data_structures.mm";
 			sourceTree = "SOURCE_ROOT";
 		};
+		7D3AD399986EB0010EEA77FF = {
+			isa = PBXFileReference;
+			lastKnownFileType = sourcecode.c.h;
+			name = STTypes.h;
+			path = ../../Source/SoundTouch/STTypes.h;
+			sourceTree = "SOURCE_ROOT";
+		};
+		7E01478B999B681FC44EDF77 = {
+			isa = PBXFileReference;
+			lastKnownFileType = sourcecode.cpp.objcpp;
+			name = "include_juce_audio_devices.mm";
+			path = "../../JuceLibraryCode/include_juce_audio_devices.mm";
+			sourceTree = "SOURCE_ROOT";
+		};
+		7FDBC831F66402258FFEDC08 = {
+			isa = PBXFileReference;
+			lastKnownFileType = file.lo;
+			name = BPMDetect.lo;
+			path = ../../Source/SoundTouch/BPMDetect.lo;
+			sourceTree = "SOURCE_ROOT";
+		};
+		83D03BCAC851F1BB97978D61 = {
+			isa = PBXFileReference;
+			lastKnownFileType = sourcecode.c.h;
+			name = FIFOSamplePipe.h;
+			path = ../../Source/SoundTouch/FIFOSamplePipe.h;
+			sourceTree = "SOURCE_ROOT";
+		};
 		8B6E9BAA559A6028602C9E72 = {
 			isa = PBXFileReference;
 			lastKnownFileType = file;
@@ -390,18 +628,53 @@
 			path = "/Applications/JUCE/modules/juce_gui_extra";
 			sourceTree = "<absolute>";
 		};
-		C4976A77E06375521643FF21 = {
+		8B81C7165A2944905DE94FD6 = {
 			isa = PBXFileReference;
 			lastKnownFileType = sourcecode.cpp.cpp;
-			name = PluginEditor.cpp;
-			path = ../../Source/PluginEditor.cpp;
+			name = RateTransposer.cpp;
+			path = ../../Source/SoundTouch/RateTransposer.cpp;
 			sourceTree = "SOURCE_ROOT";
 		};
-		D33BDD522B41449B06B05857 = {
+		91EF3A66F478C36BFACD7747 = {
+			isa = PBXFileReference;
+			lastKnownFileType = sourcecode.cpp.cpp;
+			name = FIRFilter.cpp;
+			path = ../../Source/SoundTouch/FIRFilter.cpp;
+			sourceTree = "SOURCE_ROOT";
+		};
+		92A442761459015ED271785F = {
+			isa = PBXFileReference;
+			lastKnownFileType = file.lo;
+			name = InterpolateLinear.lo;
+			path = ../../Source/SoundTouch/InterpolateLinear.lo;
+			sourceTree = "SOURCE_ROOT";
+		};
+		948BC723BE51E0119BBFBB0A = {
+			isa = PBXFileReference;
+			lastKnownFileType = file.vcxproj;
+			name = SoundTouch.vcxproj;
+			path = ../../Source/SoundTouch/SoundTouch.vcxproj;
+			sourceTree = "SOURCE_ROOT";
+		};
+		9E6F987627E9D97A3FBF3EBD = {
 			isa = PBXFileReference;
 			lastKnownFileType = sourcecode.c.h;
-			name = PluginProcessor.h;
-			path = ../../Source/PluginProcessor.h;
+			name = FIFOSampleBuffer.h;
+			path = ../../Source/SoundTouch/FIFOSampleBuffer.h;
+			sourceTree = "SOURCE_ROOT";
+		};
+		9EFFB617E33232435219A48C = {
+			isa = PBXFileReference;
+			lastKnownFileType = file.lo;
+			name = AAFilter.lo;
+			path = ../../Source/SoundTouch/AAFilter.lo;
+			sourceTree = "SOURCE_ROOT";
+		};
+		9F7FC03376E3438AC538FD4A = {
+			isa = PBXFileReference;
+			lastKnownFileType = sourcecode.cpp.cpp;
+			name = BPMDetect.cpp;
+			path = ../../Source/SoundTouch/BPMDetect.cpp;
 			sourceTree = "SOURCE_ROOT";
 		};
 		DE98449361B446E5998B3A81 = {
@@ -453,13 +726,6 @@
 			path = "../../Assets/info_button_off.png";
 			sourceTree = "SOURCE_ROOT";
 		};
-		7E01478B999B681FC44EDF77 = {
-			isa = PBXFileReference;
-			lastKnownFileType = sourcecode.cpp.objcpp;
-			name = "include_juce_audio_devices.mm";
-			path = "../../JuceLibraryCode/include_juce_audio_devices.mm";
-			sourceTree = "SOURCE_ROOT";
-		};
 		8159E18D4DF58118AE144FA7 = {
 			isa = PBXFileReference;
 			lastKnownFileType = wrapper.framework;
@@ -488,6 +754,13 @@
 			path = ../../Assets/frame.png;
 			sourceTree = "SOURCE_ROOT";
 		};
+		98C1492D1D4E4A3F90D87245 = {
+			isa = PBXFileReference;
+			lastKnownFileType = sourcecode.c.h;
+			name = TDStretch.h;
+			path = ../../Source/SoundTouch/TDStretch.h;
+			sourceTree = "SOURCE_ROOT";
+		};
 		9C8CF67E809BED4A32914577 = {
 			isa = PBXFileReference;
 			lastKnownFileType = wrapper.framework;
@@ -502,12 +775,33 @@
 			path = System/Library/Frameworks/CoreMIDI.framework;
 			sourceTree = SDKROOT;
 		};
+		9DF27063B82F6B636BC23487 = {
+			isa = PBXFileReference;
+			lastKnownFileType = file.lo;
+			name = RateTransposer.lo;
+			path = ../../Source/SoundTouch/RateTransposer.lo;
+			sourceTree = "SOURCE_ROOT";
+		};
 		A30A25B7F4FABB4FBC09A04B = {
 			isa = PBXFileReference;
 			lastKnownFileType = file;
 			name = "juce_audio_formats";
 			path = "/Applications/JUCE/modules/juce_audio_formats";
 			sourceTree = "<absolute>";
+		};
+		A384B87BAD686E406845647A = {
+			isa = PBXFileReference;
+			lastKnownFileType = sourcecode.cpp.cpp;
+			name = PeakFinder.cpp;
+			path = ../../Source/SoundTouch/PeakFinder.cpp;
+			sourceTree = "SOURCE_ROOT";
+		};
+		A47F6C348887B722E94D36B0 = {
+			isa = PBXFileReference;
+			lastKnownFileType = file.lo;
+			name = InterpolateCubic.lo;
+			path = ../../Source/SoundTouch/InterpolateCubic.lo;
+			sourceTree = "SOURCE_ROOT";
 		};
 		A5CF79AA02853BAC0187D765 = {
 			isa = PBXFileReference;
@@ -523,11 +817,25 @@
 			path = "../../JuceLibraryCode/include_juce_audio_formats.mm";
 			sourceTree = "SOURCE_ROOT";
 		};
+		A75787B8955B889CD25B9101 = {
+			isa = PBXFileReference;
+			lastKnownFileType = file.sln;
+			name = SoundTouch.sln;
+			path = ../../Source/SoundTouch/SoundTouch.sln;
+			sourceTree = "SOURCE_ROOT";
+		};
 		A76825E7AB3ABACF17D484CD = {
 			isa = PBXFileReference;
 			lastKnownFileType = sourcecode.cpp.objcpp;
 			name = "include_juce_audio_plugin_client_AU_2.mm";
 			path = "../../JuceLibraryCode/include_juce_audio_plugin_client_AU_2.mm";
+			sourceTree = "SOURCE_ROOT";
+		};
+		AF2FAC5E07DAE801763DD9CF = {
+			isa = PBXFileReference;
+			lastKnownFileType = file.lo;
+			name = "libSoundTouchMMX_la-mmx_optimized.lo";
+			path = "../../Source/SoundTouch/libSoundTouchMMX_la-mmx_optimized.lo";
 			sourceTree = "SOURCE_ROOT";
 		};
 		B4B60992F11CC12CFDDAB267 = {
@@ -537,11 +845,60 @@
 			path = ../../Assets/knob.png;
 			sourceTree = "SOURCE_ROOT";
 		};
+		B4DD00ADAED30117EB73124A = {
+			isa = PBXFileReference;
+			lastKnownFileType = sourcecode.c.h;
+			name = PeakFinder.h;
+			path = ../../Source/SoundTouch/PeakFinder.h;
+			sourceTree = "SOURCE_ROOT";
+		};
+		B9C37F2B1E62AC835415E794 = {
+			isa = PBXFileReference;
+			lastKnownFileType = sourcecode.c.h;
+			name = RateTransposer.h;
+			path = ../../Source/SoundTouch/RateTransposer.h;
+			sourceTree = "SOURCE_ROOT";
+		};
+		BDBB8AF5548F5C5BC72808CE = {
+			isa = PBXFileReference;
+			lastKnownFileType = sourcecode.c.h;
+			name = config.h;
+			path = ../../Source/SoundTouch/config.h;
+			sourceTree = "SOURCE_ROOT";
+		};
+		BFC8F7F0E2BC81522A7A0E52 = {
+			isa = PBXFileReference;
+			lastKnownFileType = sourcecode.cpp.cpp;
+			name = SoundTouch.cpp;
+			path = ../../Source/SoundTouch/SoundTouch.cpp;
+			sourceTree = "SOURCE_ROOT";
+		};
+		C48CEF68845F897D6BE2B848 = {
+			isa = PBXFileReference;
+			lastKnownFileType = file.la;
+			name = libSoundTouchMMX.la;
+			path = ../../Source/SoundTouch/libSoundTouchMMX.la;
+			sourceTree = "SOURCE_ROOT";
+		};
+		C4976A77E06375521643FF21 = {
+			isa = PBXFileReference;
+			lastKnownFileType = sourcecode.cpp.cpp;
+			name = PluginEditor.cpp;
+			path = ../../Source/PluginEditor.cpp;
+			sourceTree = "SOURCE_ROOT";
+		};
 		C4CB533FF631D2F5CB1491D9 = {
 			isa = PBXFileReference;
 			lastKnownFileType = image.png;
 			name = marker.png;
 			path = ../../Assets/marker.png;
+			sourceTree = "SOURCE_ROOT";
+		};
+		C87A01E2E30C917115725718 = {
+			isa = PBXFileReference;
+			lastKnownFileType = sourcecode.cpp.cpp;
+			name = "sse_optimized.cpp";
+			path = "../../Source/SoundTouch/sse_optimized.cpp";
 			sourceTree = "SOURCE_ROOT";
 		};
 		D2C7970AE932E436A12A4D68 = {
@@ -550,6 +907,20 @@
 			name = "juce_data_structures";
 			path = "/Applications/JUCE/modules/juce_data_structures";
 			sourceTree = "<absolute>";
+		};
+		D33BDD522B41449B06B05857 = {
+			isa = PBXFileReference;
+			lastKnownFileType = sourcecode.c.h;
+			name = PluginProcessor.h;
+			path = ../../Source/PluginProcessor.h;
+			sourceTree = "SOURCE_ROOT";
+		};
+		D39CFFB322E90E3D348B36B0 = {
+			isa = PBXFileReference;
+			lastKnownFileType = file.lo;
+			name = PeakFinder.lo;
+			path = ../../Source/SoundTouch/PeakFinder.lo;
+			sourceTree = "SOURCE_ROOT";
 		};
 		D43D7339F24672727DF71E26 = {
 			isa = PBXFileReference;
@@ -579,11 +950,25 @@
 			path = System/Library/Frameworks/Carbon.framework;
 			sourceTree = SDKROOT;
 		};
+		E9F19F807B08EAD37ABB4753 = {
+			isa = PBXFileReference;
+			lastKnownFileType = sourcecode.cpp.cpp;
+			name = FIFOSampleBuffer.cpp;
+			path = ../../Source/SoundTouch/FIFOSampleBuffer.cpp;
+			sourceTree = "SOURCE_ROOT";
+		};
 		ED1904D627D3158A7B4E08C4 = {
 			isa = PBXFileReference;
 			lastKnownFileType = sourcecode.cpp.objcpp;
 			name = "include_juce_gui_extra.mm";
 			path = "../../JuceLibraryCode/include_juce_gui_extra.mm";
+			sourceTree = "SOURCE_ROOT";
+		};
+		EDA19AE438C6BFBFFDF4BA92 = {
+			isa = PBXFileReference;
+			lastKnownFileType = sourcecode.cpp.cpp;
+			name = InterpolateCubic.cpp;
+			path = ../../Source/SoundTouch/InterpolateCubic.cpp;
 			sourceTree = "SOURCE_ROOT";
 		};
 		EDFE35DF1B5600F3BA53C598 = {
@@ -592,6 +977,13 @@
 			name = CoreAudioKit.framework;
 			path = System/Library/Frameworks/CoreAudioKit.framework;
 			sourceTree = SDKROOT;
+		};
+		EF50C2DBDED2834172A7647E = {
+			isa = PBXFileReference;
+			lastKnownFileType = sourcecode.c.h;
+			name = BPMDetect.h;
+			path = ../../Source/SoundTouch/BPMDetect.h;
+			sourceTree = "SOURCE_ROOT";
 		};
 		EF5B5CE16B4C8E31E2E807BF = {
 			isa = PBXFileReference;
@@ -607,11 +999,39 @@
 			path = System/Library/Frameworks/IOKit.framework;
 			sourceTree = SDKROOT;
 		};
+		F18567FF766E173AB2E4EF3E = {
+			isa = PBXFileReference;
+			lastKnownFileType = sourcecode.c.h;
+			name = SoundTouch.h;
+			path = ../../Source/SoundTouch/SoundTouch.h;
+			sourceTree = "SOURCE_ROOT";
+		};
 		F26709FDBAB78882C7D78525 = {
 			isa = PBXFileReference;
 			lastKnownFileType = file.r;
 			name = "include_juce_audio_plugin_client_AU.r";
 			path = "../../JuceLibraryCode/include_juce_audio_plugin_client_AU.r";
+			sourceTree = "SOURCE_ROOT";
+		};
+		F76A01017050C636DAD25EEB = {
+			isa = PBXFileReference;
+			lastKnownFileType = file.lo;
+			name = FIRFilter.lo;
+			path = ../../Source/SoundTouch/FIRFilter.lo;
+			sourceTree = "SOURCE_ROOT";
+		};
+		FC82DB9B9C18DC0BC19BBD34 = {
+			isa = PBXFileReference;
+			lastKnownFileType = sourcecode.c.h;
+			name = InterpolateLinear.h;
+			path = ../../Source/SoundTouch/InterpolateLinear.h;
+			sourceTree = "SOURCE_ROOT";
+		};
+		FCCC7E82A829BD09A771F6F6 = {
+			isa = PBXFileReference;
+			lastKnownFileType = file.in;
+			name = Makefile.in;
+			path = ../../Source/SoundTouch/Makefile.in;
 			sourceTree = "SOURCE_ROOT";
 		};
 		3307E7F7268BDEDB315E4D1E = {
@@ -634,6 +1054,65 @@
 			name = Assets;
 			sourceTree = "<group>";
 		};
+		14B01242A6AB4BE34BDFB705 = {
+			isa = PBXGroup;
+			children = (
+				4F1DE236CDBE803E1068F41D,
+				2865A2046FA37DF3787E242A,
+				9EFFB617E33232435219A48C,
+				9F7FC03376E3438AC538FD4A,
+				EF50C2DBDED2834172A7647E,
+				7FDBC831F66402258FFEDC08,
+				BDBB8AF5548F5C5BC72808CE,
+				3FE10CD04E931712EDE2A337,
+				6278DF49696FFF7D4D9BF155,
+				5C0ADBA4059347E901C7FAA2,
+				E9F19F807B08EAD37ABB4753,
+				9E6F987627E9D97A3FBF3EBD,
+				08BC7029BADEEFE91AEA0F55,
+				83D03BCAC851F1BB97978D61,
+				91EF3A66F478C36BFACD7747,
+				43156ED4BDD0D356F176480D,
+				F76A01017050C636DAD25EEB,
+				EDA19AE438C6BFBFFDF4BA92,
+				5BA275C1F8DCFE7E77283542,
+				A47F6C348887B722E94D36B0,
+				2390DCEE578F8F73048E8BC9,
+				FC82DB9B9C18DC0BC19BBD34,
+				92A442761459015ED271785F,
+				13D8DD29FD278081E8E51479,
+				2548C24411DF1A9438CC1377,
+				0F6795137FB1325AE97EF541,
+				4E7645AD406C551C00880672,
+				C48CEF68845F897D6BE2B848,
+				AF2FAC5E07DAE801763DD9CF,
+				1EEF31A993CCC461CC782BF4,
+				5441500FB99E5DB06026CC8E,
+				2CFD5B5F618BE0B48891A088,
+				24AF9C72BC666B864329E8CA,
+				FCCC7E82A829BD09A771F6F6,
+				29B3CA6EFE541662A10C4EDD,
+				A384B87BAD686E406845647A,
+				B4DD00ADAED30117EB73124A,
+				D39CFFB322E90E3D348B36B0,
+				8B81C7165A2944905DE94FD6,
+				B9C37F2B1E62AC835415E794,
+				9DF27063B82F6B636BC23487,
+				BFC8F7F0E2BC81522A7A0E52,
+				F18567FF766E173AB2E4EF3E,
+				6C5930A4913790A6C6BF4332,
+				A75787B8955B889CD25B9101,
+				948BC723BE51E0119BBFBB0A,
+				5CF4FF6C37707906CE487633,
+				C87A01E2E30C917115725718,
+				7D3AD399986EB0010EEA77FF,
+				2D96277FE4376E2078397A74,
+				98C1492D1D4E4A3F90D87245,
+				611C8E2CF378206F5593AE23,
+			);
+			name = SoundTouch;
+			sourceTree = "<group>";
+		};
 		AD87DD259550935C8D9E1782 = {
 			isa = PBXGroup;
 			children = (
@@ -651,6 +1130,7 @@
 			isa = PBXGroup;
 			children = (
 				3307E7F7268BDEDB315E4D1E,
+				14B01242A6AB4BE34BDFB705,
 				AD87DD259550935C8D9E1782,
 			);
 			name = Vibrolo;
@@ -1447,6 +1927,20 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				47E64B6E86C7A6F0E66D90C5,
+				01204DBDE8E9A92CDFF287A2,
+				DCBCAB21325B6C9945FDAB64,
+				A81153C5515DA8A10B340CAE,
+				B7EA41C87B9BCA785CB58C31,
+				BAC74C72CFC29DCCE680C833,
+				B9CF0DAC0650E288799D956E,
+				74BA309F62ADBD4AB1561F27,
+				503297D92A413CD4C7DEE11F,
+				9C7EC3B973E52E5C4C321D70,
+				EF2646FB4D88B6E2D79154B7,
+				D802C541BB1BAB675CF6E29C,
+				763DDE60564B3ED8AA45D293,
+				B9CA6344D4EA57A8A322B090,
 				C1A0DB444AD9A55DCB4D64E8,
 				B6908C389A4B91DBDBC651B8,
 				6A86B3A83D8C4BE7E37B3818,
