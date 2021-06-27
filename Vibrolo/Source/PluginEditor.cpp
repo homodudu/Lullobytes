@@ -29,7 +29,7 @@ void VibroloAudioProcessorEditor::paint (juce::Graphics& g)
     g.fillAll (backgroundColor);
     g.setColour (juce::Colours::black);
     g.setFont (15.0f);
-    //g.drawFittedText ("Lulloybtes MidSide", getLocalBounds(), juce::Justification::centred, 1);
+    //g.drawFittedText ("Lulloybtes Vibrolo", getLocalBounds(), juce::Justification::centred, 1);
 }
 
 void VibroloAudioProcessorEditor::resized()
@@ -82,7 +82,16 @@ void VibroloAudioProcessorEditor::gui()
     vSlider.onValueChange = [this]
     {
         if (linkButtonImageComponent.getToggleState())
-           tSlider.setValue(1 -vSlider.getValue());
+        {
+            tSlider.setValue(vSlider.getValue());
+        }
+    };
+    vRateSlider.onValueChange = [this]
+    {
+        if (linkButtonImageComponent.getToggleState())
+        {
+            tRateSlider.setValue(vRateSlider.getValue());
+        }
     };
     
     // Tremolo parameter attachments and listeners.
@@ -95,8 +104,25 @@ void VibroloAudioProcessorEditor::gui()
     tSlider.onValueChange = [this]
     {
         if (linkButtonImageComponent.getToggleState())
-           vSlider.setValue(1 -tSlider.getValue());
+        {
+            vSlider.setValue(tSlider.getValue());
+            vRateSlider.setValue(tRateSlider.getValue());
+        }
+
     };
+    tRateSlider.onValueChange = [this]
+    {
+        if (linkButtonImageComponent.getToggleState())
+        {
+            vRateSlider.setValue(tRateSlider.getValue());
+        }
+    };
+    
+    // Vibrato and tremolo buttons - toggle processing on/off.
+    vButtonAttachment = std::make_unique<juce::AudioProcessorValueTreeState::ButtonAttachment>(audioProcessor.treeState, "vibrato", vButtonImageComponent);
+    vButtonImageComponent.setToggleState(*audioProcessor.treeState.getRawParameterValue("vibrato"), juce::dontSendNotification);
+    tButtonAttachment = std::make_unique<juce::AudioProcessorValueTreeState::ButtonAttachment>(audioProcessor.treeState, "tremolo", tButtonImageComponent);
+    tButtonImageComponent.setToggleState(*audioProcessor.treeState.getRawParameterValue("tremolo"), juce::dontSendNotification);
     
     // Info button - toggle editor window display.
     infoButtonImageComponent.onStateChange = [this]
@@ -109,9 +135,8 @@ void VibroloAudioProcessorEditor::gui()
         vButtonImageComponent.setVisible(!infoButtonImageComponent.getToggleState());
         tButtonImageComponent.setVisible(!infoButtonImageComponent.getToggleState());
     };
-
     
-    // Link button - proportion drive signal with clean.
+    // Link button - match processing parameter values.
     lButtonAttachment = std::make_unique<juce::AudioProcessorValueTreeState::ButtonAttachment>(audioProcessor.treeState, "linked", linkButtonImageComponent);
     linkButtonImageComponent.setToggleState(*audioProcessor.treeState.getRawParameterValue("linked"), juce::dontSendNotification);
   
@@ -124,7 +149,8 @@ void VibroloAudioProcessorEditor::setSlider(juce::Slider &slider, juce::Colour d
     slider.setLookAndFeel(&customLookAndFeel);
     slider.setSliderSnapsToMousePosition(false);
     slider.setSliderStyle (juce::Slider::LinearHorizontal);
-    slider.setRange (0, 1.0);
+    slider.setRange (0, 1.0f);
+    slider.setMouseDragSensitivity(100.0f);
     slider.setTextBoxStyle (juce::Slider::NoTextBox, false, 0, 0);
     slider.setColour(juce::Slider::ColourIds::backgroundColourId, defaultColour);
     slider.setColour(juce::Slider::ColourIds::rotarySliderOutlineColourId, defaultColour);

@@ -186,7 +186,7 @@ void VibroloAudioProcessor::parameterChanged  (const juce::String &parameterID, 
 
 void VibroloAudioProcessor::prepareToPlay (double sampleRate, int samplesPerBlock)
 {
-    
+
 }
 
 //==============================================================================
@@ -233,8 +233,12 @@ void VibroloAudioProcessor::processBlock (juce::AudioBuffer<float>& buffer, juce
     for (auto i = totalNumInputChannels; i < totalNumOutputChannels; ++i)
         buffer.clear (i, 0, buffer.getNumSamples());
     
-    
-    
+//    process0->setChannels(1);
+//    process0->setSampleRate(getSampleRate());
+//    process1->setChannels(1);
+//    process1->setSampleRate(getSampleRate());
+//    
+//
 //    if (totalNumInputChannels == 2)
 //    {
 //        
@@ -243,17 +247,19 @@ void VibroloAudioProcessor::processBlock (juce::AudioBuffer<float>& buffer, juce
 //        
 //        for (int sample = 0; sample < buffer.getNumSamples(); sample++)
 //        {
-//            
-//            float midDecode = (*channelLeft + *channelRight) * 0.5f;
-//            float sideDecode = (*channelLeft - *channelRight) * 2.0f;
-//            
-//            *channelLeft = (midDecode * mid + sideDecode * side);
-//            *channelRight = (midDecode * mid - sideDecode * side);
+//            process0 -> setPitchSemiTones(sin(M_PI)/sample);
+//            process0 -> putSamples(channelLeft, buffer.getNumSamples());
+//            process1 -> setPitchSemiTones(sin(M_PI)/sample);
+//            process1 -> putSamples(channelRight, buffer.getNumSamples());
+//           
+//            process0->receiveSamples(channelLeft , buffer.getNumSamples());
+//            process0->receiveSamples(channelRight , buffer.getNumSamples());
 //            
 //            channelLeft++;
 //            channelRight++;
 //        }
 //    }
+    
     
 }
 

@@ -9,6 +9,7 @@
 #pragma once
 
 #include <JuceHeader.h>
+#include "SoundTouch/SoundTouch.h"
 
 //==============================================================================
 /**
@@ -72,6 +73,8 @@ private:
     bool linked;
     bool vibrato;
     bool tremolo;
+    std::unique_ptr <soundtouch::SoundTouch> process0;
+    std::unique_ptr <soundtouch::SoundTouch> process1;
     
     //==============================================================================
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (VibroloAudioProcessor)
