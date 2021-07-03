@@ -47,10 +47,20 @@ VibroloAudioProcessor::VibroloAudioProcessor()
     treeState.getParameter ("tremolo")->setValue (true);
     treeState.addParameterListener("linked", this);
     treeState.getParameter ("linked")->setValue (false);
+    
     vibe = 0.0f;
     vibeRate = 0.0f;
     trem = 0.0f;
     tremRate = 0.0f;
+    
+    process0 = std::make_unique<soundtouch::SoundTouch>();
+    process0->setChannels(1);
+    process0->setSampleRate(getSampleRate());
+    process0->setPitchSemiTones(2);
+    process1 = std::make_unique<soundtouch::SoundTouch>();
+    process1->setChannels(1);
+    process1->setSampleRate(getSampleRate());
+    process1->setPitchSemiTones(2);
 }
 
 
@@ -228,37 +238,33 @@ void VibroloAudioProcessor::processBlock (juce::AudioBuffer<float>& buffer, juce
     juce::ScopedNoDenormals noDenormals;
     auto totalNumInputChannels  = getTotalNumInputChannels();
     auto totalNumOutputChannels = getTotalNumOutputChannels();
+    auto bufferLength = buffer.getNumSamples();
     
     
     for (auto i = totalNumInputChannels; i < totalNumOutputChannels; ++i)
-        buffer.clear (i, 0, buffer.getNumSamples());
+        buffer.clear (i, 0, bufferLength);
     
-//    process0->setChannels(1);
-//    process0->setSampleRate(getSampleRate());
-//    process1->setChannels(1);
-//    process1->setSampleRate(getSampleRate());
-//    
-//
-//    if (totalNumInputChannels == 2)
-//    {
-//        
-//        auto* channelLeft = buffer.getWritePointer(0);
-//        auto* channelRight = buffer.getWritePointer(1);
-//        
-//        for (int sample = 0; sample < buffer.getNumSamples(); sample++)
-//        {
-//            process0 -> setPitchSemiTones(sin(M_PI)/sample);
-//            process0 -> putSamples(channelLeft, buffer.getNumSamples());
-//            process1 -> setPitchSemiTones(sin(M_PI)/sample);
-//            process1 -> putSamples(channelRight, buffer.getNumSamples());
-//           
-//            process0->receiveSamples(channelLeft , buffer.getNumSamples());
-//            process0->receiveSamples(channelRight , buffer.getNumSamples());
-//            
-//            channelLeft++;
-//            channelRight++;
-//        }
-//    }
+
+    if (totalNumInputChannels == 2)
+    {
+        
+        auto* channelLeft = buffer.getWritePointer(0);
+        auto* channelRight = buffer.getWritePointer(1);
+        
+        process0 -> putSamples(channelLeft, bufferLength);
+        process1 -> putSamples(channelRight, bufferLength);
+        
+        process0->receiveSamples(channelLeft , bufferLength);
+        process1->receiveSamples(channelRight , bufferLength);
+        
+        for (int sample = 0; sample < bufferLength; sample++)
+        {
+            
+            channelLeft++;
+            channelRight++;
+            
+        }
+    }
     
     
 }

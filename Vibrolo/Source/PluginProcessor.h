@@ -65,7 +65,6 @@ public:
     
 private:
     //==============================================================================
-    
     float vibe;
     float trem;
     float vibeRate;

@@ -39,13 +39,13 @@ namespace BinaryData
     const int            t_off_pngSize = 6238;
 
     extern const char*   t_on_png;
-    const int            t_on_pngSize = 18764;
+    const int            t_on_pngSize = 16882;
 
     extern const char*   v_off_png;
     const int            v_off_pngSize = 7170;
 
     extern const char*   v_on_png;
-    const int            v_on_pngSize = 19902;
+    const int            v_on_pngSize = 17877;
 
     extern const char*   AAFilter_lo;
     const int            AAFilter_loSize = 268;

@@ -193,7 +193,6 @@ void MidSideAudioProcessor::processBlock (juce::AudioBuffer<float>& buffer, juce
     for (auto i = totalNumInputChannels; i < totalNumOutputChannels; ++i)
         buffer.clear (i, 0, buffer.getNumSamples());
     
-
     
     if (totalNumInputChannels == 2)
     {
