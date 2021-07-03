@@ -46,7 +46,7 @@ VibroloAudioProcessor::VibroloAudioProcessor()
     treeState.addParameterListener("tremolo", this);
     treeState.getParameter ("tremolo")->setValue (true);
     treeState.addParameterListener("linked", this);
-    treeState.getParameter ("linked")->setValue (false);
+    treeState.getParameter ("linked")->setValue (true);
     
     vibe = 0.0f;
     vibeRate = 0.0f;
@@ -142,7 +142,7 @@ juce::AudioProcessorValueTreeState::ParameterLayout VibroloAudioProcessor::creat
     layout.add(std::make_unique<juce::AudioParameterFloat>("tremRate", "TremRate", 0.0f, 1.0f, 0.0f));
     layout.add(std::make_unique<juce::AudioParameterBool>("vibrato", "Vibrato", true));
     layout.add(std::make_unique<juce::AudioParameterBool>("tremolo", "Tremolo", true));
-    layout.add(std::make_unique<juce::AudioParameterBool>("linked", "Linked", false));
+    layout.add(std::make_unique<juce::AudioParameterBool>("linked", "Linked", true));
     return layout;
 }
 
