@@ -25,7 +25,7 @@ public:
     void paint(juce::Graphics&) override;
     void resized() override;
     void gui();
-    void setSlider(juce::Slider &slider, juce::Colour defaultColour, float maxRange);
+    void setSlider(juce::Slider &slider, juce::Colour defaultColour, float minRange, float maxRange);
     void setImage(juce::Image image, juce::ImageComponent &imageComponent, bool setVisible);
     
     
@@ -75,10 +75,10 @@ private:
     juce::Rectangle<int> infoButtonArea {20, 360, 25, 25};
     
     juce::Rectangle<int> rImageArea {75, 80, 140, 140};
-    juce::Rectangle<int> rSliderArea {210, 75, 115, 115};
+    juce::Rectangle<int> rSliderArea {210, 90, 115, 115};
     
     juce::Rectangle<int> wImageArea {185, 190, 140, 140};
-    juce::Rectangle<int> wSliderArea {75, 215, 115, 115};
+    juce::Rectangle<int> wSliderArea {75, 200, 115, 115};
     
 
     juce::Slider rSlider; 

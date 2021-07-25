@@ -33,16 +33,17 @@ TremoloAudioProcessor::TremoloAudioProcessor()
 
 #endif
 {
-    treeState.addParameterListener("width", this);
-    treeState.getParameter ("width")->setValue (0.0f);
     treeState.addParameterListener("rate", this);
     treeState.getParameter ("rate")->setValue (0.0f);
+    treeState.addParameterListener("width", this);
+    treeState.getParameter ("width")->setValue (0.5f);
     treeState.addParameterListener("shape", this);
     treeState.getParameter ("shape")->setValue (false);
     
     rate = 0.0f;
-    width = 0.0f;
-    lfo = 0.0f;
+    width = 0.5f;
+    lfo[0] = {0.0f};
+    lfo[1] = {0.0f};
     
 }
 
@@ -120,7 +121,7 @@ juce::AudioProcessorValueTreeState::ParameterLayout TremoloAudioProcessor::creat
 {
     juce::AudioProcessorValueTreeState::ParameterLayout layout;
     layout.add(std::make_unique<juce::AudioParameterFloat>("rate", "Rate", 0.0f, 5.0f, 0.0f));
-    layout.add(std::make_unique<juce::AudioParameterFloat>("width", "Width", 0.0f, 0.9f, 0.0f));
+    layout.add(std::make_unique<juce::AudioParameterFloat>("width", "Width", 0.5f, 5.0f, 0.0f));
     layout.add(std::make_unique<juce::AudioParameterBool>("shape", "Shape", false));
     return layout;
 }
@@ -208,20 +209,15 @@ void TremoloAudioProcessor::processBlock (juce::AudioBuffer<float>& buffer, juce
         for (int sample = 0; sample < buffer.getNumSamples(); sample++)
         {
             
-            lfo += lfoIncrement*rate;
+            lfo[channel] += lfoIncrement*rate;
+            auto sineLfo = sinf(lfo[channel]);
+            auto triLfo = (4/twoPi)*asinf(sinf(lfo[channel]));
             
-            if (rate>0.15f) {
-                if (!shape)
-                {
-                    auto sineLfo = sinf(lfo)<width ? 0 : sinf(lfo);
-                    *channelData *= sineLfo;
-                }
-                else
-                {
-                    auto rectLfo = sinf(lfo)<width ? 0 : 1;
-                    *channelData *= rectLfo;
-                }
+            if (rate>0.1f)
+            {
+                *channelData = !shape ? *channelData * powf(fabsf(sineLfo),width) : *channelData * powf(fabsf(triLfo),width);
             }
+
 
             channelData++;
             
@@ -275,3 +271,4 @@ juce::AudioProcessor* JUCE_CALLTYPE createPluginFilter()
 {
     return new TremoloAudioProcessor();
 }
+

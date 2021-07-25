@@ -31,7 +31,7 @@ public:
 public:
     juce::Image handleImage;
     juce::Rectangle<float> handleArea;
-    float handleLength = 40.0f;
+    float handleLength = 90.0f;
     
     juce::Image rotaryImage;
     

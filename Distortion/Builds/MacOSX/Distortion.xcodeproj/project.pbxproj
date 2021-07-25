@@ -464,6 +464,13 @@
 			path = System/Library/Frameworks/DiscRecording.framework;
 			sourceTree = SDKROOT;
 		};
+		914035EED2D2FE967FE70C91 = {
+			isa = PBXFileReference;
+			lastKnownFileType = sourcecode.c.h;
+			name = CustomLookAndFeel.h;
+			path = ../../Source/CustomLookAndFeel.h;
+			sourceTree = "SOURCE_ROOT";
+		};
 		93E69ABBB3E4AC422ADFDDD9 = {
 			isa = PBXFileReference;
 			explicitFileType = wrapper.cfbundle;
@@ -477,13 +484,6 @@
 			includeInIndex = 0;
 			path = libDistortion.a;
 			sourceTree = "BUILT_PRODUCTS_DIR";
-		};
-		914035EED2D2FE967FE70C91 = {
-			isa = PBXFileReference;
-			lastKnownFileType = sourcecode.c.h;
-			name = CustomLookAndFeel.h;
-			path = ../../Source/CustomLookAndFeel.h;
-			sourceTree = "SOURCE_ROOT";
 		};
 		9514816290F7CB57A50FBFD9 = {
 			isa = PBXFileReference;
@@ -560,6 +560,13 @@
 			lastKnownFileType = sourcecode.cpp.cpp;
 			name = BinaryData.cpp;
 			path = ../../JuceLibraryCode/BinaryData.cpp;
+			sourceTree = "SOURCE_ROOT";
+		};
+		BFCB5F9DE6B8CFF4467ECBC7 = {
+			isa = PBXFileReference;
+			lastKnownFileType = file.svg;
+			name = knob.svg;
+			path = ../../Assets/knob.svg;
 			sourceTree = "SOURCE_ROOT";
 		};
 		C10F3AD646F36187CB4C7E51 = {
@@ -646,6 +653,7 @@
 				0573CE010CB9DF5426B9AC63,
 				5BD4F8ADDEF10CB4CBA9FBC3,
 				7C059FE8E1FE6C380519D822,
+				BFCB5F9DE6B8CFF4467ECBC7,
 				7503E9A0042A58EDE5CDB319,
 				A218357643BE681474EBE16E,
 			);

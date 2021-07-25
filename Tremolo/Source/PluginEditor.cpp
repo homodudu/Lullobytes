@@ -60,12 +60,12 @@ void TremoloAudioProcessorEditor::gui()
     setImage(rOnImage, rOnImageComponent, true);
     setImage(wOffImage, wOffImageComponent, true);
     setImage(wOnImage, wOnImageComponent, true);
-    setSlider(rSlider, sliderColor, 5.0f);
-    setSlider(wSlider, sliderColor, 0.9f);
+    setSlider(rSlider, sliderColor, 0.0f, 5.0f);
+    setSlider(wSlider, sliderColor, 0.5f, 5.0f);
     
     // Set alpha to provide visual feeback of signal parameters.
     rOnImageComponent.setAlpha(*audioProcessor.treeState.getRawParameterValue("rate"));
-    wOnImageComponent.setAlpha(*audioProcessor.treeState.getRawParameterValue("width"));
+    wOnImageComponent.setAlpha(*audioProcessor.treeState.getRawParameterValue("width")-0.5f);
     
     // Rate parameter attachment and listener.
     audioProcessor.treeState.addParameterListener("rate", &audioProcessor);
@@ -82,7 +82,7 @@ void TremoloAudioProcessorEditor::gui()
     wSlider.setValue(*audioProcessor.treeState.getRawParameterValue("width"));
     wSlider.onValueChange = [this]
     {
-        wSlider.getValue()>0.01f ? wOnImageComponent.setAlpha(wSlider.getValue()) : wOnImageComponent.setAlpha(0.0f);
+        wSlider.getValue()>0.51f ? wOnImageComponent.setAlpha(wSlider.getValue()-0.5f) : wOnImageComponent.setAlpha(0.0f);
     };
     
     // Info button - toggle editor window display.
@@ -101,7 +101,7 @@ void TremoloAudioProcessorEditor::gui()
     addAndMakeVisible (&infoButtonImageComponent);
     
     // Shape button - switch waveshapes.
-    shapeButtonImageComponent.setImages (false, true, true, sinImage, 1.0f, {}, {}, 1.0f, {}, recImage, 1.0f, {});
+    shapeButtonImageComponent.setImages (false, true, true, sinImage, 1.0f, {}, {}, 1.0f, {}, triImage, 1.0f, {});
     audioProcessor.treeState.addParameterListener("shape", &audioProcessor);
     shapeButtonImageComponent.setClickingTogglesState(true);
     sButtonAttachment = std::make_unique<juce::AudioProcessorValueTreeState::ButtonAttachment>(audioProcessor.treeState, "shape", shapeButtonImageComponent);
@@ -111,12 +111,12 @@ void TremoloAudioProcessorEditor::gui()
 }
 
 //==============================================================================
-void TremoloAudioProcessorEditor::setSlider(juce::Slider &slider, juce::Colour defaultColour, float maxRange)
+void TremoloAudioProcessorEditor::setSlider(juce::Slider &slider, juce::Colour defaultColour, float minRange, float maxRange)
 {
     slider.setLookAndFeel(&customLookAndFeel);
     slider.setSliderSnapsToMousePosition(false);
     slider.setSliderStyle (juce::Slider::LinearHorizontal);
-    slider.setRange (0, maxRange);
+    slider.setRange (minRange, maxRange);
     slider.setTextBoxStyle (juce::Slider::NoTextBox, false, 0, 0);
     slider.setColour(juce::Slider::ColourIds::backgroundColourId, defaultColour);
     slider.setColour(juce::Slider::ColourIds::rotarySliderOutlineColourId, defaultColour);

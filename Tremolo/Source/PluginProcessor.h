@@ -65,9 +65,9 @@ private:
     
     float rate;
     float width;
-    float lfo;
+    float lfo[2];
     bool shape;
-
+    
     //==============================================================================
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (TremoloAudioProcessor)
 };

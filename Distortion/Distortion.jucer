@@ -20,6 +20,7 @@
       <FILE id="MnzooO" name="d_off.png" compile="0" resource="1" file="Assets/d_off.png"/>
       <FILE id="Ddxm2G" name="d_on.png" compile="0" resource="1" file="Assets/d_on.png"/>
       <FILE id="aG2QOz" name="knob.png" compile="0" resource="1" file="Assets/knob.png"/>
+      <FILE id="EprUza" name="knob.svg" compile="0" resource="1" file="Assets/knob.svg"/>
       <FILE id="eh7MgN" name="marker.png" compile="0" resource="1" file="Assets/marker.png"/>
       <FILE id="rWgRTL" name="frame.png" compile="0" resource="1" file="Assets/frame.png"/>
     </GROUP>
