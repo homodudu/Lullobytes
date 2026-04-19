@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <JUCERPROJECT id="aqq1gm" name="Distortion" projectType="audioplug" useAppConfig="0"
-              addUsingNamespaceToJuceHeader="0" jucerFormatVersion="1" pluginFormats="buildAU"
+              addUsingNamespaceToJuceHeader="0" jucerFormatVersion="1" pluginFormats="buildAU,buildVST3"
               companyName="Lullobytes" displaySplashScreen="1" version="1.0.1">
   <MAINGROUP id="xcJgGJ" name="Distortion">
     <GROUP id="{E2042A58-6DC0-7AB7-0564-28F97AF4C33C}" name="Assets">
@@ -20,7 +20,6 @@
       <FILE id="MnzooO" name="d_off.png" compile="0" resource="1" file="Assets/d_off.png"/>
       <FILE id="Ddxm2G" name="d_on.png" compile="0" resource="1" file="Assets/d_on.png"/>
       <FILE id="aG2QOz" name="knob.png" compile="0" resource="1" file="Assets/knob.png"/>
-      <FILE id="EprUza" name="knob.svg" compile="0" resource="1" file="Assets/knob.svg"/>
       <FILE id="eh7MgN" name="marker.png" compile="0" resource="1" file="Assets/marker.png"/>
       <FILE id="rWgRTL" name="frame.png" compile="0" resource="1" file="Assets/frame.png"/>
     </GROUP>

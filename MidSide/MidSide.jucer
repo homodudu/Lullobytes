@@ -2,7 +2,7 @@
 
 <JUCERPROJECT id="W8H4Cy" name="MidSide" projectType="audioplug" useAppConfig="0"
               addUsingNamespaceToJuceHeader="0" displaySplashScreen="1" jucerFormatVersion="1"
-              companyName="Lullobytes" pluginFormats="buildAU">
+              companyName="Lullobytes" pluginFormats="buildAU,buildVST3">
   <MAINGROUP id="tKo02l" name="MidSide">
     <GROUP id="{BD117C7A-E7BF-7679-F364-30141B9AB62E}" name="Assets">
       <FILE id="dCUP75" name="frame.png" compile="0" resource="1" file="Assets/frame.png"/>
